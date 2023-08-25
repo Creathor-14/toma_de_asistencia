@@ -1,13 +1,21 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Asistencia Duoc Uc</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
+  <ion-card color="light">
+    <ion-card-content>
+      <ion-item>
+        <ion-input label="Correo" type="email" labelPlacement="floating" placeholder="correo@duocuc.cl"></ion-input>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-input label="Contraseña" labelPlacement="floating" type="password" [counter]="true" maxlength="20"></ion-input>
+      </ion-item>
+      <ion-button fill="solid">Iniciar sesión</ion-button>
+      <ion-button fill="clear" size ="small">¿olvidaste tu contraseña?</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

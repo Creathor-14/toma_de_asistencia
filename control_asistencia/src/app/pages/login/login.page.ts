@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from 'src/app/services/users.service';
+
 
 @Component({
   selector: 'app-login',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  email:string = "";
+  contrasenia:string = "";
 
-  constructor() { }
+  constructor(private userSercive:UsersService) { }
 
-  ngOnInit() {
+  login(){
+    var respuesta = this.userSercive.verificarUsuario(this.email,this.contrasenia);
+    console.log(respuesta)
   }
+
+  ngOnInit() {}
 
 }

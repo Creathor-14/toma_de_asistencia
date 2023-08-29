@@ -45,5 +45,13 @@ export class UsersService {
     await alert.present();
     return alert;
   }
+  recuperarContrasenia(email: string): string | null {
+    const user = this.user.find(u => u.name === email);
+    if (user) {
+      return user.password;
+    }
+    return null;
+  }
+  
   constructor(private alertService:AlertController) { }
 }

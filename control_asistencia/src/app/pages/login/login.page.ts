@@ -16,7 +16,13 @@ export class LoginPage implements OnInit {
 
   login(){
     var respuesta = this.userSercive.verificarUsuario(this.email,this.contrasenia);
-    console.log(respuesta)
+    if (respuesta != null){
+      console.log(respuesta);
+      this.router.navigateByUrl("inicio/"+respuesta);
+    }else{
+      console.log(respuesta);
+    }
+    
   }
   recuperar(){
     this.router.navigateByUrl("recuperar");

@@ -18,8 +18,9 @@ const routes: Routes = [
   {
     path: 'recuperar',
     loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
-  },  {
-    path: 'inicio',
+  },
+  {
+    path: 'inicio/:usuario',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {

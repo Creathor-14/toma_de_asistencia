@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
+
 
 @Component({
   selector: 'app-login',
@@ -6,10 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  email:string = "";
+  contrasenia:string = "";
 
-  constructor() { }
+  constructor(private userSercive:UsersService, private router:Router) { }
 
-  ngOnInit() {
+  login(){
+    var respuesta = this.userSercive.verificarUsuario(this.email,this.contrasenia);
+    if (respuesta != null){
+      console.log(respuesta);
+      this.router.navigateByUrl("inicio/"+respuesta);
+    }else{
+      console.log(respuesta);
+    }
+    
   }
+  recuperar(){
+    this.router.navigateByUrl("recuperar");
+  }
+  
+  ngOnInit() {}
 
 }

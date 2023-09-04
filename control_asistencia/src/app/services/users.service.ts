@@ -34,11 +34,6 @@ export class UsersService {
     }
     this.showAlert("Usuario inexistente.", "Advertencia");
     return;
-    /*
-    for(const u in this.user){
-      const v = User[u];
-      console.log(u);
-    }*/
   }
   async showAlert(msg:string, title:string){
     var alert = await this.alertService.create({cssClass:"alertClass",message:msg,header:title,buttons:['Aceptar']});

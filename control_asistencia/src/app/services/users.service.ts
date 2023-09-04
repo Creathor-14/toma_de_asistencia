@@ -11,6 +11,8 @@ export class UsersService {
     { id: 2, name: "a", password: "a"}
   ];
 
+  usuarioAutenticado: { id: number; name: string; password: string } | null = null; // Variable para almacenar el usuario autenticado
+
   verificarUsuario(email:string, contrasenia:string){
     if (email == "") {
       this.showAlert("Debe ingresar un email.", "Advertencia");

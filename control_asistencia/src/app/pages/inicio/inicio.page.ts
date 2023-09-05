@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,9 +9,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class InicioPage {
 
-  constructor(private userService: UserService,private activatedRoute:ActivatedRoute) {}
+  constructor(private userService: UserService,private router:Router) {}
 
   getMensajeBienvenida(): string {
       return `Bienvenido ${this.userService.getNombreUsuarioActual()}`;
+  }
+  cerrarSesion(){
+    this.router.navigateByUrl("login/user");
   }
 }

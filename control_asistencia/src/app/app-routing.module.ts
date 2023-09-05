@@ -8,12 +8,20 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'login/user',
     pathMatch: 'full'
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'login/user',
+    loadChildren: () => import('./pages/login/user/user.module').then( m => m.UserPageModule)
+  },
+  {
+    path: 'login/password/:email',
+    loadChildren: () => import('./pages/login/password/password.module').then( m => m.PasswordPageModule)
   },
   {
     path: 'recuperar',
@@ -27,6 +35,11 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./pages/registro/registro.module').then( m => m.RegistroPageModule)
   },
+  {
+    path: 'registrar',
+    loadChildren: () => import('./pages/registrar/registrar.module').then( m => m.RegistrarPageModule)
+  },
+
 
   
 

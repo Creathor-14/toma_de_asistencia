@@ -1,0 +1,25 @@
+<form (submit)="addUser()">
+  <label for="id">ID:</label>
+  <input type="number" id="id" [(ngModel)]="newUser.id" name="id">
+  
+  <label for="email">Email:</label>
+  <input type="email" id="email" [(ngModel)]="newUser.email" name="email">
+  
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" [(ngModel)]="newUser.nombre" name="nombre">
+  
+  <label for="contrasenia">Contraseña:</label>
+  <input type="password" id="contrasenia" [(ngModel)]="newUser.contrasenia" name="contrasenia">
+  
+  <button type="submit">Agregar Usuario</button>
+</form>
+<H1>Usuarios</H1>
+<ul>
+  <li *ngFor="let user of users">{{ user.id }} - {{ user.nombre }} - {{ user.email }} - {{ user.contrasenia }} </li>
+</ul>
+<div class="btn-container">
+  <ion-button (click)="volver()" fill="solid">Volver</ion-button>
+</div>
+<div class="btn-container">
+  <ion-button color="danger" (click)="defectUseres()" fill="solid">Usuarios por defecto</ion-button>
+</div>

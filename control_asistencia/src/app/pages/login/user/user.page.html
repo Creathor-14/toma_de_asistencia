@@ -6,10 +6,10 @@
         <ion-label position="stacked"><h1>Iniciar sesión</h1></ion-label>
         <ion-input [(ngModel)]="email"  type="email" color="medium" placeholder="correo@duocuc.cl" maxlength="256"></ion-input>
       </ion-item>
-      <ion-button fill="clear" size ="small">¿No puede acceder a su cuenta?</ion-button>
+      <ion-button (click)="recuperar()" fill="clear" size ="small">¿No puede acceder a su cuenta?</ion-button>
       <div class="btn-container">
-        <ion-button color="medium">Registrate</ion-button>
-        <ion-button  class="iniciar-sesion" fill="solid">Iniciar sesión</ion-button>
+        <ion-button (click)="registrarse()" color="medium">Registrate</ion-button>
+        <ion-button (click)="siguiente()" class="iniciar-sesion" fill="solid">Siguiente</ion-button>
         
       </div>
     </ion-card-content>

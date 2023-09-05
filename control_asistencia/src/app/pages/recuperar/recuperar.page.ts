@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
@@ -7,18 +7,18 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class RecuperarPage {
   email: string = '';
-  constructor(private usersService: UsersService) {}
+  constructor(private userService: UserService) {}
   async recuperarContrasenia() {
     if (this.email.trim() === '') {
       // Valida que se haya ingresado un email
-      await this.usersService.showAlert('Debe ingresar un email.', 'Advertencia');
+      await this.userService.showAlert('Debe ingresar un email.', 'Advertencia');
       return;
     }
-    const contraseña = this.usersService.recuperarContrasenia(this.email);
+    const contraseña = this.userService.recuperarContrasenia(this.email);
     if (contraseña !== null) {
-      await this.usersService.showAlert(`La contraseña para el email ${this.email} es: ${contraseña}`, 'Correcto');
+      await this.userService.showAlert(`La contraseña para el email ${this.email} es: ${contraseña}`, 'Correcto');
     } else {
-      await this.usersService.showAlert('Email no registrado', 'Advertencia');
+      await this.userService.showAlert('Email no registrado', 'Advertencia');
     }
   }
 }

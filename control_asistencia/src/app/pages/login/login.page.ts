@@ -12,10 +12,10 @@ export class LoginPage implements OnInit {
   email:string = "";
   contrasenia:string = "";
 
-  constructor(private userSercive:UsersService, private router:Router) { }
+  constructor(private usersSercive:UsersService, private router:Router) { }
 
   login(){
-    var respuesta = this.userSercive.verificarUsuario(this.email,this.contrasenia);
+    var respuesta = this.usersSercive.verificarUsuario(this.email,this.contrasenia);
     if (respuesta != null){
       console.log(respuesta);
       this.router.navigateByUrl("inicio/"+respuesta);

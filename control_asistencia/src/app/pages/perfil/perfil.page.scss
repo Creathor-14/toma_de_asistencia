@@ -4,9 +4,13 @@ h1{
 p{
     text-align: center;
 }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 .prueba{
     font-size: 15rem;
-    margin-inline: 10vw;
 }
 .centro{
     display: grid;

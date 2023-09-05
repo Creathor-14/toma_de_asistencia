@@ -17,10 +17,7 @@ export class RegistrarPage implements OnInit {
     contrasenia: '',
   };
   users: User[];
-
-
-    
-
+  
   constructor(private userService: UserService,private router:Router) {
     this.users = this.userService.getUsers();
   }

@@ -1,3 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registrar usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="light">
+    <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
+    <ion-card-content>
+      <ion-item> 
+        <form (submit)="addUser()">
+          <ion-input label="ID" type="number" id="id" [(ngModel)]="newUser.id" name="id" labelPlacement="floating" placeholder="Ingrese texto"></ion-input>
+          <ion-input label="Email" type="email" id="email" [(ngModel)]="newUser.email" name="email" labelPlacement="floating" placeholder="Ingrese texto"></ion-input>
+          <ion-input label="Nombre" labelPlacement="floating" placeholder="Ingrese texto"></ion-input>
+          <ion-input label="Contraseña" labelPlacement="floating" placeholder="Ingrese texto"></ion-input>
+          <button type="submit">Agregar Usuario</button>
+        </form>
+      </ion-item>
+      <div class="btn-container">
+        
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+
+
+
+<!--    
 <form (submit)="addUser()">
   <label for="id">ID:</label>
   <input type="number" id="id" [(ngModel)]="newUser.id" name="id">
@@ -13,6 +43,9 @@
   
   <button type="submit">Agregar Usuario</button>
 </form>
+-->
+
+
 <H1>Usuarios</H1>
 <ul>
   <li *ngFor="let user of users">{{ user.id }} - {{ user.nombre }} - {{ user.email }} - {{ user.contrasenia }} </li>

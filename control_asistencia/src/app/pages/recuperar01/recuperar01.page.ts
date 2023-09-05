@@ -16,13 +16,11 @@ export class Recuperar01Page {
   }
   
   async recuperarContrasenia() {
-    const contraseña = this.userService.recuperarContrasenia(this.email);
-    if (contraseña !== null) {
-      await this.userService.showAlert(`La contraseña para el email ${this.email} es: ${contraseña}`, 'Correcto');
-    } else {
-      await this.userService.showAlert('Email no registrado', 'Advertencia');
-    }
+    
+    await this.userService.showAlert(`La contraseña para el email ${this.userService.getEmailUsuarioActual()} es: ${this.userService.getContraseniaUsuarioActual()}`, 'Correcto');
+    
   }
+  
 
 
   volver(){

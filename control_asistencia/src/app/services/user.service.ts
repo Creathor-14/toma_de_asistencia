@@ -9,7 +9,7 @@ export class UserService {
   constructor(private alertService:AlertController) {}
   private users: User[] = [
     {id: 0,email: 'th.quiroga@duocuc.cl',nombre: 'Thomas',contrasenia: '123',},
-    {id: 1, email: "prueba@duocuc.cl",nombre: 'Martin', contrasenia: "prueba"},
+    {id: 1, email: "mar.rees@duocuc.cl",nombre: 'Martin', contrasenia: "prueba"},
     {id: 2, email: 'a', nombre: "a", contrasenia: "a"}
   ];
   usuarioActual = new User(-1, "", "","");
@@ -26,6 +26,10 @@ export class UserService {
   }
   getUsers(): User[] {
     return this.users;
+  }
+  deleteUser(id:number): void{
+    this.showAlert("Usuario ["+this.usuarioActual.nombre+"] Eliminado.", "Mensaje");
+    this.users.splice(id, 1);
   }
   
   existeUsuario(email:string){
@@ -67,8 +71,12 @@ export class UserService {
     await alert.present();
     return alert;
   }
+  
   getUsuarioActual(){
     return this.usuarioActual;
+  }
+  getIdUsuarioActual(){
+    return this.usuarioActual.id;
   }
   getEmailUsuarioActual(){
     return this.usuarioActual.email;
@@ -76,5 +84,9 @@ export class UserService {
   getNombreUsuarioActual(){
     return this.usuarioActual.nombre;
   }
+  getContraseniaUsuarioActual(){
+    return this.usuarioActual.contrasenia;
+  }
+
   
 }

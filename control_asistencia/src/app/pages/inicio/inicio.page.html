@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Inicio Duoc Uc</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="perfil()"><ion-icon slot="end" name="person-outline"></ion-icon><!--pencil-outline--></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -9,7 +12,7 @@
     <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
     <ion-card-content>
       <p style="text-align: center;">{{ getMensajeBienvenida() }}</p>
-      <ion-button fill="solid" style="width: 100%;">ESCANEAR ASISTENCIA</ion-button>
+      <ion-button (click)="leerQr()" fill="solid" style="width: 100%;">ESCANEAR ASISTENCIA</ion-button>
       <ion-button (click)="verasistencia()" fill="solid" style="width: 100%;">VER ASISTENCIA</ion-button>
       <ion-button (click)="cerrarSesion()" fill="solid" style="width: 100%;">CERRAR SESION</ion-button>
     </ion-card-content>

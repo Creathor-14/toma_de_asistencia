@@ -17,4 +17,7 @@ export class InicioPage {
   cerrarSesion(){
     this.router.navigateByUrl("login/user");
   }
+  perfil(){
+    this.router.navigateByUrl("perfil/"+1);
+  }
 }

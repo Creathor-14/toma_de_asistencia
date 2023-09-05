@@ -17,4 +17,7 @@ export class InicioPage {
   cerrarSesion(){
     this.router.navigateByUrl("login/user");
   }
+  verasistencia(){
+    this.router.navigateByUrl("/registro");
+  }
 }

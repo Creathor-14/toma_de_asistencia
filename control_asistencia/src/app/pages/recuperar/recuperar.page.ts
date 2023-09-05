@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
@@ -7,7 +9,9 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RecuperarPage {
   email: string = '';
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router ) {
+
+  }
   async recuperarContrasenia() {
     if (this.email.trim() === '') {
       // Valida que se haya ingresado un email
@@ -21,4 +25,8 @@ export class RecuperarPage {
       await this.userService.showAlert('Email no registrado', 'Advertencia');
     }
   }
+  volver(){
+    this.router.navigateByUrl("login/user");
+  }
+  
 }

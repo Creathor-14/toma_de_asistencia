@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="container">
+    <ion-button (click)="registrar_asistencia()">
+      <ion-icon class="prueba" name="camera-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

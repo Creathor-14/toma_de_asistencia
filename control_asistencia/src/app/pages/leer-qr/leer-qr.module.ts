@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegistroPageRoutingModule } from './registro-routing.module';
+import { LeerQrPageRoutingModule } from './leer-qr-routing.module';
 
-import { RegistroPage } from './registro.page';
+import { LeerQrPage } from './leer-qr.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegistroPageRoutingModule
+    LeerQrPageRoutingModule
   ],
-  declarations: [RegistroPage]
+  declarations: [LeerQrPage]
 })
-export class RegistroPageModule {}
+export class LeerQrPageModule {}

@@ -17,7 +17,14 @@ export class InicioPage {
   cerrarSesion(){
     this.router.navigateByUrl("login/user");
   }
+
   verasistencia(){
     this.router.navigateByUrl("/registro");
+  }
+  perfil(){
+    this.router.navigateByUrl("perfil/"+1);
+  }
+  leerQr(){
+    this.router.navigateByUrl("leer-qr");
   }
 }

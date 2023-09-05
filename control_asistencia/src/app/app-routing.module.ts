@@ -35,6 +35,12 @@ const routes: Routes = [
     path: 'registrar',
     loadChildren: () => import('./pages/registrar/registrar.module').then( m => m.RegistrarPageModule)
   },
+ 
+  {
+    path: 'recuperar01',
+    loadChildren: () => import('./pages/recuperar01/recuperar01.module').then( m => m.Recuperar01PageModule)
+  },
+
   
 
 

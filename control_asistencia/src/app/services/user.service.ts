@@ -13,6 +13,7 @@ export class UserService {
     {id: 2, email: 'a', nombre: "a", contrasenia: "a"}
   ];
   usuarioActual = new User(-1, "", "","");
+  
   lastId():number{//no funciona con los valores por defecto
     if (this.users.length > 0) {
       const ultimoUsuario = this.users[this.users.length - 1];

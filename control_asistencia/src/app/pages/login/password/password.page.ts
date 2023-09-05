@@ -16,7 +16,7 @@ export class PasswordPage implements OnInit {
     this.router.navigateByUrl("login/user");
   }
   recuperar(){
-    this.router.navigateByUrl("recuperar");
+    this.router.navigateByUrl("recuperar01");
   }
   getMensajeBienvenida(): string {
       return `${this.userSercive.getEmailUsuarioActual()}`;

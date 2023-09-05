@@ -8,15 +8,18 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
 })
+
 export class UserPage implements OnInit {
   constructor(private router:Router, private userSercive:UserService) { }
   email:string = "";
+  
   
 
   ngOnInit() {
   }
   recuperar(){
     this.router.navigateByUrl("recuperar");
+    
   }
   registrarse(){
     this.router.navigateByUrl("registrar");
@@ -31,3 +34,4 @@ export class UserPage implements OnInit {
   }
   
 }
+

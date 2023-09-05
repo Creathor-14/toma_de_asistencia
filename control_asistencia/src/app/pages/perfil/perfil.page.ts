@@ -21,10 +21,14 @@ export class PerfilPage implements OnInit {
     return `${this.userService.getEmailUsuarioActual()}`;
   }
   getContrasenia(): string {
-    return `contraseña: ${this.userService.getEmailUsuarioActual()}`;
+    return `${this.userService.getContraseniaUsuarioActual()}`;
   }
   volver(){
     this.router.navigateByUrl("inicio/");
+  }
+  eliminar(){
+    this.userService.deleteUser(this.userService.getIdUsuarioActual());
+    this.router.navigateByUrl("login/user");
   }
   ngOnInit() {
   }

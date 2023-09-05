@@ -26,6 +26,10 @@ export class UserService {
   getUsers(): User[] {
     return this.users;
   }
+  deleteUser(id:number): void{
+    this.showAlert("Usuario ["+this.usuarioActual.nombre+"] Eliminado.", "Mensaje");
+    this.users.splice(id, 1);
+  }
   
   existeUsuario(email:string){
     if (email == "") {
@@ -66,8 +70,12 @@ export class UserService {
     await alert.present();
     return alert;
   }
+  
   getUsuarioActual(){
     return this.usuarioActual;
+  }
+  getIdUsuarioActual(){
+    return this.usuarioActual.id;
   }
   getEmailUsuarioActual(){
     return this.usuarioActual.email;
@@ -75,5 +83,9 @@ export class UserService {
   getNombreUsuarioActual(){
     return this.usuarioActual.nombre;
   }
+  getContraseniaUsuarioActual(){
+    return this.usuarioActual.contrasenia;
+  }
+
   
 }

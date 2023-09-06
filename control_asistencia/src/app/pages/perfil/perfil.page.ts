@@ -26,6 +26,9 @@ export class PerfilPage implements OnInit {
   getContrasenia(): string {
     return `${this.userService.getContrasenia(this.id)}`;
   }
+  editar(){
+    this.router.navigateByUrl("perfil/editar/"+this.id);
+  }
   volver(){
     this.router.navigateByUrl("inicio/"+this.id);
   }

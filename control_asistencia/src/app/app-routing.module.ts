@@ -36,6 +36,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
   },
   {
+    path: 'perfil/editar/:id',
+    loadChildren: () => import('./pages/perfil/editar/editar.module').then( m => m.EditarPageModule)
+  },
+  {
     path: 'leer-qr/:id',
     loadChildren: () => import('./pages/leer-qr/leer-qr.module').then( m => m.LeerQrPageModule)
   },
@@ -51,16 +55,6 @@ const routes: Routes = [
     path: 'ver-asistencia/:id',
     loadChildren: () => import('./pages/ver-asistencia/ver-asistencia.module').then( m => m.VerAsistenciaPageModule)
   },
-
-  
-
-
-
-
-  
-
-
-
 
 ];
 

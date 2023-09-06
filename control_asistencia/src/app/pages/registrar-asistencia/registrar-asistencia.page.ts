@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registrar-asistencia',
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RegistrarAsistenciaPage implements OnInit {
   id:number=0;
-  constructor(private router:Router, private activatedRoute:ActivatedRoute) {}
+  constructor(private router:Router, private activatedRoute:ActivatedRoute, private userService:UserService) {}
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
@@ -16,6 +17,10 @@ export class RegistrarAsistenciaPage implements OnInit {
     this.router.navigateByUrl("leer-qr/"+this.id);
   }
   cancelar(){
+    this.router.navigateByUrl("inicio/"+this.id);
+  }
+  registrarAsistencia(){
+    this.userService.showAlert("Asistencia registrada.", "Mensaje");
     this.router.navigateByUrl("inicio/"+this.id);
   }
 

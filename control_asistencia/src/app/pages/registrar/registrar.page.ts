@@ -10,10 +10,15 @@ import { UserService } from 'src/app/services/user.service';
   
 })
 export class RegistrarPage implements OnInit {
+  email:string = "";
+  nombre:string = "";
+  apellido:string = "";
+  contrasenia:string = "";
   newUser = {
     id: this.userService.lastId(),
     email: '',
     nombre: '',
+    apellido: '',
     contrasenia: '',
   };
   users: User[];
@@ -23,14 +28,14 @@ export class RegistrarPage implements OnInit {
   }
 
   addUser(): void {
+    this.newUser = new User(this.userService.lastId(), this.email, this.nombre, this.apellido, this.contrasenia);
     this.userService.addUser(this.newUser);
-    this.newUser = new User(this.userService.lastId(), '', '', ''); // Reiniciar el usuario
+    this.email= '';
+    this.nombre= '';
+    this.apellido= '';
+    this.contrasenia= '';
   }
-  defectUseres():void{
-    this.userService.addUser({id: 0,email: 'th.quiroga@duocuc.cl',nombre: 'Thomas',contrasenia: '123',});
-    this.userService.addUser({ id: 1, email: "prueba@duocuc.cl",nombre: 'Martin', contrasenia: "prueba"});
-    this.userService.addUser({ id: 2, email: 'a', nombre: "a", contrasenia: "a"});
-  }
+
   volver(){
     this.router.navigateByUrl("login/user");
   }

@@ -47,6 +47,10 @@ const routes: Routes = [
     path: 'recuperar01',
     loadChildren: () => import('./pages/recuperar01/recuperar01.module').then( m => m.Recuperar01PageModule)
   },
+  {
+    path: 'ver-asistencia',
+    loadChildren: () => import('./pages/ver-asistencia/ver-asistencia.module').then( m => m.VerAsistenciaPageModule)
+  },
 
   
 

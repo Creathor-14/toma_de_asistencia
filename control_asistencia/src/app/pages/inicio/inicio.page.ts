@@ -19,7 +19,7 @@ export class InicioPage {
   }
 
   verasistencia(){
-    this.router.navigateByUrl("/registro");
+    this.router.navigateByUrl("ver-asistencia");
   }
   perfil(){
     this.router.navigateByUrl("perfil/"+1);

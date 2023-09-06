@@ -1,25 +1,32 @@
-<ion-content  >
+<div class="background-image">
+  
   <ion-card color="light">
     <ion-toolbar color="light">
       <ion-buttons slot="start">
         <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
-    
     <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
     <ion-card-content class="ion-text-center ion-align-items-center">
-      <ion-item> 
-
-          <ion-input [(ngModel)]="email" label="Email" type="email" id="email"  name="email" labelPlacement="floating" placeholder="Ingrese email"></ion-input>
-          <ion-input [(ngModel)]="nombre" label="Nombre" labelPlacement="floating" placeholder="Ingrese nombre"></ion-input>
-          <ion-input [(ngModel)]="apellido" label="Apellido" labelPlacement="floating" placeholder="Ingrese apellido"></ion-input>
-          <ion-input [(ngModel)]="contrasenia" label="Contraseña" labelPlacement="floating" placeholder="Ingrese contraseña"></ion-input>
-          <ion-button (click)="addUser()" fill="solid" type="submit"> Agregar Usuario</ion-button>            
-
+      <ion-item color="light"> 
+        <ion-input [(ngModel)]="email" label="Email" type="email" id="email"  name="email" labelPlacement="floating" placeholder="Ingrese email"></ion-input>
       </ion-item>
+      <ion-item color="light"> 
+        <ion-input [(ngModel)]="nombre" label="Nombre" labelPlacement="floating" placeholder="Ingrese nombre"></ion-input>
+      </ion-item>
+      <ion-item color="light">
+        <ion-input [(ngModel)]="apellido" label="Apellido" labelPlacement="floating" placeholder="Ingrese apellido"></ion-input>
+      </ion-item>
+      <ion-item color="light">
+        <ion-input [(ngModel)]="contrasenia" label="Contraseña" labelPlacement="floating" placeholder="Ingrese contraseña"></ion-input>
+      </ion-item>
+      <div class="btn-container">
+        <ion-button (click)="addUser()" fill="solid" type="submit"> Agregar Usuario</ion-button>  
+      </div>
     </ion-card-content>
   </ion-card>
-</ion-content>
+ 
+</div>
 
 
 

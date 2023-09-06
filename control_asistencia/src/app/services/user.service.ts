@@ -57,8 +57,35 @@ export class UserService {
     }
     return 0;
   }
-  addUser(user: User): void {//no se deben aceptar correos repetidos, ni parametros vacios
-    this.users.push(user);
+  addUser(id:number, email:string, nombre:string, apellido:string, contrasenia:string): boolean {//no se deben aceptar correos repetidos, ni parametros vacios
+    if (email == "") {
+      this.showAlert("Debe ingresar un email.", "Advertencia");
+    }
+    else if (nombre == "") {
+      this.showAlert("Debe ingresar un nombre.", "Advertencia");
+    }
+     else if (apellido == "") {
+      this.showAlert("Debe ingresar un apellido.", "Advertencia");
+    }
+    else if (contrasenia == "") {
+      this.showAlert("Debe ingresar una contraseña.", "Advertencia");
+    }else{
+      let inexistente:boolean = true;
+      for(let i = 0; i<this.users.length; i++){
+        let u = this.users[i];
+        if(email == u.email){
+            this.showAlert("Email de usuario ocupado.", "Mensaje");
+            inexistente = false;
+            break;
+        }
+      }
+      if(inexistente){
+        this.users.push(new User(id,email,nombre,apellido,contrasenia));
+        this.showAlert("Usuario ingresado.", "Mensaje");
+        return true;
+      }  
+    }
+    return false;
   }
   getUsers(): User[] {
     return this.users;
@@ -98,11 +125,7 @@ export class UserService {
     }
     return null;
   }
-  async showAlert(msg:string, title:string){
-    var alert = await this.alertService.create({cssClass:"alertClass",message:msg,header:title,buttons:['Aceptar']});
-    await alert.present();
-    return alert;
-  }
+  
 
   //mejorar las funciones de aca abajo
   getEmail(id:number){
@@ -142,5 +165,9 @@ export class UserService {
     return "";
   }
 
-  
+  async showAlert(msg:string, title:string){
+    var alert = await this.alertService.create({cssClass:"alertClass",message:msg,header:title,buttons:['Aceptar']});
+    await alert.present();
+    return alert;
+  }
 }

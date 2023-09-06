@@ -21,19 +21,20 @@ export class RegistrarPage implements OnInit {
     apellido: '',
     contrasenia: '',
   };
-  users: User[];
+  users: User[];//ver usuarios existentes
   
   constructor(private userService: UserService,private router:Router) {
-    this.users = this.userService.getUsers();
+    this.users = this.userService.getUsers();//ver usuarios existentes
   }
 
   addUser(): void {
-    this.newUser = new User(this.userService.lastId(), this.email, this.nombre, this.apellido, this.contrasenia);
-    this.userService.addUser(this.newUser);
-    this.email= '';
-    this.nombre= '';
-    this.apellido= '';
-    this.contrasenia= '';
+    let ingresado = this.userService.addUser(this.userService.lastId(), this.email, this.nombre, this.apellido, this.contrasenia);
+    if(ingresado){
+      this.email= '';
+      this.nombre= '';
+      this.apellido= '';
+      this.contrasenia= '';
+    }
   }
 
   volver(){

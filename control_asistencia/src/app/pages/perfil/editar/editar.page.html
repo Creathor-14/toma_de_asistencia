@@ -4,38 +4,23 @@
       <ion-buttons slot="start">
         <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
       </ion-buttons>
-      <ion-buttons slot="primary">
-        <ion-button >Editar<ion-icon slot="end" name="pencil-outline"></ion-icon><!--pencil-outline--></ion-button>
-      </ion-buttons>
     </ion-toolbar>
     <div class="container">
       <ion-icon class="prueba" name="person-circle-outline"></ion-icon><!--Mejorar el centrado del icono-->
     </div>
-      <ion-item color="light">
-      <ion-label>
-        <h1>Nombre</h1>
-
-      </ion-label>
+    <ion-item color="light">
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="nombre" [clearInput]="true" placeholder="Ingrese el nombre"></ion-input>
     </ion-item>
     <ion-item color="light">
-      <ion-label>
-        <h1>Apellido</h1>
-
-      </ion-label>
+      <ion-label position="stacked">Apellido</ion-label>
+      <ion-input [(ngModel)]="apellido" [clearInput]="true" placeholder="Ingrese el apellido"></ion-input>
     </ion-item>
-    <ion-item color="light">
-      <ion-label>
-        <h1>Email</h1>
-
-      </ion-label>
+    <ion-item color="light" >
+      <ion-label position="stacked">Contraseña</ion-label>
+      <ion-input [(ngModel)]="contrasenia" [clearInput]="true" placeholder="Ingrese la contraseña"></ion-input>
     </ion-item>
-    <ion-item color="light">
-      <ion-label>
-        <h1>Contraseña</h1>
-
-      </ion-label>
-    </ion-item>
-    <ion-button (click)="aceptar()" class="centro" fill="solid" color="danger"><ion-icon name="trash-outline" size="large"></ion-icon> Eliminar usuario </ion-button>
+    <ion-button (click)="actualizar()" class="centro" fill="solid" color="success"><ion-icon name="trash-outline" size="large"></ion-icon> Actualizar usuario </ion-button>
   </ion-card>
 </ion-content>
 

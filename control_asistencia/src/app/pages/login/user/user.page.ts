@@ -26,9 +26,8 @@ export class UserPage implements OnInit {
   }
   siguiente(){
     var respuesta = this.userSercive.existeUsuario(this.email);
-    if(respuesta){
-      console.log(this.email);
-      this.router.navigateByUrl("login/password/"+this.email);
+    if(respuesta!=-1){
+      this.router.navigateByUrl("login/password/"+respuesta);
     }
     
   }

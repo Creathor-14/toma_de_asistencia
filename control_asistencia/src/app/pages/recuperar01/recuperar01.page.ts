@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -10,14 +10,15 @@ import { Router } from '@angular/router';
 })
 
 export class Recuperar01Page {
-  email: string = '';
-  constructor(private userService: UserService, private router: Router ) {
-
+  id:number = 0;
+  constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute ) {}
+  ngOnInit() {
+    this.id = this.activatedRoute.snapshot.params['id'];
   }
   
   async recuperarContrasenia() {
     
-    await this.userService.showAlert(`La contraseña para el email ${this.userService.getEmailUsuarioActual()} es: ${this.userService.getContraseniaUsuarioActual()}`, 'Correcto');
+    await this.userService.showAlert(`La contraseña para el email ${this.userService.getEmail(this.id)} es: ${this.userService.getContrasenia(this.id)}`, 'Correcto');
     
   }
   

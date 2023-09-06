@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/user/user.module').then( m => m.UserPageModule)
   },
   {
-    path: 'login/password/:email',
+    path: 'login/password/:id',
     loadChildren: () => import('./pages/login/password/password.module').then( m => m.PasswordPageModule)
   },
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
   {
-    path: 'inicio/:usuario',
+    path: 'inicio/:id',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
@@ -32,23 +32,23 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrar/registrar.module').then( m => m.RegistrarPageModule)
   },
   {
-    path: 'perfil/:usuario',
+    path: 'perfil/:id',
     loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
-  },  {
-    path: 'leer-qr',
+  },
+  {
+    path: 'leer-qr/:id',
     loadChildren: () => import('./pages/leer-qr/leer-qr.module').then( m => m.LeerQrPageModule)
   },
   {
-    path: 'registrar-asistencia',
+    path: 'registrar-asistencia/:id',
     loadChildren: () => import('./pages/registrar-asistencia/registrar-asistencia.module').then( m => m.RegistrarAsistenciaPageModule)
   },
- 
   {
-    path: 'recuperar01',
+    path: 'recuperar01/:id',
     loadChildren: () => import('./pages/recuperar01/recuperar01.module').then( m => m.Recuperar01PageModule)
   },
   {
-    path: 'ver-asistencia',
+    path: 'ver-asistencia/:id',
     loadChildren: () => import('./pages/ver-asistencia/ver-asistencia.module').then( m => m.VerAsistenciaPageModule)
   },
 

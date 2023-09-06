@@ -12,8 +12,44 @@ export class UserService {
     {id: 1, email: "mar.rees@duocuc.cl",nombre: 'Martin', apellido: 'Rees', contrasenia: "prueba"},
     {id: 2, email: 'a', nombre: "a", apellido: 'a', contrasenia: "a"}
   ];
-  usuarioActual = new User(-1, "", "", "","");
+
+  /**
+   * Ve si existe un usuario con ese correo, si existe regresa su id, si no -1.
+   * @param email 
+   * @returns id
+   */
+  existeUsuario(email:string):number{
+    if (email == "") {
+      this.showAlert("Debe ingresar un email.", "Advertencia");
+      return -1;
+    }
+    for(let i = 0; i<this.users.length; i++){
+      let u = this.users[i];
+      if(email == u.email){
+          return u.id;
+      }
+    }
+    this.showAlert("Usuario inexistente.", "Advertencia");
+    return -1;
+  }
   
+  contraseniaCorrecta(id:number, contrasenia:string):number{
+    if (contrasenia == "") {
+      this.showAlert("Debe ingresar una contraseña.", "Advertencia");
+      return -1;
+    }
+    for(let i = 0; i<this.users.length; i++){
+      let u = this.users[i];
+      if(u.id == id && u.contrasenia == contrasenia){
+          return u.id;
+      }
+    }
+    this.showAlert("Contraseña incorrecta.", "Advertencia");
+    return -1;
+    
+  }
+
+
   lastId():number{//no funciona con los valores por defecto
     if (this.users.length > 0) {
       const ultimoUsuario = this.users[this.users.length - 1];
@@ -28,37 +64,11 @@ export class UserService {
     return this.users;
   }
   deleteUser(id:number): void{
-    this.showAlert("Usuario ["+this.usuarioActual.nombre+"] Eliminado.", "Mensaje");
+    this.showAlert("Usuario ["+this.getNombre(id)+" "+this.getApellido(id)+"] Eliminado.", "Mensaje");
     this.users.splice(id, 1);
   }
   
-  existeUsuario(email:string){
-    if (email == "") {
-      this.showAlert("Debe ingresar un email.", "Advertencia");
-      return false;
-    }
-    for(let i = 0; i<this.users.length; i++){
-      let u = this.users[i];
-      if(email == u.email){//usar el metodo de pasar parametros por url
-          this.usuarioActual=u;
-          return true;
-      }
-    }
-    this.showAlert("Usuario inexistente.", "Advertencia");
-    return false;
-  }
-  contraseniaCorrecta(contrasenia:string):boolean{
-    if (contrasenia == "") {
-      this.showAlert("Debe ingresar una contraseña.", "Advertencia");
-      return false;
-    }
-    if(contrasenia == this.usuarioActual.contrasenia){
-      return true;
-    }else{
-      this.showAlert("Contraseña incorrecta.", "Advertencia");
-      return false;
-    }
-  }
+  
   recuperarContrasenia(email: string): string | null {
     const user = this.users.find(u => u.email === email);
     if (user) {
@@ -71,24 +81,43 @@ export class UserService {
     await alert.present();
     return alert;
   }
-  
-  getUsuarioActual(){
-    return this.usuarioActual;
+
+  //mejorar las funciones de aca abajo
+  getEmail(id:number){
+    for(let i = 0; i<this.users.length; i++){
+      let u = this.users[i];
+      if(id == u.id){
+          return u.email;
+      }
+    }
+    return "";
   }
-  getIdUsuarioActual(){
-    return this.usuarioActual.id;
+  getNombre(id:number){
+    for(let i = 0; i<this.users.length; i++){
+      let u = this.users[i];
+      if(id == u.id){
+          return u.nombre;
+      }
+    }
+    return "";
   }
-  getEmailUsuarioActual(){
-    return this.usuarioActual.email;
+  getApellido(id:number){
+    for(let i = 0; i<this.users.length; i++){
+      let u = this.users[i];
+      if(id == u.id){
+          return u.apellido;
+      }
+    }
+    return "";
   }
-  getNombreUsuarioActual(){
-    return this.usuarioActual.nombre;
-  }
-  getApellidoUsuarioActual(){
-    return this.usuarioActual.apellido;
-  }
-  getContraseniaUsuarioActual(){
-    return this.usuarioActual.contrasenia;
+  getContrasenia(id:number){
+    for(let i = 0; i<this.users.length; i++){
+      let u = this.users[i];
+      if(id == u.id){
+          return u.contrasenia;
+      }
+    }
+    return "";
   }
 
   

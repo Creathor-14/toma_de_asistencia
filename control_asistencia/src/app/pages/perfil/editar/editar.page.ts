@@ -9,12 +9,15 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class EditarPage implements OnInit {
   id:number = 0;
-  nombre:string = this.userService.getNombre(this.id);
-  apellido:string = this.userService.getApellido(this.id);
-  contrasenia:string = this.userService.getContrasenia(this.id);
+  nombre:string = "";
+  apellido:string = "";
+  contrasenia:string = "";
   constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) { }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    this.nombre = this.userService.getNombre(this.id);
+    this.apellido = this.userService.getApellido(this.id);
+    this.contrasenia = this.userService.getContrasenia(this.id);
   }
 
   getNombre(): string {

@@ -6,7 +6,15 @@
     width: 100%;
     height: 100%;
 }
-
+.background-image::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 ion-card{
     display: flex;
@@ -21,9 +29,12 @@ ion-card{
     
 }
 img{
-    width: 15%;
-    height: 15%;   
+    width: 50%;
+    height: 50%;   
     margin-bottom: 1.5rem;
+}
+p{
+    font-size: 1.3rem;
 }
 ion-item{
     margin-bottom: 0.5rem;

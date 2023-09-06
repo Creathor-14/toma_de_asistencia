@@ -1,14 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Inicio Duoc Uc</ion-title>
-    <ion-buttons slot="primary">
-      <ion-button (click)="perfil()"><ion-icon slot="end" name="person-outline"></ion-icon><!--pencil-outline--></ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+
 <ion-content>
   
   <ion-card color="light">
+    <ion-toolbar color="light">
+      <ion-buttons slot="primary">
+        <ion-button (click)="perfil()"><ion-icon slot="end" name="person-outline" size="large"></ion-icon><!--pencil-outline--></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
     <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
     <ion-card-content>
       <p style="text-align: center;">{{ getMensajeBienvenida() }}</p>

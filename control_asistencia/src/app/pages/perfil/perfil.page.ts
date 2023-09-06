@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,29 +8,31 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  id:number = 0;
 
-
-  constructor(private router:Router, private userService: UserService) { }
+  constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) { }
+  ngOnInit() {
+    this.id = this.activatedRoute.snapshot.params['id'];
+  }
   getNombre(): string {
-    return `${this.userService.getNombreUsuarioActual()}`;
+    return `${this.userService.getNombre(this.id)}`;
   }
   getApellido(): string {
-    return `apellido: ${this.userService.getNombreUsuarioActual()}`;
+    return `${this.userService.getApellido(this.id)}`;
   }
   getEmail(): string {
-    return `${this.userService.getEmailUsuarioActual()}`;
+    return `${this.userService.getEmail(this.id)}`;
   }
   getContrasenia(): string {
-    return `${this.userService.getContraseniaUsuarioActual()}`;
+    return `${this.userService.getContrasenia(this.id)}`;
   }
   volver(){
-    this.router.navigateByUrl("inicio/");
+    this.router.navigateByUrl("inicio/"+this.id);
   }
   eliminar(){
-    this.userService.deleteUser(this.userService.getIdUsuarioActual());
+    this.userService.deleteUser(this.id);
     this.router.navigateByUrl("login/user");
   }
-  ngOnInit() {
-  }
+
 
 }

@@ -1,10 +1,11 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Registrar usuario</ion-title>
-  </ion-toolbar>
-</ion-header>
 <ion-content>
   <ion-card color="light">
+    <ion-toolbar color="light">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+    
     <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
     <ion-card-content>
       <ion-item> 
@@ -14,7 +15,6 @@
           <ion-input [(ngModel)]="apellido" label="Apellido" labelPlacement="floating" placeholder="Ingrese apellido"></ion-input>
           <ion-input [(ngModel)]="contrasenia" label="Contraseña" labelPlacement="floating" placeholder="Ingrese contraseña"></ion-input>
           <ion-button (click)="addUser()" fill="solid" type="submit"> Agregar Usuario</ion-button>            
-          <ion-button (click)="volver()" fill="solid">Volver</ion-button>
 
       </ion-item>
     </ion-card-content>
@@ -41,7 +41,7 @@
   <button type="submit">Agregar Usuario</button>
 </form>
 
--->
+
 
 <H1>Usuarios</H1>
 <ul>
@@ -51,3 +51,4 @@
   <ion-button (click)="volver()" fill="solid">Volver</ion-button>
 </div>
 
+-->

@@ -1,11 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Registro historico asistencias</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 <ion-content>
   
   <ion-card color="light">
+    <ion-toolbar color="light">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
     <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
     <ion-card-content>
       <ion-item>
@@ -18,7 +19,6 @@
           <h1>Fecha</h1>
         </ion-label>
       </ion-item>
-      <ion-button (click)="volver()" fill="solid">Volver</ion-button>
 
       
     </ion-card-content>

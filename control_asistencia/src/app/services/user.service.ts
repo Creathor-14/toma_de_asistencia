@@ -67,6 +67,28 @@ export class UserService {
     this.showAlert("Usuario ["+this.getNombre(id)+" "+this.getApellido(id)+"] Eliminado.", "Mensaje");
     this.users.splice(id, 1);
   }
+  updateUser(id:number, nombre:string, apellido:string, contrasenia:string):void{
+    if (nombre == "") {
+      this.showAlert("Debe ingresar un nombre.", "Advertencia");
+    }
+     else if (apellido == "") {
+      this.showAlert("Debe ingresar un apellido.", "Advertencia");
+    }
+    else if (contrasenia == "") {
+      this.showAlert("Debe ingresar una contraseña.", "Advertencia");
+    }else{
+      for(let i = 0; i<this.users.length; i++){
+        let u = this.users[i];
+        if(id == u.id){
+            u.nombre = nombre;
+            u.apellido = apellido;
+            u.contrasenia = contrasenia;
+            this.showAlert("Usuario Actualizado.", "Mensaje");
+        }
+      }
+    }
+    
+  }
   
   
   recuperarContrasenia(email: string): string | null {

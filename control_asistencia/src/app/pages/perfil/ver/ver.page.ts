@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
+  selector: 'app-ver',
+  templateUrl: './ver.page.html',
+  styleUrls: ['./ver.page.scss'],
 })
-export class PerfilPage implements OnInit {
+export class VerPage implements OnInit {
   id:number = 0;
 
   constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) { }
@@ -36,6 +36,4 @@ export class PerfilPage implements OnInit {
     this.userService.deleteUser(this.id);
     this.router.navigateByUrl("login/user");
   }
-
-
 }

@@ -32,8 +32,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/registrar/registrar.module').then( m => m.RegistrarPageModule)
   },
   {
-    path: 'perfil/:id',
-    loadChildren: () => import('./pages/perfil/perfil.module').then( m => m.PerfilPageModule)
+    path: 'perfil/ver/:id',
+    loadChildren: () => import('./pages/perfil/ver/ver.module').then( m => m.VerPageModule)
   },
   {
     path: 'perfil/editar/:id',

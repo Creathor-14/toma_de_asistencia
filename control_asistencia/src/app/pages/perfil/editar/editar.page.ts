@@ -38,6 +38,6 @@ export class EditarPage implements OnInit {
     this.userService.updateUser(this.id, this.nombre, this.apellido, this.contrasenia);
   }
   volver(){
-    this.router.navigateByUrl("perfil/"+this.id);
+    this.router.navigateByUrl("perfil/ver/"+this.id);
   }
 }

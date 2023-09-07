@@ -20,7 +20,7 @@ export class InicioPage {
 
 
   perfil(){
-    this.router.navigateByUrl("perfil/"+this.id);
+    this.router.navigateByUrl("perfil/ver/"+this.id);
   }
   leerQr(){
     this.router.navigateByUrl("leer-qr/"+this.id);

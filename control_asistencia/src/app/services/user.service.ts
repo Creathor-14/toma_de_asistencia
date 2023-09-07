@@ -75,7 +75,7 @@ export class UserService {
    * @param contrasenia 
    * @returns true
    */
-  addUser(id:number, email:string, nombre:string, apellido:string, contrasenia:string): boolean {
+  async addUser(id:number, email:string, nombre:string, apellido:string, contrasenia:string): Promise<boolean> {
     if (email == "") {
       this.showAlert("Debe ingresar un email.", "Advertencia");
     }
@@ -98,9 +98,12 @@ export class UserService {
         }
       }
       if(inexistente){
-        this.users.push(new User(id,email,nombre,apellido,contrasenia));
-        this.showAlert("Usuario ingresado.", "Mensaje");
-        return true;
+        var confirmar= await this.showConfirm("¿Desea agregar usuario?","Cancelar","Aceptar");
+        if (confirmar){
+          this.users.push(new User(id,email,nombre,apellido,contrasenia));
+          this.showAlert("Usuario ingresado.", "Mensaje");
+          return true;
+        }
       }  
     }
     return false;
@@ -206,5 +209,29 @@ export class UserService {
     var alert = await this.alertService.create({cssClass:"alertClass",message:msg,header:title,buttons:['Aceptar']});
     await alert.present();
     return alert;
+  }
+
+  async showConfirm(message:string,btn_cancelar:string,btn_confirmar:string){
+    let promise = new Promise<boolean>(async (resolve)=>{
+      var alert = await this.alertService.create({cssClass:"",message:message,buttons:[
+        
+        {
+          text:btn_cancelar,
+          role: 'cancel',
+          handler: () =>{
+            resolve(false);
+          }
+        },
+        {
+          text:btn_confirmar,
+          handler: () =>{
+            resolve(true);
+          }
+        }
+      ]})
+      await alert.present();
+
+    })
+    return promise;
   }
 }

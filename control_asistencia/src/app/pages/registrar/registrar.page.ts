@@ -27,9 +27,9 @@ export class RegistrarPage implements OnInit {
     this.users = this.userService.getUsers();//ver usuarios existentes
   }
 
-  addUser(): void {
+  async addUser(): Promise<void> {
     let ingresado = this.userService.addUser(this.userService.lastId(), this.email, this.nombre, this.apellido, this.contrasenia);
-    if(ingresado){
+    if(await ingresado){
       this.email= '';
       this.nombre= '';
       this.apellido= '';

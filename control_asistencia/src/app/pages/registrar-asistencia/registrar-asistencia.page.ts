@@ -19,9 +19,12 @@ export class RegistrarAsistenciaPage implements OnInit {
   cancelar(){
     this.router.navigateByUrl("inicio/"+this.id);
   }
-  registrarAsistencia(){
-    this.userService.showAlert("Asistencia registrada.", "Mensaje");
-    this.router.navigateByUrl("inicio/"+this.id);
+  async registrarAsistencia(){
+    var confirmar = await this.userService.showConfirm("¿Desea registrar su asistencia?","Cancelar","Confirmar");
+    if(confirmar){
+      this.userService.showAlert("Asistencia registrada.", "Mensaje");
+      this.router.navigateByUrl("inicio/"+this.id);
+    }
   }
 
 

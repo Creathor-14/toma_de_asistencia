@@ -9,8 +9,9 @@ export class UserService {
   constructor(private alertService:AlertController) {}
   private users: User[] = [
     {id: 0,email: 'th.quiroga@duocuc.cl',nombre: 'Thomas', apellido: 'Quiroga', contrasenia: '123',},
-    {id: 1, email: "mar.rees@duocuc.cl",nombre: 'Martin', apellido: 'Rees', contrasenia: "prueba"},
-    {id: 2, email: 'a', nombre: "a", apellido: 'a', contrasenia: "a"}
+    {id: 1, email: 'mar.rees@duocuc.cl',nombre: 'Martin', apellido: 'Rees', contrasenia: 'prueba'},
+    {id: 2, email: 'a', nombre: 'a', apellido: 'a', contrasenia: 'a'},
+    {id: 3, email: 'pgy4121-002d', nombre: 'Guillermo', apellido: 'Villacura', contrasenia: 'pgy4121-002d'}
   ];
 
   /**
@@ -32,7 +33,12 @@ export class UserService {
     this.showAlert("Usuario inexistente.", "Advertencia");
     return -1;
   }
-  
+  /**
+   * Verifica que la contraseña sea correcta, si lo es retorna la id, sino -1.
+   * @param id 
+   * @param contrasenia 
+   * @returns id
+   */
   contraseniaCorrecta(id:number, contrasenia:string):number{
     if (contrasenia == "") {
       this.showAlert("Debe ingresar una contraseña.", "Advertencia");
@@ -49,15 +55,27 @@ export class UserService {
     
   }
 
-
-  lastId():number{//no funciona con los valores por defecto
+  /**
+   * Genera la id para un nuevo usuario.
+   * @returns ultimaId+1
+   */
+  lastId():number{
     if (this.users.length > 0) {
       const ultimoUsuario = this.users[this.users.length - 1];
       return ultimoUsuario.id+1;
     }
     return 0;
   }
-  addUser(id:number, email:string, nombre:string, apellido:string, contrasenia:string): boolean {//no se deben aceptar correos repetidos, ni parametros vacios
+  /**
+   * Verifica si no existen parametros en blanco, luego que el email ingresado no exista, si no ocurre lo anterior se ingresa el usuario
+   * @param id 
+   * @param email 
+   * @param nombre 
+   * @param apellido 
+   * @param contrasenia 
+   * @returns true
+   */
+  addUser(id:number, email:string, nombre:string, apellido:string, contrasenia:string): boolean {
     if (email == "") {
       this.showAlert("Debe ingresar un email.", "Advertencia");
     }
@@ -87,13 +105,28 @@ export class UserService {
     }
     return false;
   }
+  /**
+   * Obtiene la lista de usuarios
+   * @returns Users[]
+   */
   getUsers(): User[] {
     return this.users;
   }
+  /**
+   * Elimina un usuario segun su id.
+   * @param id 
+   */
   deleteUser(id:number): void{
     this.showAlert("Usuario ["+this.getNombre(id)+" "+this.getApellido(id)+"] Eliminado.", "Mensaje");
     this.users.splice(id, 1);
   }
+  /**
+   * Si no existen parametros en blanco, actualiza los datos del usuario segun su id.
+   * @param id 
+   * @param nombre 
+   * @param apellido 
+   * @param contrasenia 
+   */
   updateUser(id:number, nombre:string, apellido:string, contrasenia:string):void{
     if (nombre == "") {
       this.showAlert("Debe ingresar un nombre.", "Advertencia");
@@ -117,7 +150,11 @@ export class UserService {
     
   }
   
-  
+  /**
+   * Busca si existe el usuario, si existe dara un mensaje con su contraseña. 
+   * @param email 
+   * @returns contraseña
+   */
   recuperarContrasenia(email: string): string | null {
     const user = this.users.find(u => u.email === email);
     if (user) {

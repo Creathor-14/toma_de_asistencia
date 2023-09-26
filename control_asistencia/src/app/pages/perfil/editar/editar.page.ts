@@ -34,8 +34,11 @@ export class EditarPage implements OnInit {
   }
 
 
-  actualizar(){
-    this.userService.updateUser(this.id, this.nombre, this.apellido, this.contrasenia);
+  async actualizar(){
+    var confirmar = await this.userService.showConfirm("¿Desea modificar usuario?","Cancelar","Aceptar")
+    if(confirmar){
+      this.userService.updateUser(this.id, this.nombre, this.apellido, this.contrasenia);
+    }
   }
   volver(){
     this.router.navigateByUrl("perfil/ver/"+this.id);

@@ -28,8 +28,14 @@ export class InicioPage {
   verasistencia(){
     this.router.navigateByUrl("ver-asistencia/"+this.id);
   }
-  cerrarSesion(){
-    this.router.navigateByUrl("login/user");
+
+
+  async cerrarSesion(){
+    var confirmar = await this.userService.showConfirm("Desea cerrar la sesión actual?","Cancelar","Confirmar")
+    console.log(confirmar);
+    if (confirmar) {
+      this.router.navigateByUrl("login/user");
+    }
   }
 
 }

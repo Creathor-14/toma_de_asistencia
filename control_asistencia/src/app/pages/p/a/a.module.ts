@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { VerPageRoutingModule } from './ver-routing.module';
+import { APageRoutingModule } from './a-routing.module';
 
-import { VerPage } from './ver.page';
+import { APage } from './a.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VerPageRoutingModule
+    APageRoutingModule
   ],
-  declarations: [VerPage]
+  declarations: [APage]
 })
-export class VerPageModule {}
+export class APageModule {}

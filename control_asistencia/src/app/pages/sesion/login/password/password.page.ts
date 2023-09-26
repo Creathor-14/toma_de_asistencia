@@ -22,7 +22,7 @@ export class PasswordPage implements OnInit {
   login(){
     var respuesta = this.userSercive.contraseniaCorrecta(this.id, this.contrasenia);
     if (respuesta!=-1){
-      this.router.navigateByUrl("inicio/"+this.id);
+      this.router.navigateByUrl("tabs/"+this.id);
     }
   }
   volver(){//pasar el correo por parametro

@@ -1,12 +1,12 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { trigger,state, style, transition, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-ver',
-  templateUrl: './ver.page.html',
-  styleUrls: ['./ver.page.scss'],
+  selector: 'app-visualizar',
+  templateUrl: './visualizar.page.html',
+  styleUrls: ['./visualizar.page.scss'],
   animations: [
     trigger('fadeInOut',[
       state('void', style({ opacity: 0})),
@@ -14,9 +14,9 @@ import { trigger,state, style, transition, animate } from '@angular/animations';
       transition('void => *', animate('1000ms ease-in')),
       transition('* => void', animate('1000ms ease-out')),
     ])
-  ]
+  ],
 })
-export class VerPage implements OnInit {
+export class VisualizarPage implements OnInit {
   loading = true;
   id:number = 0;
 
@@ -49,4 +49,5 @@ export class VerPage implements OnInit {
     this.userService.deleteUser(this.id);
     this.router.navigateByUrl("login/user");
   }
+
 }

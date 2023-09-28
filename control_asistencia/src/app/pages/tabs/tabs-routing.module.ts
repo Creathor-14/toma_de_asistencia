@@ -6,7 +6,7 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'perfil/',
+    redirectTo: 'tabs',
     pathMatch: 'full'
   },
   {
@@ -24,14 +24,13 @@ const routes: Routes = [
       {
         path: 'registrar-asistencia/:id',
         loadChildren: () => import('../registrar-asistencia/registrar-asistencia.module').then((m) => m.RegistrarAsistenciaPageModule),
-      },
-      {
-        path: 'login',
-        loadChildren: () => import('../sesion/login/user/user.module').then((m) => m.UserPageModule),
-      },
-      
+      }
     ]
-  }
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('../sesion/login/user/user.module').then((m) => m.UserPageModule),
+  },
 ];
 
 @NgModule({

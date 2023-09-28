@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
   <ng-container *ngIf="loading; else content">
     <div @fadeInOut class="loading-state">
-      <ion-card color="light">
+
         <ion-toolbar color="light">
           <ion-buttons slot="start">
             <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
@@ -38,7 +38,7 @@
             <ion-skeleton-text animated style="width: 50xw; padding: 3px;"></ion-skeleton-text>
           </ion-label>
         </ion-item>
-      </ion-card>
+
     </div>
   </ng-container>
 
@@ -46,7 +46,7 @@
 
   <ng-template #content>
     <div @fadeInOut class="content">
-      <ion-card color="light">
+
         <ion-toolbar color="light">
           <ion-buttons slot="start">
             <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
@@ -84,7 +84,7 @@
           </ion-label>
         </ion-item>
         <ion-button (click)="eliminar()" class="centro" fill="solid" color="danger"><ion-icon name="trash-outline" size="large"></ion-icon> Eliminar usuario </ion-button>
-      </ion-card>
+
     </div>
   </ng-template>
 </ion-content>

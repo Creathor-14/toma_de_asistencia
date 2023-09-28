@@ -6,7 +6,7 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: 'perfil',
     pathMatch: 'full'
   },
   {
@@ -14,15 +14,15 @@ const routes: Routes = [
     component: TabsPage,
     children:[
       {
-        path: 'perfil/:id',
+        path: 'perfil',
         loadChildren: () => import('../perfil/visualizar/visualizar.module').then((m) => m.VisualizarPageModule),
       },
       {
-        path: 'leer-qr/:id',
+        path: 'leer-qr',
         loadChildren: () => import('../leer-qr/leer-qr.module').then((m) => m.LeerQrPageModule),
       },
       {
-        path: 'registrar-asistencia/:id',
+        path: 'registrar-asistencia',
         loadChildren: () => import('../registrar-asistencia/registrar-asistencia.module').then((m) => m.RegistrarAsistenciaPageModule),
       }
     ]

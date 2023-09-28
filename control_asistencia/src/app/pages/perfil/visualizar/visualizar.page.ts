@@ -18,13 +18,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class VisualizarPage implements OnInit {
   loading = true;
-  id:number = 0;
+  id:number = this.userService.getActualId();
 
   constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) {
 
    }
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params['id'];
+    this.id = this.userService.getActualId();
     
     setTimeout(() => {
       this.loading = false;
@@ -46,11 +46,12 @@ export class VisualizarPage implements OnInit {
     this.router.navigateByUrl("perfil/editar/"+this.id);
   }
   volver(){
+    this.userService.deleteUser(this.userService.getActualId());
     this.router.navigateByUrl("inicio/"+this.id);
     
   }
   eliminar(){
-    this.userService.deleteUser(this.id);
+    
     this.router.navigateByUrl("login/user");
   }
 

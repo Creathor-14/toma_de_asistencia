@@ -13,7 +13,9 @@ export class UserService {
     {id: 2, email: 'a', nombre: 'a', apellido: 'a', contrasenia: 'a'},
     {id: 3, email: 'pgy4121-002d', nombre: 'Guillermo', apellido: 'Villacura', contrasenia: 'pgy4121-002d'}
   ];
-
+  actualId:number=-1;
+  setActualId(id:number){this.actualId=id;}
+  getActualId():number{return this.actualId;}
   /**
    * Ve si existe un usuario con ese correo, si existe regresa su id, si no -1.
    * @param email 
@@ -27,6 +29,8 @@ export class UserService {
     for(let i = 0; i<this.users.length; i++){
       let u = this.users[i];
       if(email == u.email){
+          this.setActualId(u.id);
+          console.log(this.getActualId())
           return u.id;
       }
     }

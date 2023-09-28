@@ -9,18 +9,18 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./password.page.scss'],
 })
 export class PasswordPage implements OnInit {
-  id:number = 0;
+  id:number =  this.userService.getActualId();
   contrasenia:string = "";
-  constructor(private router:Router, private userSercive:UserService, private activatedRoute:ActivatedRoute) { }
+  constructor(private router:Router, private userService:UserService, private activatedRoute:ActivatedRoute) { }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
 
   getMensajeBienvenida(): string {
-      return `${this.userSercive.getEmail(this.id)}`;
+      return `${this.userService.getEmail(this.id)}`;
   }
   login(){
-    var respuesta = this.userSercive.contraseniaCorrecta(this.id, this.contrasenia);
+    var respuesta = this.userService.contraseniaCorrecta(this.id, this.contrasenia);
     if (respuesta!=-1){
       this.router.navigateByUrl("tabs/"+this.id);
     }

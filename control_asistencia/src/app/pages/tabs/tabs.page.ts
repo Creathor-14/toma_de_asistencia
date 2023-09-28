@@ -8,19 +8,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
-  id:number= 0;
+  id:number= this.userService.getActualId();
   constructor(private userService: UserService,private router:Router,private activatedRoute:ActivatedRoute) {
     
   }
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params['id'];
+    this.id = this.userService.getActualId();
   }
   getMensajeBienvenida(): string {
     return `${this.userService.getNombre(this.id)} ${this.userService.getApellido(this.id)}`;
-} 
-  exit(){
-      this.router.navigateByUrl("login/user");
-  }
+  } 
 
 }

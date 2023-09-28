@@ -22,8 +22,8 @@ const routes: Routes = [
         loadChildren: () => import('../leer-qr/leer-qr.module').then((m) => m.LeerQrPageModule),
       },
       {
-        path: 'registrar-asistencia',
-        loadChildren: () => import('../registrar-asistencia/registrar-asistencia.module').then((m) => m.RegistrarAsistenciaPageModule),
+        path: 'visualizar-asistencia',
+        loadChildren: () => import('../asistencia/visualizar/visualizar.module').then((m) => m.VisualizarPageModule),
       }
     ]
   },

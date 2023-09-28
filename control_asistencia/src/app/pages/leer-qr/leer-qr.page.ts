@@ -16,7 +16,7 @@ export class LeerQrPage implements OnInit {
     this.router.navigateByUrl("inicio/"+this.id);
   }
   registrar_asistencia(){
-    this.router.navigateByUrl("registrar-asistencia/"+this.id);
+    this.router.navigateByUrl("registrar-asistencia");
   }
 
 

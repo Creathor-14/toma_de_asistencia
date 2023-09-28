@@ -59,7 +59,14 @@ const routes: Routes = [
     path: 'visualizar',
     loadChildren: () => import('./pages/perfil/visualizar/visualizar.module').then( m => m.VisualizarPageModule)
   },
-
+  {
+    path: 'visualizar',
+    loadChildren: () => import('./pages/asistencia/visualizar/visualizar.module').then( m => m.VisualizarPageModule)
+  },
+  {
+    path: 'registrar-asistencia',
+    loadChildren: () => import('./pages/asistencia/registrar/registrar.module').then( m => m.RegistrarPageModule)
+  },
 
 
 ];

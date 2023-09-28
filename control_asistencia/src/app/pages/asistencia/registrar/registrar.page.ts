@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-registrar-asistencia',
-  templateUrl: './registrar-asistencia.page.html',
-  styleUrls: ['./registrar-asistencia.page.scss'],
+  selector: 'app-registrar',
+  templateUrl: './registrar.page.html',
+  styleUrls: ['./registrar.page.scss'],
 })
-export class RegistrarAsistenciaPage implements OnInit {
+export class RegistrarPage implements OnInit {
   id:number=this.userService.getActualId();
-  constructor(private router:Router, private activatedRoute:ActivatedRoute, private userService:UserService) {}
+  constructor(private router:Router, private userService:UserService) {}
   ngOnInit() {
     this.id = this.userService.getActualId();
   }
@@ -26,6 +26,4 @@ export class RegistrarAsistenciaPage implements OnInit {
       this.router.navigateByUrl("inicio/"+this.id);
     }
   }
-
-
 }

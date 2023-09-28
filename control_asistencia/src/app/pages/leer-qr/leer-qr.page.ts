@@ -14,7 +14,7 @@ export class LeerQrPage implements OnInit {
     this.id = this.userService.getActualId();
   }
   registrar_asistencia(){
-    this.router.navigateByUrl("asistencia/registrar");
+    this.router.navigateByUrl(`tabs/${this.id}/asistencia/registrar`);
   }
 
 

@@ -30,7 +30,6 @@ export class UserService {
       let u = this.users[i];
       if(email == u.email){
           this.setActualId(u.id);
-          console.log(this.getActualId())
           return u.id;
       }
     }

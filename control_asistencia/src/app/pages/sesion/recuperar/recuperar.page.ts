@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuperar',
@@ -8,9 +8,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./recuperar.page.scss'],
 })
 export class RecuperarPage {
+  id:number=-1;
   email: string = '';
-  constructor(private userService: UserService, private router: Router ) {
+  correoExist:boolean = false;
 
+  constructor(private userService: UserService, private router: Router, private activatedRoute:ActivatedRoute) {}
+
+  ngOnInit(){
+    this.id = this.activatedRoute.snapshot.params['id'];
+    if(this.id!=-1){
+      this.correoExist = true;
+      this.email = this.userService.getEmail(this.id);
+      console.log("correo:",this.email);
+    }
   }
   async recuperarContrasenia() {
     if (this.email.trim() === '') {

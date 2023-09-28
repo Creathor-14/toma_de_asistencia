@@ -6,7 +6,7 @@ import { TabsPage } from './tabs.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'perfil',
+    redirectTo: 'perfil/visualizar',
     pathMatch: 'full'
   },
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
     component: TabsPage,
     children:[
       {
-        path: 'perfil',
+        path: 'perfil/visualizar',
         loadChildren: () => import('../perfil/visualizar/visualizar.module').then((m) => m.VisualizarPageModule),
       },
       {
@@ -24,6 +24,14 @@ const routes: Routes = [
       {
         path: 'asistencia/visualizar',
         loadChildren: () => import('../asistencia/visualizar/visualizar.module').then((m) => m.VisualizarPageModule),
+      },
+      {
+        path: 'perfil/editar',
+        loadChildren: () => import('../perfil/editar/editar.module').then((m) => m.EditarPageModule),
+      },
+      {
+        path: 'asistencia/registrar',
+        loadChildren: () => import('../asistencia/registrar/registrar.module').then((m) => m.RegistrarPageModule),
       }
     ]
   },

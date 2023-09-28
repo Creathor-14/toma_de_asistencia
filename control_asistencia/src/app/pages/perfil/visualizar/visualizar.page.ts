@@ -43,14 +43,11 @@ export class VisualizarPage implements OnInit {
     return `${this.userService.getContrasenia(this.id)}`;
   }
   editar(){
-    this.router.navigateByUrl("perfil/editar");
+    this.router.navigateByUrl(`tabs/${this.id}/perfil/editar`);
   }
-  volver(){
-    this.userService.deleteUser(this.userService.getActualId());
 
-  }
   eliminar(){
-    
+    this.userService.deleteUser(this.id);
     this.router.navigateByUrl("login/user");
   }
 

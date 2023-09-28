@@ -18,7 +18,7 @@ export class UserPage implements OnInit {
   ngOnInit() {
   }
   recuperar(){
-    this.router.navigateByUrl("recuperar");
+    this.router.navigateByUrl("recuperar/-1");
     
   }
   registrarse(){

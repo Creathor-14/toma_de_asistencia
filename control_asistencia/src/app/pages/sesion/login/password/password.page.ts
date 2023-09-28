@@ -13,7 +13,8 @@ export class PasswordPage implements OnInit {
   contrasenia:string = "";
   constructor(private router:Router, private userService:UserService, private activatedRoute:ActivatedRoute) { }
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params['id'];
+    //this.id = this.activatedRoute.snapshot.params['id'];
+    this.id = this.userService.getActualId();
   }
 
   getMensajeBienvenida(): string {
@@ -29,6 +30,6 @@ export class PasswordPage implements OnInit {
     this.router.navigateByUrl("login/user");
   }
   recuperar(){
-    this.router.navigateByUrl("recuperar01/"+this.id);
+    this.router.navigateByUrl("recuperar/"+this.id);
   }
 }

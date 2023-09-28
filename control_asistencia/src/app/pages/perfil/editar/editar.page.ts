@@ -8,13 +8,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./editar.page.scss'],
 })
 export class EditarPage implements OnInit {
-  id:number = 0;
+  id:number = this.userService.getActualId();
   nombre:string = "";
   apellido:string = "";
   contrasenia:string = "";
   constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) { }
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params['id'];
+    //this.id = this.activatedRoute.snapshot.params['id'];
+    this.id = this.userService.getActualId();
     this.nombre = this.userService.getNombre(this.id);
     this.apellido = this.userService.getApellido(this.id);
     this.contrasenia = this.userService.getContrasenia(this.id);
@@ -41,6 +42,6 @@ export class EditarPage implements OnInit {
     }
   }
   volver(){
-    this.router.navigateByUrl("perfil/ver/"+this.id);
+    this.router.navigateByUrl(`tabs/${this.id}/perfil/visualizar`);
   }
 }

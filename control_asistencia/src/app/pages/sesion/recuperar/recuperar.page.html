@@ -8,7 +8,13 @@
     <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
     <ion-card-content>
       <ion-item color="light">
-        <ion-input [(ngModel)]="email" label="Correo" type="email" labelPlacement="floating" placeholder="correo@duocuc.cl"  maxlength="256"></ion-input>
+        <ng-container *ngIf="correoExist;else vacio">
+          <ion-input  [(ngModel)]="email" label="Correo" type="email" labelPlacement="floating" placeholder="correo@duocuc.cl"  maxlength="256"></ion-input>
+        </ng-container>
+        <ng-template #vacio>
+          <ion-input  [(ngModel)]="email" label="Correo" type="email" labelPlacement="floating" placeholder="{{email}}"  maxlength="256"></ion-input>
+        </ng-template>
+        
       </ion-item>
       <div class="btn-container">
         <ion-button (click)="recuperarContrasenia()" class="iniciar-sesion" fill="solid" style="width: 100%;">Recuperar</ion-button>

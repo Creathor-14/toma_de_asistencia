@@ -26,8 +26,8 @@ const routes: Routes = [
         loadChildren: () => import('../registrar-asistencia/registrar-asistencia.module').then((m) => m.RegistrarAsistenciaPageModule),
       },
       {
-        path: 'a',
-        loadChildren: () => import('../p/a/a.module').then((m) => m.APageModule),
+        path: 'login',
+        loadChildren: () => import('../sesion/login/user/user.module').then((m) => m.UserPageModule),
       },
       
     ]

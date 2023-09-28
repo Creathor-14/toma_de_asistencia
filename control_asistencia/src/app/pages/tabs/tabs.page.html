@@ -1,21 +1,21 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
 
-    <ion-tab-button tab="perfil/">
+    <ion-tab-button tab="perfil/{{id}}">
       <ion-icon name="person-outline"></ion-icon>
       Profile
     </ion-tab-button>
-    <ion-tab-button tab="leer-qr/">
+    <ion-tab-button tab="leer-qr/{{id}}">
       <ion-icon name="qr-code-outline"></ion-icon>
       Leer Qr
     </ion-tab-button>
-    <ion-tab-button tab="ver-asistencia/">
+    <ion-tab-button tab="ver-asistencia">
       <ion-icon name="calendar-outline"></ion-icon>
       Ver Asistencia
     </ion-tab-button>
-    <ion-tab-button tab="a">
-      <ion-icon name=""></ion-icon>
-      prueba
+    <ion-tab-button (click)="exit()">
+      <ion-icon name="exit-outline"></ion-icon>
+      Salir
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

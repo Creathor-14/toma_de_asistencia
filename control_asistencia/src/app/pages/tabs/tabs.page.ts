@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
-
-  constructor() { }
+  id:number= 0;
+  constructor(private router:Router,private activatedRoute:ActivatedRoute) {
+    
+  }
 
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.params['id'];
+  }
+  exit(){
+      this.router.navigateByUrl("login/user");
   }
 
 }

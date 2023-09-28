@@ -20,9 +20,12 @@ export class VisualizarPage implements OnInit {
   loading = true;
   id:number = 0;
 
-  constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) { }
+  constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) {
+
+   }
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.params['id'];
+    
     setTimeout(() => {
       this.loading = false;
     },2000);
@@ -44,6 +47,7 @@ export class VisualizarPage implements OnInit {
   }
   volver(){
     this.router.navigateByUrl("inicio/"+this.id);
+    
   }
   eliminar(){
     this.userService.deleteUser(this.id);

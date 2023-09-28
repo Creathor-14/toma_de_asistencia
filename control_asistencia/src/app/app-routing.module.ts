@@ -54,9 +54,6 @@ const routes: Routes = [
   {
     path: 'prueba',
     loadChildren: () => import('./pages/prueba/prueba.module').then( m => m.PruebaPageModule)
-  },  {
-    path: 'a',
-    loadChildren: () => import('./pages/p/a/a.module').then( m => m.APageModule)
   },
   {
     path: 'visualizar',

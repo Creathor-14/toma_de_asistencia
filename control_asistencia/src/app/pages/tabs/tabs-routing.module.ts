@@ -22,7 +22,7 @@ const routes: Routes = [
         loadChildren: () => import('../leer-qr/leer-qr.module').then((m) => m.LeerQrPageModule),
       },
       {
-        path: 'visualizar-asistencia',
+        path: 'asistencia/visualizar',
         loadChildren: () => import('../asistencia/visualizar/visualizar.module').then((m) => m.VisualizarPageModule),
       }
     ]

@@ -13,17 +13,15 @@ export class RegistrarPage implements OnInit {
   ngOnInit() {
     this.id = this.userService.getActualId();
   }
-  volver(){
-    this.router.navigateByUrl("leer-qr/"+this.id);
-  }
+
   cancelar(){
-    this.router.navigateByUrl("inicio/"+this.id);
+    this.router.navigateByUrl("tabs/"+this.id);
   }
   async registrarAsistencia(){
     var confirmar = await this.userService.showConfirm("¿Desea registrar su asistencia?","Cancelar","Confirmar");
     if(confirmar){
       this.userService.showAlert("Asistencia registrada.", "Mensaje");
-      this.router.navigateByUrl("inicio/"+this.id);
+      this.router.navigateByUrl("tabs/"+this.id+"/asistencia/visualizar");
     }
   }
 }

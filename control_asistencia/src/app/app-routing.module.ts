@@ -26,15 +26,11 @@ const routes: Routes = [
   {
     path: 'registrar',
     loadChildren: () => import('./pages/sesion/registrar/registrar.module').then( m => m.RegistrarPageModule)
-  },/*
-  {
-    path: 'perfil/ver/:id',
-    loadChildren: () => import('./pages/perfil/ver/ver.module').then( m => m.VerPageModule)
   },
   {
-    path: 'perfil/editar/:id',
+    path: 'perfil/editar',
     loadChildren: () => import('./pages/perfil/editar/editar.module').then( m => m.EditarPageModule)
-  },
+  },/*
   {
     path: 'leer-qr/:id',
     loadChildren: () => import('./pages/leer-qr/leer-qr.module').then( m => m.LeerQrPageModule)
@@ -64,7 +60,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/asistencia/visualizar/visualizar.module').then( m => m.VisualizarPageModule)
   },
   {
-    path: 'registrar-asistencia',
+    path: 'asistencia/registrar',
     loadChildren: () => import('./pages/asistencia/registrar/registrar.module').then( m => m.RegistrarPageModule)
   },
 

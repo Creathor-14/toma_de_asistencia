@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="false">
+<ion-content [fullscreen]="false" color="light">
   <ng-container *ngIf="loading; else content">
     <div @fadeInOut class="loading-state">
 
@@ -42,7 +42,7 @@
 
 
 
-  <ng-template #content>
+  <ng-template #content color="light">
     <div @fadeInOut class="content">
 
         <ion-toolbar color="light">

@@ -19,7 +19,6 @@ export class RecuperarPage {
     if(this.id!=-1){
       this.correoExist = true;
       this.email = this.userService.getEmail(this.id);
-      console.log("correo:",this.email);
     }
   }
   async recuperarContrasenia() {

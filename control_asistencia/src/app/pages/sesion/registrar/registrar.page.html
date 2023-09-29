@@ -1,3 +1,4 @@
+<!--
 <div class="background-image">
   
   <ion-card color="light">
@@ -26,36 +27,30 @@
     </ion-card-content>
   </ion-card>
  
-</div>
+</div>-->
 
-
-
-
-<!--    
-<form (submit)="addUser()">
-  <label for="id">ID:</label>
-  <input type="number" id="id" [(ngModel)]="newUser.id" name="id">
-  
-  <label for="email">Email:</label>
-  <input type="email" id="email" [(ngModel)]="newUser.email" name="email">
-  
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" [(ngModel)]="newUser.nombre" name="nombre">
-  
-  <label for="contrasenia">Contraseña:</label>
-  <input type="password" id="contrasenia" [(ngModel)]="newUser.contrasenia" name="contrasenia">
-  
-  <button type="submit">Agregar Usuario</button>
-</form>
-
-
-
-<H1>Usuarios</H1>
-<ul>
-  <li *ngFor="let user of users">{{ user.id }} - {{ user.nombre }} - {{ user.apellido }} - {{ user.email }} - {{ user.contrasenia }} </li>
-</ul>
-<div class="btn-container">
-  <ion-button (click)="volver()" fill="solid">Volver</ion-button>
-</div>
-
--->
+<ion-content [fullscreen]="true">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
+  <ion-card-content class="ion-text-center ion-align-items-center">
+    <ion-item color="light"> 
+      <ion-input [(ngModel)]="email" label="Email" type="email" id="email"  name="email" labelPlacement="floating" placeholder="Ingrese email"></ion-input>
+    </ion-item>
+    <ion-item color="light"> 
+      <ion-input [(ngModel)]="nombre" label="Nombre" labelPlacement="floating" placeholder="Ingrese nombre"></ion-input>
+    </ion-item>
+    <ion-item color="light">
+      <ion-input [(ngModel)]="apellido" label="Apellido" labelPlacement="floating" placeholder="Ingrese apellido"></ion-input>
+    </ion-item>
+    <ion-item color="light">
+      <ion-input [(ngModel)]="contrasenia" label="Contraseña" labelPlacement="floating" placeholder="Ingrese contraseña"></ion-input>
+    </ion-item>
+    <div class="btn-container">
+      <ion-button (click)="addUser()" fill="solid" type="submit"> Agregar Usuario</ion-button>  
+    </div>
+  </ion-card-content>
+</ion-content>

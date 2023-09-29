@@ -15,7 +15,8 @@ export class RegistrarPage implements OnInit {
   }
 
   cancelar(){
-    this.router.navigateByUrl("tabs/"+this.id);
+    this.router.navigateByUrl(`tabs/${this.id}/leer-qr`);
+    alert("jajaj");
   }
   async registrarAsistencia(){
     var confirmar = await this.userService.showConfirm("¿Desea registrar su asistencia?","Cancelar","Confirmar");

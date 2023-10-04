@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { AlertController } from '@ionic/angular';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword  } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private alertService:AlertController) {}
+  constructor(private alertService:AlertController, private auth: Auth) {}
   private users: User[] = [
     {id: 0,email: 'th.quiroga@duocuc.cl',nombre: 'Thomas', apellido: 'Quiroga', contrasenia: '123',},
     {id: 1, email: 'mar.rees@duocuc.cl',nombre: 'Martin', apellido: 'Rees', contrasenia: 'prueba'},
@@ -236,5 +237,15 @@ export class UserService {
 
     })
     return promise;
+  }
+
+  //Firebase segment
+  register({email, password}: any){
+    console.log({email,password});
+    return createUserWithEmailAndPassword(this.auth,email,password);
+  }
+  login({email, password}: any){
+
+    return signInWithEmailAndPassword(this.auth, email, password);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,37 +10,35 @@ import { UserService } from 'src/app/services/user.service';
   
 })
 export class RegistrarPage implements OnInit {
-  email:string = "";
-  nombre:string = "";
-  apellido:string = "";
-  contrasenia:string = "";
-  newUser = {
-    id: this.userService.lastId(),
-    email: '',
-    nombre: '',
-    apellido: '',
-    contrasenia: '',
-  };
-  users: User[];//ver usuarios existentes
+  formReg: FormGroup;
+
   
   constructor(private userService: UserService,private router:Router) {
-    this.users = this.userService.getUsers();//ver usuarios existentes
-  }
-
-  async addUser(): Promise<void> {
-    let ingresado = this.userService.addUser(this.userService.lastId(), this.email, this.nombre, this.apellido, this.contrasenia);
-    if(await ingresado){
-      this.email= '';
-      this.nombre= '';
-      this.apellido= '';
-      this.contrasenia= '';
-    }
+    this.formReg = new FormGroup({
+      email: new FormControl(),
+      nombre: new FormControl(),
+      apellido: new FormControl(),
+      password: new FormControl(),
+    })
   }
 
   volver(){
     this.router.navigateByUrl("login/user");
   }
   ngOnInit() {
+  }
+  onSubmit(){
+    const email = this.formReg.value.email;
+    const nombre = this.formReg.value.nombre;
+    const apellido = this.formReg.value.apellido;
+    const password = this.formReg.value.password;
+
+    this.userService.register({email,password})
+      .then(response => {
+        let ingresado = this.userService.addUser(this.userService.lastId(), email, nombre, apellido, password);
+        console.log(response);
+      })
+      .catch(error => console.log(error));
   }
 
 }

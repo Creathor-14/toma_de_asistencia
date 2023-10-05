@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/sesion/login/user/user.module').then( m => m.UserPageModule)
   },
   {
-    path: 'login/password/:id',
+    path: 'login/password/:email',
     loadChildren: () => import('./pages/sesion/login/password/password.module').then( m => m.PasswordPageModule)
   },
   {

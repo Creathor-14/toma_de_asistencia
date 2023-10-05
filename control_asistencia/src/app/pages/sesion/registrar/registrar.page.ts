@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -13,7 +14,7 @@ export class RegistrarPage implements OnInit {
   formReg: FormGroup;
 
   
-  constructor(private userService: UserService,private router:Router) {
+  constructor(private userService: UserService,private router:Router, private auth: AngularFireAuth) {
     this.formReg = new FormGroup({
       email: new FormControl(),
       nombre: new FormControl(),
@@ -33,12 +34,35 @@ export class RegistrarPage implements OnInit {
     const apellido = this.formReg.value.apellido;
     const password = this.formReg.value.password;
 
-    this.userService.register({email,password})
-      .then(response => {
-        let ingresado = this.userService.addUser(this.userService.lastId(), email, nombre, apellido, password);
-        console.log(response);
-      })
-      .catch(error => console.log(error));
+  
+   
+    try{
+      const request = this.auth.createUserWithEmailAndPassword(email,password);
+      console.log("yes12");
+      //this.showAlert("Usuario ingresado.", "Mensaje");
+
+    }catch (error:any) {
+      console.log("yes");
+      if (error.code == 'auth/invalid-email') {
+        this.userService.showAlert("El formato del correo no es valido.","Error de validación");
+      }else if(error.code == 'auth/weak-password'){
+        this.userService.showAlert("La contraseña debe tener un minimo de 6 caracteres.","Error de validación");
+      }else if(error.code == 'auth/email-already-in-use'){
+        this.userService.showAlert("Este correo ya esta en uso.","Error de validación");
+      }else if(error.code == 'auth/admin-restricted-operation'){
+        this.userService.showAlert("Ingrese un correo.","Error de validación");
+      }else if(error.code == 'auth/missing-password'){
+        this.userService.showAlert("Ingrese una contraseña.","Error de validación");
+      }else{
+        this.userService.showAlert(error, "Error");
+        console.log(error) 
+      }
+    }
+   
   }
+    
+     
+  
+
 
 }

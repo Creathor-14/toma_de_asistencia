@@ -10,12 +10,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';// para la api
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
   BrowserAnimationsModule,
-  provideFirebaseApp(() => initializeApp(environment.firebase)),
+  AngularFireModule.initializeApp(environment.firebaseConfig),
+  AngularFireAuthModule,
+
+  provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
   provideAuth(() => getAuth())],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

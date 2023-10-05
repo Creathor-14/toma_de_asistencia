@@ -102,12 +102,8 @@ export class UserService {
         }
       }
       if(inexistente){
-        var confirmar= await this.showConfirm("¿Desea agregar usuario?","Cancelar","Aceptar");
-        if (confirmar){
-          this.users.push(new User(id,email,nombre,apellido,contrasenia));
-          this.showAlert("Usuario ingresado.", "Mensaje");
-          return true;
-        }
+        this.users.push(new User(id,email,nombre,apellido,contrasenia));
+        return true;
       }  
     }
     return false;
@@ -240,9 +236,31 @@ export class UserService {
   }
 
   //Firebase segment
-  register({email, password}: any){
-    console.log({email,password});
-    return createUserWithEmailAndPassword(this.auth,email,password);
+  async register({email, password}: any){
+    var confirmar= await this.showConfirm("¿Desea agregar usuario?","Cancelar","Aceptar");
+      if (confirmar){
+        try{
+          createUserWithEmailAndPassword(this.auth,email,password);
+          //this.showAlert("Usuario ingresado.", "Mensaje");
+          //this.showAlert("Usuario ingresado.", "Mensaje");
+        }catch (error:any) {
+          console.log("yes");
+          if (error.code == 'auth/invalid-email') {
+            this.showAlert("El formato del correo no es valido.","Error de validación");
+          }else if(error.code == 'auth/weak-password'){
+            this.showAlert("La contraseña debe tener un minimo de 6 caracteres.","Error de validación");
+          }else if(error.code == 'auth/email-already-in-use'){
+            this.showAlert("Este correo ya esta en uso.","Error de validación");
+          }else if(error.code == 'auth/admin-restricted-operation'){
+            this.showAlert("Ingrese un correo.","Error de validación");
+          }else if(error.code == 'auth/missing-password'){
+            this.showAlert("Ingrese una contraseña.","Error de validación");
+          }else{
+            this.showAlert(error, "Error");
+            console.log(error) 
+          }
+        }
+      }
   }
   login({email, password}: any){
 

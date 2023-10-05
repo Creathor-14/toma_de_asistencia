@@ -36,27 +36,31 @@ export class RegistrarPage implements OnInit {
 
   
    
-    try{
-      const request = this.auth.createUserWithEmailAndPassword(email,password);
-      console.log("yes12");
-      //this.showAlert("Usuario ingresado.", "Mensaje");
-
-    }catch (error:any) {
-      console.log("yes");
-      if (error.code == 'auth/invalid-email') {
-        this.userService.showAlert("El formato del correo no es valido.","Error de validación");
-      }else if(error.code == 'auth/weak-password'){
-        this.userService.showAlert("La contraseña debe tener un minimo de 6 caracteres.","Error de validación");
-      }else if(error.code == 'auth/email-already-in-use'){
-        this.userService.showAlert("Este correo ya esta en uso.","Error de validación");
-      }else if(error.code == 'auth/admin-restricted-operation'){
-        this.userService.showAlert("Ingrese un correo.","Error de validación");
-      }else if(error.code == 'auth/missing-password'){
-        this.userService.showAlert("Ingrese una contraseña.","Error de validación");
-      }else{
-        this.userService.showAlert(error, "Error");
-        console.log(error) 
-      }
+    try {
+      this.auth.createUserWithEmailAndPassword(email, password)
+      .then(response => {
+        this.userService.showAlert("Usuario registrado correctamente.","Succes");
+      })
+      .catch(error => {
+        if (error.code == 'auth/invalid-email') {
+          this.userService.showAlert("El formato del correo no es válido.", "Error de validación");
+        } else if (error.code == 'auth/weak-password') {
+          this.userService.showAlert("La contraseña debe tener un mínimo de 6 caracteres.", "Error de validación");
+        } else if (error.code == 'auth/email-already-in-use') {
+          this.userService.showAlert("Este correo ya está en uso.", "Error de validación");
+        } else if (error.code == 'auth/admin-restricted-operation') {
+          this.userService.showAlert("Ingrese un correo.", "Error de validación");
+        } else if (error.code == 'auth/missing-password') {
+          this.userService.showAlert("Ingrese una contraseña.", "Error de validación");
+        } else {
+          this.userService.showAlert(error, "Error");
+          console.log(error);
+        }
+      });
+  
+    } catch (error) {
+      console.log("catch");
+      // Manejar errores sincrónicos aquí si es necesario
     }
    
   }

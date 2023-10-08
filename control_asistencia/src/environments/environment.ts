@@ -12,7 +12,7 @@ export const environment = {
     authDomain: 'pgy4121-asistencia.firebaseapp.com',
     messagingSenderId: '174028965389',
   },
-  
+  apiUrl:"https://dev.matiivilla.cl/duoc/location/"
 };
 
 /*

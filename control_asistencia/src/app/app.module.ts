@@ -13,10 +13,12 @@ import { provideAuth,getAuth } from '@angular/fire/auth';// para la api
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
   BrowserAnimationsModule,
+  HttpClientModule,
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFireAuthModule,
 

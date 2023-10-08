@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/sesion/login/password/password.module').then( m => m.PasswordPageModule)
   },
   {
-    path: 'recuperar/:id',
+    path: 'recuperar/:email',
     loadChildren: () => import('./pages/sesion/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
   {

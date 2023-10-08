@@ -18,36 +18,36 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class VisualizarPage implements OnInit {
   loading = true;
-  id:number = this.userService.getActualId();
+  email:string=this.userService.getActualEmail();
 
   constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) {
 
    }
   ngOnInit() {
-    this.id = this.userService.getActualId();
+    this.email=this.userService.getActualEmail();
     
     setTimeout(() => {
       this.loading = false;
     },2000);
   }
   getNombre(): string {
-    return `${this.userService.getNombre(this.id)}`;
+    return `${this.userService.getNombre(this.email)}`;
   }
   getApellido(): string {
-    return `${this.userService.getApellido(this.id)}`;
+    return `${this.userService.getApellido(this.email)}`;
   }
   getEmail(): string {
-    return `${this.userService.getEmail(this.id)}`;
+    return `${this.email}`;
   }
   getContrasenia(): string {
-    return `${this.userService.getContrasenia(this.id)}`;
+    return `${this.userService.getContrasenia(this.email)}`;
   }
   editar(){
-    this.router.navigateByUrl(`tabs/${this.id}/perfil/editar`);
+    this.router.navigateByUrl(`tabs/${this.email}/perfil/editar`);
   }
 
   eliminar(){
-    this.userService.deleteUser(this.id);
+    this.userService.deleteUser(this.email);
     this.router.navigateByUrl("login/user");
   }
 

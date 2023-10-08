@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/services/helper.service';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class UserPage implements OnInit {
-  constructor(private router:Router, private userService:UserService) { }
+  constructor(private router:Router, private userService:UserService, private helperService:HelperService) { }
   email:string = "";
   
   
@@ -26,10 +27,11 @@ export class UserPage implements OnInit {
   }
   siguiente(){
     if(this.email == ""){
-      this.userService.showAlert("Ingrese un correo.", "Error de validación");
+      this.helperService.showAlert("Ingrese un correo.", "Error de validación");
     }else if(!this.validateEmail(this.email)){
-      this.userService.showAlert("Formato de correo invalido.", "Error de validación");
+      this.helperService.showAlert("Formato de correo invalido.", "Error de validación");
     }else{
+      this.userService.setActualEmail(this.email);
       this.router.navigateByUrl("login/password/"+this.email);
     }
     

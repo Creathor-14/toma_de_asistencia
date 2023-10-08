@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HelperService } from 'src/app/services/helper.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,21 +9,21 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./registrar.page.scss'],
 })
 export class RegistrarPage implements OnInit {
-  id:number=this.userService.getActualId();
-  constructor(private router:Router, private userService:UserService) {}
+  email:string=this.userService.getActualEmail();
+  constructor(private router:Router, private userService:UserService, private helperService:HelperService) {}
   ngOnInit() {
-    this.id = this.userService.getActualId();
+    this.email = this.userService.getActualEmail();
   }
 
   cancelar(){
-    this.router.navigateByUrl(`tabs/${this.id}/leer-qr`);
+    this.router.navigateByUrl(`tabs/${this.email}/leer-qr`);
     alert("jajaj");
   }
   async registrarAsistencia(){
-    var confirmar = await this.userService.showConfirm("¿Desea registrar su asistencia?","Cancelar","Confirmar");
+    var confirmar = await this.helperService.showConfirm("¿Desea registrar su asistencia?","Cancelar","Confirmar");
     if(confirmar){
-      this.userService.showAlert("Asistencia registrada.", "Mensaje");
-      this.router.navigateByUrl("tabs/"+this.id+"/asistencia/visualizar");
+      this.helperService.showAlert("Asistencia registrada.", "Mensaje");
+      this.router.navigateByUrl("tabs/"+this.email+"/asistencia/visualizar");
     }
   }
 }

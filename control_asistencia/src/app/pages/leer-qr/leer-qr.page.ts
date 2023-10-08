@@ -8,13 +8,13 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./leer-qr.page.scss'],
 })
 export class LeerQrPage implements OnInit {
-  id:number=this.userService.getActualId();
+  email:string=this.userService.getActualEmail();
   constructor(private router:Router, private userService:UserService) {}
   ngOnInit() {
-    this.id = this.userService.getActualId();
+    this.email=this.userService.getActualEmail();
   }
   registrar_asistencia(){
-    this.router.navigateByUrl(`tabs/${this.id}/asistencia/registrar`);
+    this.router.navigateByUrl(`tabs/${this.email}/asistencia/registrar`);
   }
 
 

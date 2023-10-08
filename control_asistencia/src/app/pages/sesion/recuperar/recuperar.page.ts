@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-recuperar',
@@ -8,30 +9,25 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./recuperar.page.scss'],
 })
 export class RecuperarPage {
-  id:number=-1;
-  email: string = '';
-  correoExist:boolean = false;
+  
+  email: string = this.userService.getActualEmail();
 
-  constructor(private userService: UserService, private router: Router, private activatedRoute:ActivatedRoute) {}
+  constructor(private userService: UserService, private router: Router, private activatedRoute:ActivatedRoute, private helperService:HelperService) {}
 
   ngOnInit(){
-    this.id = this.activatedRoute.snapshot.params['id'];
-    if(this.id!=-1){
-      this.correoExist = true;
-      this.email = this.userService.getEmail(this.id);
-    }
+    this.email=this.userService.getActualEmail();
   }
   async recuperarContrasenia() {
     if (this.email.trim() === '') {
       // Valida que se haya ingresado un email
-      await this.userService.showAlert('Debe ingresar un email.', 'Advertencia');
+      await this.helperService.showAlert('Debe ingresar un email.', 'Advertencia');
       return;
     }
     const contraseña = this.userService.recuperarContrasenia(this.email);
     if (contraseña !== null) {
-      await this.userService.showAlert(`La contraseña para el email ${this.email} es: ${contraseña}`, 'Correcto');
+      await this.helperService.showAlert(`La contraseña para el email ${this.email} es: ${contraseña}`, 'Correcto');
     } else {
-      await this.userService.showAlert('Email no registrado', 'Advertencia');
+      await this.helperService.showAlert('Email no registrado', 'Advertencia');
     }
   }
   volver(){

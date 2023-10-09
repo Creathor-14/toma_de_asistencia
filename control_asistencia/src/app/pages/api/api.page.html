@@ -1,3 +1,4 @@
+<!--
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>registro</ion-title>
@@ -25,3 +26,26 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+-->
+<ion-item>
+  <ion-label position="floating">Enter email</ion-label>
+  <ion-input type="text" [(ngModel)]="userEmail" placeholder="Enter email" required></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Enter name</ion-label>
+  <ion-input type="text" [(ngModel)]="userName" placeholder="Enter name" required></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Enter last name</ion-label>
+  <ion-input type="text" [(ngModel)]="userLastName" placeholder="Enter last name" required></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Enter password</ion-label>
+  <ion-input type="text" [(ngModel)]="userPassword" placeholder="Enter password" required></ion-input>
+</ion-item>
+
+<ion-button size="small" color="tertiary" (click)="setStorage()">Set storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="getStorage()">Get storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="updateStorage()">Update storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="deleteFromStorage()">Delete storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="clearStorage()">Clear storage data</ion-button>

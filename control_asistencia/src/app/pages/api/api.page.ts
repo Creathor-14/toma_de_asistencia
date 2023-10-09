@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Region } from 'src/app/models/region';
 import { HelperService } from 'src/app/services/helper.service';
 import { ApisService } from 'src/app/services/apis.service';
+import { User } from 'src/app/models/user.model';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-api',
@@ -14,7 +16,8 @@ export class ApiPage implements OnInit {
   regionSel:number = 0;
   comunaSel:number = 0;
   
-  constructor(private apiService:ApisService, private helperService:HelperService) { }
+  constructor(private apiService:ApisService, private helperService:HelperService,
+    private storageService:StorageService) { }
 
   ngOnInit() {
     this.cargarRegion();
@@ -38,6 +41,30 @@ export class ApiPage implements OnInit {
     } catch (error) {
       
     }
+  }
+
+  user:User={email: "", nombre: "", apellido: "", contrasenia: ""};
+  public userName:string="";
+  public userEmail:string="";
+  public userLastName:string="";
+  public userPassword:string="";
+  
+  setStorage(){
+    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword};
+    this.storageService.create("user",JSON.stringify(user))
+
+  }
+  getStorage(){
+
+  }
+  updateStorage(){
+
+  }
+  deleteFromStorage(){
+
+  }
+  clearStorage(){
+    
   }
 
 }

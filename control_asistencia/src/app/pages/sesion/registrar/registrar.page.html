@@ -1,0 +1,27 @@
+
+<ion-content [fullscreen]="true" color="light">
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
+  <form (ngSubmit)="onSubmit()" [formGroup]="formReg">
+    <ion-item color="light"> 
+      <ion-input formControlName="email"  label="Email" type="email" id="email"  name="email" labelPlacement="floating" placeholder="Ingrese email"></ion-input>
+    </ion-item>
+    <ion-item color="light"> 
+      <ion-input formControlName="nombre" label="Nombre" labelPlacement="floating" placeholder="Ingrese nombre"></ion-input>
+    </ion-item>
+    <ion-item color="light">
+      <ion-input formControlName="apellido" label="Apellido" labelPlacement="floating" placeholder="Ingrese apellido"></ion-input>
+    </ion-item>
+    <ion-item color="light">
+      <ion-input formControlName="password" label="Contraseña" labelPlacement="floating" placeholder="Ingrese contraseña"></ion-input>
+    </ion-item>
+
+    <ion-button fill="solid" type="submit" expand="block"> Agregar Usuario</ion-button>  
+  </form>
+
+</ion-content>

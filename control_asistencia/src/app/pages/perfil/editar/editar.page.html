@@ -1,12 +1,11 @@
-<ion-content>
-  <ion-card color="light">
+<ion-content [fullscreen]="false" color="light">
     <ion-toolbar color="light">
       <ion-buttons slot="start">
         <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
     <div class="container">
-      <ion-icon class="prueba" name="person-circle-outline"></ion-icon><!--Mejorar el centrado del icono-->
+      <ion-icon class="prueba" name="person-circle-outline"></ion-icon>
     </div>
     <ion-item color="light">
       <ion-label position="stacked">Nombre</ion-label>
@@ -15,12 +14,10 @@
     <ion-item color="light">
       <ion-label position="stacked">Apellido</ion-label>
       <ion-input [(ngModel)]="apellido" [clearInput]="true" placeholder="Ingrese el apellido"></ion-input>
-    </ion-item>
+    </ion-item><!--
     <ion-item color="light" >
       <ion-label position="stacked">Contraseña</ion-label>
       <ion-input [(ngModel)]="contrasenia" [clearInput]="true" placeholder="Ingrese la contraseña"></ion-input>
-    </ion-item>
+    </ion-item>-->
     <ion-button (click)="actualizar()" class="centro" fill="solid" color="success"><ion-icon name="trash-outline" size="large"></ion-icon> Actualizar usuario </ion-button>
-  </ion-card>
 </ion-content>
-

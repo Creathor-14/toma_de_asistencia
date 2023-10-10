@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController, ModalController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 export class HelperService {
   
 
-  constructor(private alertController:AlertController, private loadingController:LoadingController) { }
+  constructor(private alertController:AlertController, private loadingController:LoadingController, private toastController:ToastController, private modalController: ModalController) { }
   async showConfirm(message:string,btn_cancelar:string,btn_confirmar:string){
     let promise = new Promise<boolean>(async (resolve)=>{
       var alert = await this.alertController.create({cssClass:"",message:message,buttons:[
@@ -41,6 +41,34 @@ export class HelperService {
     var loader = await this.loadingController.create({cssClass:"loaderClass",message:msg,translucent:true})
     await loader.present();
     return loader;
+  }
+
+  async showToast(msg:string,duracion:number = 1000){
+    var toast = await this.toastController.create(
+      {
+        cssClass:"cssToast",
+        message:msg,
+        translucent:true,
+        position:"bottom",
+        duration:duracion,
+        color:"warning"
+      }
+      );
+      await toast.present();
+      return toast;
+  }
+
+  async showModal(component:any,props:any = {},hideable = false){
+    var modal = await this.modalController.create
+    (
+      {
+        component:component,
+        cssClass:"cssModal",
+        componentProps:props,
+        backdropDismiss:hideable
+      }
+    )
+    await modal.present();
   }
 
 

@@ -29,40 +29,45 @@ export class RegistrarPage implements OnInit {
   }
   ngOnInit() {
   }
-  onSubmit(){
+  onSubmit() {
     const email = this.formReg.value.email;
     const nombre = this.formReg.value.nombre;
     const apellido = this.formReg.value.apellido;
     const password = this.formReg.value.password;
+  
     if (nombre == null) {
       this.helperService.showAlert("Debe ingresar un nombre.", "Advertencia");
-    }
-    else if (apellido == null) {
+    } else if (apellido == null) {
       this.helperService.showAlert("Debe ingresar un apellido.", "Advertencia");
-    }else{
-      try {
-        this.auth.createUserWithEmailAndPassword(email, password)
-        .then(response => {
-          this.helperService.showAlert("Usuario registrado correctamente.","Succes");
-          this.userService.addUser(email, nombre, apellido, password);
-        })
-        .catch(error => {
-          if (error.code == 'auth/invalid-email') {
-            this.helperService.showAlert("El formato del correo no es válido.", "Error de validación");
-          } else if (error.code == 'auth/weak-password') {
-            this.helperService.showAlert("La contraseña debe tener un mínimo de 6 caracteres.", "Error de validación");
-          } else if (error.code == 'auth/email-already-in-use') {
-            this.helperService.showAlert("Este correo ya está en uso.", "Error de validación");
-          } else if (error.code == 'auth/admin-restricted-operation') {
-            this.helperService.showAlert("Ingrese un correo.", "Error de validación");
-          } else if (error.code == 'auth/missing-password') {
-            this.helperService.showAlert("Ingrese una contraseña.", "Error de validación");
-          } else {
-            this.helperService.showAlert(error, "Error");
-            console.log(error);
-          }
-        });
-      } catch (error) {}
+    } else {
+      this.helperService.showLoader("Cargando").then(loader => {
+        try {
+          this.auth.createUserWithEmailAndPassword(email, password)
+            .then(response => {
+              this.helperService.showAlert("Usuario registrado correctamente.", "Success");
+              this.userService.addUser(email, nombre, apellido, password);
+            })
+            .catch(error => {
+              if (error.code == 'auth/invalid-email') {
+                this.helperService.showAlert("El formato del correo no es válido.", "Error de validación");
+              } else if (error.code == 'auth/weak-password') {
+                this.helperService.showAlert("La contraseña debe tener un mínimo de 6 caracteres.", "Error de validación");
+              } else if (error.code == 'auth/email-already-in-use') {
+                this.helperService.showAlert("Este correo ya está en uso.", "Error de validación");
+              } else if (error.code == 'auth/admin-restricted-operation') {
+                this.helperService.showAlert("Ingrese un correo.", "Error de validación");
+              } else if (error.code == 'auth/missing-password') {
+                this.helperService.showAlert("Ingrese una contraseña.", "Error de validación");
+              } else {
+                this.helperService.showAlert(error, "Error");
+                console.log(error);
+              }
+            })
+            .finally(() => {
+              loader.dismiss();
+            });
+        } catch (error) {}
+      });
     }
   }
     

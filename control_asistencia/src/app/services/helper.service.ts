@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
+  
 
-  constructor(private alertController:AlertController) { }
+  constructor(private alertController:AlertController, private loadingController:LoadingController) { }
   async showConfirm(message:string,btn_cancelar:string,btn_confirmar:string){
     let promise = new Promise<boolean>(async (resolve)=>{
       var alert = await this.alertController.create({cssClass:"",message:message,buttons:[
@@ -35,4 +36,15 @@ export class HelperService {
     await alert.present();
     return alert;
   }
+
+  async showLoader(msg:string){
+    var loader = await this.loadingController.create({cssClass:"loaderClass",message:msg,translucent:true})
+    await loader.present();
+    return loader;
+  }
+
+
+
+
+
 }

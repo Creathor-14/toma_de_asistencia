@@ -38,7 +38,6 @@ export class VisualizarPage implements OnInit {
     this.user= await this.storageService.getUserData(this.email);
   }
   getNombre(): string {
-    
     return `${this.user.nombre}`;
   }
   getApellido(): string {

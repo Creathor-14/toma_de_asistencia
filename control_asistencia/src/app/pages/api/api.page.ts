@@ -77,4 +77,9 @@ export class ApiPage implements OnInit {
     await this.storageService.clear();
   }
 
+  
+  async prueba(){
+    this.storageService.guardarUser(this.userEmail, this.userName, this.userLastName, this.userPassword);
+  }
+
 }

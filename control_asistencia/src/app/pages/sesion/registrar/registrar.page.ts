@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class RegistrarPage implements OnInit {
   formReg: FormGroup;
 
   
-  constructor(private userService: UserService,private router:Router, private auth: AngularFireAuth, private helperService:HelperService) {
+  constructor(private userService: UserService,private router:Router, private auth: AngularFireAuth, private helperService:HelperService,
+    private storageService:StorageService) {
     this.formReg = new FormGroup({
       email: new FormControl(),
       nombre: new FormControl(),
@@ -43,8 +45,8 @@ export class RegistrarPage implements OnInit {
       try {
         this.auth.createUserWithEmailAndPassword(email, password)
         .then(response => {
+          this.storageService.guardarUser(email, nombre, apellido, password);
           this.helperService.showAlert("Usuario registrado correctamente.","Succes");
-          this.userService.addUser(email, nombre, apellido, password);
         })
         .catch(error => {
           if (error.code == 'auth/invalid-email') {

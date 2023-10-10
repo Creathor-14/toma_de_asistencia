@@ -13,6 +13,7 @@ export class StorageService {
   }
 
   async read(key:string){
+    this.getItem(key);
     return (await Preferences.get({key}));
   }
   
@@ -30,13 +31,13 @@ export class StorageService {
 
 
   //profe
-  /*
+  
   async getItem(key:string):Promise<string | null>{
-    const obj = await Preferences.get({key:key});
+    const obj = await Preferences.get({key:key});    
     return obj.value;
   }
   async obtenerUser():Promise<User[]>{
-    const storageData = await this.getItem(storageUsuario);
+    const storageData = await this.getItem("user");
     if (storageData == null) {
       return[];
     }
@@ -50,15 +51,41 @@ export class StorageService {
     }
   }
 
+  async guardarUser(email:string, nombre:string, apellido:string, contrasenia:string){
+    let user:User = {email: email, nombre: nombre, apellido: apellido, contrasenia: contrasenia};
+    let users:User[]=[];
+    users.push(user);
 
-  async guardarUser(usuario:User[]){
-    var usuarios = await this.obtenerUsuario();
+    var usuarios = await this.obtenerUser();
     for (const i of usuarios) {
       if (i) {
-        usuario.push(i);
+        users.push(i);
       }
     }
-    this.setItem(storageUsuario,JSON.stringify(usuario));
-  }*/
+    this.setItem("user",JSON.stringify(users));
+  }
 
+  async setItem(llave:string,valor:string){
+    await Preferences.set({key:llave,value:valor});
+  }
+
+  //pruebas
+  async getUserData(email:string):Promise<User>{
+    let data:any[] = [];
+    const storageData = await this.getItem("user")
+    if (storageData == null) {
+      return {email:"",nombre:"",apellido:"",contrasenia:""};
+    }else{
+      data = JSON.parse(storageData);
+      if(data){
+        for(const i of data){
+          if(i.email = email){
+            return {email:i.email ,nombre:i.nombre, apellido:i.apellido, contrasenia:i.contrasenia};
+          }
+        }
+      }
+      return {email:"",nombre:"",apellido:"",contrasenia:""};
+      
+    }
+  }
 }

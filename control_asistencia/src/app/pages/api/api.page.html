@@ -27,6 +27,7 @@
   </ion-card>
 </ion-content>
 -->
+<ion-content>
 <ion-item>
   <ion-label position="floating">Enter email</ion-label>
   <ion-input type="text" [(ngModel)]="userEmail" placeholder="Enter email" required></ion-input>
@@ -49,3 +50,15 @@
 <ion-button size="small" color="tertiary" (click)="updateStorage()">Update storage data</ion-button>
 <ion-button size="small" color="tertiary" (click)="deleteFromStorage()">Delete storage data</ion-button>
 <ion-button size="small" color="tertiary" (click)="clearStorage()">Clear storage data</ion-button>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{user.email}}</ion-card-title>
+    <ion-card-subtitle>{{user.nombre}} {{user.apellido}}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{user.contrasenia}}
+  </ion-card-content>
+</ion-card>
+</ion-content>

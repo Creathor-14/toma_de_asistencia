@@ -54,17 +54,27 @@ export class ApiPage implements OnInit {
     this.storageService.create("user",JSON.stringify(user))
 
   }
-  getStorage(){
+  async getStorage(){
+    await this.storageService.read("user").then((data:any)=>{
+      if(data.value){
+        
+        let u = JSON.parse(data.value);
+        this.user=u;
+      }else{
+        this.user={email:"none",nombre:"none",apellido:"none",contrasenia:"none"};
+      }
+    })
 
   }
-  updateStorage(){
-
+  async updateStorage(){
+    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword};
+    await this.storageService.create("user",JSON.stringify(user))
   }
-  deleteFromStorage(){
-
+  async deleteFromStorage(){
+    await this.storageService.delete("user");
   }
-  clearStorage(){
-    
+  async clearStorage(){
+    await this.storageService.clear();
   }
 
 }

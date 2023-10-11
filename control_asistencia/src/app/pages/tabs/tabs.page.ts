@@ -30,7 +30,7 @@ export class TabsPage implements OnInit {
 
   cerrarSesion() {
     this.helperService.showToast("¡Sesión cerrada con éxito!", 1000); 
-    this.router.navigateByUrl('/login');
+    this.router.navigate(['login/user']); 
   }
 
 

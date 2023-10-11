@@ -1,6 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -19,30 +21,35 @@ import { UserService } from 'src/app/services/user.service';
 export class VisualizarPage implements OnInit {
   loading = true;
   email:string=this.userService.getActualEmail();
+  user:User={email:"",nombre:"",apellido:"",contrasenia:""};
 
-  constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute) {
+  constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute,
+    private storageService:StorageService) { }
 
-   }
   ngOnInit() {
     this.email=this.userService.getActualEmail();
-    
+    this.ja()
     setTimeout(() => {
       this.loading = false;
     },2000);
+    
+  }
+  async ja(){
+    this.user= await this.storageService.getUserData(this.email);
   }
   getNombre(): string {
-    return `${this.userService.getNombre(this.email)}`;
+    return `${this.user.nombre}`;
   }
   getApellido(): string {
-    return `${this.userService.getApellido(this.email)}`;
+    return `${this.user.apellido}`;
   }
   getEmail(): string {
     return `${this.email}`;
   }
   getContrasenia(): string {
-    return `${this.userService.getContrasenia(this.email)}`;
+    return `${this.user.contrasenia}`;
   }
-  editar(){
+  async editar(){
     this.router.navigateByUrl(`tabs/${this.email}/perfil/editar`);
   }
 

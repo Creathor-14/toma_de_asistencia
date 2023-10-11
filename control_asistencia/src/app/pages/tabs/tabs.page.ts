@@ -23,6 +23,10 @@ export class TabsPage implements OnInit {
   getMensajeBienvenida(): string {
     return `${this.userService.getNombre(this.email)} ${this.userService.getApellido(this.email)}`;
   } 
+  redirectToLogin() {
+
+    this.router.navigate(['login/user']); 
+  }
 
   cerrarSesion() {
     this.helperService.showToast("¡Sesión cerrada con éxito!", 1000); 

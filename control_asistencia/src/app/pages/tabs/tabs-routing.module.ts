@@ -38,11 +38,7 @@ const routes: Routes = [
         loadChildren: () => import('../api/api.module').then( m => m.ApiPageModule)
       }
     ]
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('../sesion/login/user/user.module').then((m) => m.UserPageModule),
-  },
+  }
 ];
 
 @NgModule({

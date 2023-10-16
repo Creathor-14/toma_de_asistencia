@@ -1,0 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-icon (click)="close()" style="font-size: 25px;" slot="end" name="close-outline"></ion-icon>
+    <ion-title>resulQr</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <h3>nombre: {{dataAsistencia.nombre}}</h3>
+    <h3>Apellido: {{dataAsistencia.apellido}}</h3>
+  </ion-card>
+</ion-content>
+

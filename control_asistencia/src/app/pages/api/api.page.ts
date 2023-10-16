@@ -5,6 +5,8 @@ import { ApisService } from 'src/app/services/apis.service';
 import { User } from 'src/app/models/user.model';
 import { StorageService } from 'src/app/services/storage.service';
 
+import { BarcodeScanner } from 'capacitor-barcode-scanner';
+import { ResulQrPage } from 'src/app/modals/resul-qr/resul-qr.page';
 @Component({
   selector: 'app-api',
   templateUrl: './api.page.html',
@@ -82,4 +84,17 @@ export class ApiPage implements OnInit {
     this.storageService.guardarUser(this.userEmail, this.userName, this.userLastName, this.userPassword);
   }
 
+  resultQr:any ='';
+  async scan(){
+    this.resultQr  = (await BarcodeScanner.scan()).code;
+    console.log("obj QR",JSON.parse(this.resultQr));
+    await this.modalResultQr();
+  }
+
+  async modalResultQr(){
+    var qr = [];
+    qr.push(this.resultQr);
+    const parametros={dataQr: this.resultQr}
+    await this.helperService.showModal(ResulQrPage,parametros,false);
+  }
 }

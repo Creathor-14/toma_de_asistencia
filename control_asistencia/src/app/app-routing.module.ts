@@ -26,7 +26,11 @@ const routes: Routes = [
   {
     path: 'registrar',
     loadChildren: () => import('./pages/sesion/registrar/registrar.module').then( m => m.RegistrarPageModule)
+  },  {
+    path: 'resul-qr',
+    loadChildren: () => import('./modals/resul-qr/resul-qr.module').then( m => m.ResulQrPageModule)
   },
+
 
 
 ];

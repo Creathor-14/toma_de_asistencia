@@ -34,26 +34,29 @@ export class PasswordPage implements OnInit {
     return this.email;
   }
 
-  login() {
-    this.auth
-      .signInWithEmailAndPassword(this.email, this.contrasenia)
-      .then((response) => {
-        this.mostrarMensajeInicioSesionExitoso();
-        this.router.navigateByUrl("tabs/" + this.email);
-        console.log(response);
-      })
-      .catch((error) => {
-        if (error.code == "auth/missing-password") {
-          this.helperService.showAlert("Ingrese una contraseña.", "Error de validación");
-        } else if (error.code == "auth/invalid-login-credentials") {
-          this.helperService.showAlert(
-            "Usuario inexistente o datos inválidos.",
-            "Error de validación"
-          );
-        } else {
-          console.error(error);
-        }
-      });
+  async login(){
+    const loader = await this.helperService.showLoader("Cargando");
+    try {
+      const request = await this.auth.signInWithEmailAndPassword(this.email,this.contrasenia);
+
+
+      
+      this.router.navigateByUrl("tabs/" + this.email);
+      await loader.dismiss();
+      await this.mostrarMensajeInicioSesionExitoso();
+
+    } catch (error:any) {
+      if (error.code == "auth/missing-password") {
+        this.helperService.showAlert("Ingrese una contraseña.", "Error de validación");
+        await loader.dismiss();
+      } else if (error.code == "auth/invalid-login-credentials") {
+        this.helperService.showAlert("Usuario inexistente o datos inválidos.","Error de validación");
+        await loader.dismiss();
+      } else {
+        console.error(error);
+        await loader.dismiss();
+      }
+    }
   }
 
   mostrarMensajeInicioSesionExitoso() {

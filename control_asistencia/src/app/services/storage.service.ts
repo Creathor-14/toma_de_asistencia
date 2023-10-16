@@ -106,7 +106,7 @@ export class StorageService {
     for (const a of user.asistencias) {
       let actualAsist:string = a.asignatura+a.seccion+a.fecha+a.hora;
       let nuevaAsist:string = asistencia.asignatura+asistencia.seccion+asistencia.fecha+asistencia.hora;
-      console.log(actualAsist,"|    |",nuevaAsist);
+      //console.log(actualAsist,"|    |",nuevaAsist);
 
       if (actualAsist == nuevaAsist) {
         existeAsist=true;
@@ -135,6 +135,24 @@ export class StorageService {
       }
     }
     this.setItem("user",JSON.stringify(users));
+  }
+  //{asignatura: string, seccion: string, docente: string, sala: string, fecha: string, hora: string, leccion: string}[]
+  async getAsistencias(email:string):Promise<Asistencia[]>{
+    let data:any[] = [];
+    const storageData = await this.getItem("user")
+    if (storageData == null) {
+      return [];
+    }else{
+      data = JSON.parse(storageData);
+      if(data){
+        for(const i of data){
+          if(i.email = email){
+            return i.asistencias;
+          }
+        }
+      }
+      return [];
+    }
   }
 
 }

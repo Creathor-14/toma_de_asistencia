@@ -10,8 +10,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class UserService {
   constructor(private alertService:AlertController, private auth: AngularFireAuth, private helperService:HelperService) {}
   private users: User[] = [
-    {email: 'a', nombre: 'a', apellido: 'a', contrasenia: 'a'},
-    {email: 'pgy4121-002d', nombre: 'Guillermo', apellido: 'Villacura', contrasenia: 'pgy4121-002d'}
+    {email: 'a', nombre: 'a', apellido: 'a', contrasenia: 'a', asistencias: []},
+    {email: 'pgy4121-002d', nombre: 'Guillermo', apellido: 'Villacura', contrasenia: 'pgy4121-002d',asistencias: []}
   ];
   actualEmail:string="";
   setActualEmail(email:string){this.actualEmail=email;}

@@ -7,8 +7,24 @@
 
 <ion-content [fullscreen]="true">
   <ion-card>
-    <h3>nombre: {{dataAsistencia.nombre}}</h3>
-    <h3>Apellido: {{dataAsistencia.apellido}}</h3>
+    <h3>nombre: {{dataAsistencia.asignatura}}</h3>
+    <h3>Apellido: {{dataAsistencia.seccion}}</h3>
+    <h3>Asignatura: {{dataAsistencia.docente}}</h3>
+    <h3>nombre: {{dataAsistencia.sala}}</h3>
+    <h3>Apellido: {{dataAsistencia.fecha}}</h3>
+    <h3>Asignatura: {{dataAsistencia.hora}}</h3>
+    <h3>Asignatura: {{dataAsistencia.leccion}}</h3>
+    <ion-button (click)="registrarAsistencia()" class="centro" fill="solid" color="success" ><ion-icon name="checkmark-outline" size="large"></ion-icon> Registrar </ion-button>
   </ion-card>
 </ion-content>
-
+<!--
+{
+  "asignatura": "ENG4567",
+  "seccion": "001D",
+  "docente": "Carlos Fernández",
+  "sala": "Aula 205",
+  "fecha": "24-09-2023",
+  "hora": "10:45",
+  "leccion": "Inglés Avanzado"
+}
+-->

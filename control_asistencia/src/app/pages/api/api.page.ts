@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/services/storage.service';
 
 import { BarcodeScanner } from 'capacitor-barcode-scanner';
 import { ResulQrPage } from 'src/app/modals/resul-qr/resul-qr.page';
+import { Asistencia } from 'src/app/models/asistencia';
 @Component({
   selector: 'app-api',
   templateUrl: './api.page.html',
@@ -45,14 +46,15 @@ export class ApiPage implements OnInit {
     }
   }
 
-  user:User={email: "", nombre: "", apellido: "", contrasenia: ""};
+  user:User={email: "", nombre: "", apellido: "", contrasenia: "", asistencias: []};
   public userName:string="";
   public userEmail:string="";
   public userLastName:string="";
   public userPassword:string="";
+  public userAsistencias:Asistencia[]=[];
   
   setStorage(){
-    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword};
+    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword,asistencias:this.userAsistencias};
     this.storageService.create("user",JSON.stringify(user))
 
   }
@@ -63,13 +65,13 @@ export class ApiPage implements OnInit {
         let u = JSON.parse(data.value);
         this.user=u;
       }else{
-        this.user={email:"none",nombre:"none",apellido:"none",contrasenia:"none"};
+        this.user={email:"none",nombre:"none",apellido:"none",contrasenia:"none",asistencias:[]};
       }
     })
 
   }
   async updateStorage(){
-    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword};
+    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword,asistencias:this.userAsistencias};
     await this.storageService.create("user",JSON.stringify(user))
   }
   async deleteFromStorage(){
@@ -84,17 +86,4 @@ export class ApiPage implements OnInit {
     this.storageService.guardarUser(this.userEmail, this.userName, this.userLastName, this.userPassword);
   }
 
-  resultQr:any ='';
-  async scan(){
-    this.resultQr  = (await BarcodeScanner.scan()).code;
-    console.log("obj QR",JSON.parse(this.resultQr));
-    await this.modalResultQr();
-  }
-
-  async modalResultQr(){
-    var qr = [];
-    qr.push(this.resultQr);
-    const parametros={dataQr: this.resultQr}
-    await this.helperService.showModal(ResulQrPage,parametros,false);
-  }
 }

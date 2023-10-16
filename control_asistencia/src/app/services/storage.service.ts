@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { User } from '../models/user.model';
+import { Asistencia } from '../models/asistencia';
 @Injectable({
   providedIn: 'root'
 })
@@ -52,7 +53,10 @@ export class StorageService {
   }
 
   async guardarUser(email:string, nombre:string, apellido:string, contrasenia:string){
-    let user:User = {email: email, nombre: nombre, apellido: apellido, contrasenia: contrasenia};
+    let user:User = {
+      email: email, nombre: nombre, apellido: apellido, contrasenia: contrasenia,
+      asistencias: []
+    };
     let users:User[]=[];
     users.push(user);
 
@@ -74,17 +78,17 @@ export class StorageService {
     let data:any[] = [];
     const storageData = await this.getItem("user")
     if (storageData == null) {
-      return {email:"",nombre:"",apellido:"",contrasenia:""};
+      return {email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
     }else{
       data = JSON.parse(storageData);
       if(data){
         for(const i of data){
           if(i.email = email){
-            return {email:i.email ,nombre:i.nombre, apellido:i.apellido, contrasenia:i.contrasenia};
+            return {email:i.email ,nombre:i.nombre, apellido:i.apellido, contrasenia:i.contrasenia, asistencias:i.asistencias};
           }
         }
       }
-      return {email:"",nombre:"",apellido:"",contrasenia:""};
+      return {email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
       
     }
   }

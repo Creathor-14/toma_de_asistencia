@@ -21,7 +21,7 @@ import { UserService } from 'src/app/services/user.service';
 export class VisualizarPage implements OnInit {
   loading = true;
   email:string=this.userService.getActualEmail();
-  user:User={email:"",nombre:"",apellido:"",contrasenia:""};
+  user:User={email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
 
   constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute,
     private storageService:StorageService) { }

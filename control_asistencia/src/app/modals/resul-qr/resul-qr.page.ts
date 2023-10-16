@@ -40,7 +40,7 @@ export class ResulQrPage implements OnInit {
       let asistencia:Asistencia = this.dataAsistencia;
       this.storageService.addAsistencia(asistencia,this.email);
       this.modalController.dismiss();
-      this.helperService.showAlert("Asistencia registrada.", "Mensaje");
+      
       this.router.navigateByUrl("tabs/"+this.email+"/asistencia/visualizar");
     }
   }

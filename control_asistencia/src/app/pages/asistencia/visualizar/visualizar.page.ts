@@ -14,9 +14,9 @@ export class VisualizarPage implements OnInit {
   ngOnInit() {
     this.email=this.userService.getActualEmail();
     this.ja()
-    
   }
   async ja(){
     this.asistencias = await this.storageService.getAsistencias(this.email);
+    console.log(this.email,this.asistencias)
   }
 }

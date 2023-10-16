@@ -124,7 +124,6 @@ export class StorageService {
 
   }
   async actualizarUser(user:User){
-
     let users:User[]=[];
     users.push(user);
 
@@ -136,17 +135,20 @@ export class StorageService {
     }
     this.setItem("user",JSON.stringify(users));
   }
-  //{asignatura: string, seccion: string, docente: string, sala: string, fecha: string, hora: string, leccion: string}[]
-  async getAsistencias(email:string):Promise<Asistencia[]>{
+
+  async getAsistencias(email:string):Promise<Asistencia[]>{//se bueggea
     let data:any[] = [];
     const storageData = await this.getItem("user")
+    console.log(storageData);
     if (storageData == null) {
+      console.log("NULL")
       return [];
     }else{
       data = JSON.parse(storageData);
+      console.log("data:",data)
       if(data){
         for(const i of data){
-          if(i.email = email){
+          if(i.email == email){
             return i.asistencias;
           }
         }

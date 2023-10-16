@@ -38,6 +38,7 @@ export class ResulQrPage implements OnInit {
     var confirmar = await this.helperService.showConfirm("¿Desea registrar su asistencia?","Cancelar","Confirmar");
     if(confirmar){
       let asistencia:Asistencia = this.dataAsistencia;
+      
       this.storageService.addAsistencia(asistencia,this.email);
       this.modalController.dismiss();
       

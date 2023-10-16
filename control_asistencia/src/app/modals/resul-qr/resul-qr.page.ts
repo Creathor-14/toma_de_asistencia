@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Asistencia } from 'src/app/models/asistencia';
 import { HelperService } from 'src/app/services/helper.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -16,11 +18,11 @@ export class ResulQrPage implements OnInit {
 
   nombre:string = '';
   constructor(private modalController:ModalController, private router:Router, 
-    private userService:UserService, private helperService:HelperService) { }
+    private userService:UserService, private helperService:HelperService,
+    private storageService:StorageService) { }
 
   ngOnInit() {
     console.log("data-Modal",JSON.parse(this.dataQr));
-    console.log(JSON.parse(this.dataQr).asignatura);
     this.dataAsistencia = JSON.parse(this.dataQr);
     this.email = this.userService.getActualEmail();
   }
@@ -35,6 +37,8 @@ export class ResulQrPage implements OnInit {
   async registrarAsistencia(){
     var confirmar = await this.helperService.showConfirm("¿Desea registrar su asistencia?","Cancelar","Confirmar");
     if(confirmar){
+      let asistencia:Asistencia = this.dataAsistencia;
+      this.storageService.addAsistencia(asistencia,this.email);
       this.modalController.dismiss();
       this.helperService.showAlert("Asistencia registrada.", "Mensaje");
       this.router.navigateByUrl("tabs/"+this.email+"/asistencia/visualizar");

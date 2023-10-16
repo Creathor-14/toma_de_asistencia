@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Preferences } from '@capacitor/preferences';
 import { User } from '../models/user.model';
 import { Asistencia } from '../models/asistencia';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -89,7 +90,30 @@ export class StorageService {
         }
       }
       return {email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
-      
     }
   }
+
+
+
+  async addAsistencia(asistencia:Asistencia,email:string){
+    let user:User = await this.getUserData(email);
+    
+    user.asistencias.push(asistencia);
+    this.actualizarUser(user);
+
+  }
+  async actualizarUser(user:User){
+
+    let users:User[]=[];
+    users.push(user);
+
+    var usuarios = await this.obtenerUser();
+    for (const i of usuarios) {
+      if (i.email != user.email) {
+        users.push(i);
+      }
+    }
+    this.setItem("user",JSON.stringify(users));
+  }
+
 }

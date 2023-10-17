@@ -44,7 +44,7 @@ export class RegistrarPage implements OnInit {
           this.auth.createUserWithEmailAndPassword(email, password)
             .then(response => {
               this.helperService.showAlert("Usuario registrado correctamente.", "Success");
-              this.userService.addUser(email, nombre, apellido, password);
+              this.storageService.guardarUser(email,nombre,apellido,password);
             })
             .catch(error => {
               if (error.code == 'auth/invalid-email') {

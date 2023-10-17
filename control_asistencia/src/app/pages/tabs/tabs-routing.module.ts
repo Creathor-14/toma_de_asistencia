@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
@@ -16,26 +17,32 @@ const routes: Routes = [
       {
         path: 'perfil/visualizar',
         loadChildren: () => import('../perfil/visualizar/visualizar.module').then((m) => m.VisualizarPageModule),
+        ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
       },
       {
         path: 'leer-qr',
         loadChildren: () => import('../leer-qr/leer-qr.module').then((m) => m.LeerQrPageModule),
+        ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
       },
       {
         path: 'asistencia/visualizar',
         loadChildren: () => import('../asistencia/visualizar/visualizar.module').then((m) => m.VisualizarPageModule),
+        ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
       },
       {
         path: 'perfil/editar',
         loadChildren: () => import('../perfil/editar/editar.module').then((m) => m.EditarPageModule),
+        ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
       },
       {
         path: 'asistencia/registrar',
         loadChildren: () => import('../asistencia/registrar/registrar.module').then((m) => m.RegistrarPageModule),
+        ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
       },
       {
         path: 'api',
-        loadChildren: () => import('../api/api.module').then( m => m.ApiPageModule)
+        loadChildren: () => import('../api/api.module').then( m => m.ApiPageModule),
+        ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
       }
     ]
   }

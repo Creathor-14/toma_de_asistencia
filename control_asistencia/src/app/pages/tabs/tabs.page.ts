@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { HelperService } from 'src/app/services/helper.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 
 
@@ -12,7 +13,8 @@ import { HelperService } from 'src/app/services/helper.service';
 })
 export class TabsPage implements OnInit {
   email:string=this.userService.getActualEmail();
-  constructor(private userService: UserService,private router:Router,private activatedRoute:ActivatedRoute, private helperService: HelperService) {
+  constructor(private userService: UserService,private router:Router,private activatedRoute:ActivatedRoute, 
+    private helperService:HelperService, private auth:AngularFireAuth) {
     
   }
 
@@ -28,9 +30,16 @@ export class TabsPage implements OnInit {
     this.router.navigate(['login/user']); 
   }
 
-  cerrarSesion() {
-    this.helperService.showToast("¡Sesión cerrada con éxito!", 1000); 
-    this.router.navigate(['login/user']); 
+  async cerrarSesion() {
+    var corfirmar = await this.helperService.showConfirm("Desea cerrar la sesión actual?","Cancelar","Confirmar")
+    if (corfirmar == true) {
+      await this.auth.signOut();
+      this.helperService.showToast("¡Sesión cerrada con éxito!", 1000); 
+      await this.router.navigate(['login/user']);
+      
+    }
+    
+    //this.router.navigate(['login/user']); 
   }
 
 

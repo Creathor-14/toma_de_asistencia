@@ -11,13 +11,17 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class RecuperarPage {
   
-  email: string = this.userService.getActualEmail();
+  email: string = "";
 
   constructor(private userService: UserService, private router: Router, private activatedRoute:ActivatedRoute, 
     private helperService:HelperService, private angularFireAuth: AngularFireAuth) {}
 
   ngOnInit(){
-    this.email=this.userService.getActualEmail();
+    let e = this.activatedRoute.snapshot.params['email'];
+    if(e != -1){
+      this.email = e;
+    }
+    
   }
   async recuperarContrasenia() {
     if (this.email.trim() === '') {

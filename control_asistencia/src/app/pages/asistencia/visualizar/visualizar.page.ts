@@ -15,6 +15,9 @@ export class VisualizarPage implements OnInit {
     this.email=this.userService.getActualEmail();
     this.ja()
   }
+  ionViewWillEnter() {
+    console.log("ye")
+  }
   async ja(){
     this.asistencias = await this.storageService.getAsistencias(this.email);
     console.log(this.email,this.asistencias)

@@ -33,6 +33,7 @@ export class UserPage implements OnInit {
     }else{
       this.userService.setActualEmail(this.email);
       this.router.navigateByUrl("login/password/"+this.email);
+      this.helperService.showToast("¡Ingrese su clave!", 1000); 
     }
     
     /*

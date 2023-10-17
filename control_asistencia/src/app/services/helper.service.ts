@@ -51,7 +51,7 @@ export class HelperService {
         translucent:true,
         position:"bottom",
         duration:duracion,
-        color:"warning"
+        color:"success",
       }
       );
       await toast.present();

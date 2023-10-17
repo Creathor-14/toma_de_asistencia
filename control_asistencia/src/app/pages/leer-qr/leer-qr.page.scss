@@ -1,40 +1,14 @@
-.background-image {
-  background-image: url('../../../assets/img/san-joaquin.jpg');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  width: 100%;
-  height: 100%;
+.registro{
+  margin-left: 14%;
+  margin-top: 7%;
 }
-.background-image::before {
-  content: "";
-  background-color: rgba(0, 0, 0, 0.6);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-ion-card{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  
-}
-
-.container {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.qr{
+  margin-left: 14%;
 }
 .prueba{
   font-size: 15rem;
+}
+.scan{
+  margin-left: 14%;
+  width: 70%;
 }

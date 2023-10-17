@@ -1,14 +1,18 @@
-<div class="background-image">
-  <ion-card color="light">
-    <div class="box">
-      <ion-icon style="font-size: 250px;" name="qr-code-outline"></ion-icon>
-      <ion-button (click)="scan()">Scan</ion-button>
-    </div>
-    <div class="container">
-      <ion-button (click)="registrar_asistencia()">
-        <ion-icon class="prueba" name="camera-outline"></ion-icon>
-      </ion-button>
-    </div>
-  </ion-card>
+<div>
+  <div>
+    <ion-button (click)="registrar_asistencia()" class="registro">
+      <ion-icon class="prueba" name="camera-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <div>
+    <ion-icon style="font-size: 250px;" name="qr-code-outline"  class = "qr"></ion-icon>
+  </div>
+
+  <div> 
+    <ion-button (click)="scan()"  class = "scan">Scan</ion-button>
+  </div>
+
+  
+  
 </div>
 

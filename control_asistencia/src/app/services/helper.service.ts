@@ -43,7 +43,7 @@ export class HelperService {
     return loader;
   }
 
-  async showToast(msg:string,duracion:number = 1000){
+  async showToast(msg:string,duracion:number = 1000,color:string){
     var toast = await this.toastController.create(
       {
         cssClass:"cssToast",
@@ -51,7 +51,7 @@ export class HelperService {
         translucent:true,
         position:"bottom",
         duration:duracion,
-        color:"success",
+        color:color,
       }
       );
       await toast.present();

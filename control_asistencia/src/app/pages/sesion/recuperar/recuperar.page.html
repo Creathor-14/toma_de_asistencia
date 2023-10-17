@@ -1,11 +1,13 @@
 <div class="background-image">
   <ion-card color="light">
-    <ion-toolbar color="light">
-      <ion-buttons slot="start">
-        <ion-back-button default-href="volver()" (click)="volver()"></ion-back-button>
-      </ion-buttons>
-    </ion-toolbar>
     <img alt="Logo Duoc Uc" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo_DuocUC.svg/2560px-Logo_DuocUC.svg.png"/>
+    <ion-grid>
+      <ion-buttons size="small" (click)="volver()">
+        <ion-button size="small">
+          <ion-icon color="medium" slot="icon-only" name="arrow-back-outline" size="small"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-grid>
     <ion-card-content>
       <ion-item color="light">
           <ion-input  [(ngModel)]="email" label="Correo" type="email" labelPlacement="floating" placeholder="{{email}}" maxlength="256"></ion-input>

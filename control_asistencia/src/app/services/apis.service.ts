@@ -16,6 +16,7 @@ export class ApisService {
   }
 
   async getComuna(regionId:number){
+    console.log(regionId)
     return await lastValueFrom(this.http.get<ApiResponse<any>>(`${environment.apiUrl}comuna/` + regionId));
   }
 }

@@ -6,45 +6,45 @@ import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
+import { ApisService } from 'src/app/services/apis.service';
+import { Region } from 'src/app/models/region';
+
 @Component({
   selector: 'app-registrar',
   templateUrl: './registrar.page.html',
   styleUrls: ['./registrar.page.scss'],
 })
 export class RegistrarPage implements OnInit {
-  formReg: FormGroup;
+  email: string ="";
+  nombre: string ="";
+  apellido: string ="";
+  password: string ="";
+
   constructor(private userService: UserService,private router:Router, private auth: AngularFireAuth, private helperService:HelperService,
-    private storageService:StorageService) {
-    this.formReg = new FormGroup({
-      email: new FormControl(),
-      nombre: new FormControl(),
-      apellido: new FormControl(),
-      password: new FormControl(),
-    })
+    private storageService:StorageService, private apisService:ApisService) {
+    
   }
 
   volver(){
     this.router.navigateByUrl("login/user");
   }
   ngOnInit() {
+    this.cargarRegion();
   }
-  onSubmit() {
-    const email = this.formReg.value.email;
-    const nombre = this.formReg.value.nombre;
-    const apellido = this.formReg.value.apellido;
-    const password = this.formReg.value.password;
+
   
-    if (nombre == null) {
+  addUser(){
+    if (this.nombre == null) {
       this.helperService.showAlert("Debe ingresar un nombre.", "Advertencia");
-    } else if (apellido == null) {
+    } else if (this.apellido == null) {
       this.helperService.showAlert("Debe ingresar un apellido.", "Advertencia");
     } else {
       this.helperService.showLoader("Cargando").then(loader => {
         try {
-          this.auth.createUserWithEmailAndPassword(email, password)
+          this.auth.createUserWithEmailAndPassword(this.email, this.password)
             .then(response => {
               this.helperService.showAlert("Usuario registrado correctamente.", "Success");
-              this.storageService.guardarUser(email,nombre,apellido,password);
+              this.storageService.guardarUser(this.email,this.nombre,this.apellido,this.password);
             })
             .catch(error => {
               if (error.code == 'auth/invalid-email') {
@@ -69,4 +69,32 @@ export class RegistrarPage implements OnInit {
       });
     }
   }
+  regiones:Region[]=[];
+  comunas:any[]=[];
+  regionSel:number = 0;
+  comunaSel:number = 0;
+  async cargarComuna(){
+    try {
+      console.log(this.regionSel);
+      const req = await this.apisService.getComuna(this.regionSel);
+      this.comunas = req.data;
+
+    } catch (error:any) {
+      console.log("ERROR", error);
+      
+      this.helperService.showAlert(error.error.msg,"Error")
+    }
+  }
+
+  async cargarRegion(){
+    try {
+      const req = await this.apisService.getRegion();
+      this.regiones = req.data;
+      
+    } catch (error) {
+      
+    }
+  }
+
+  
 }

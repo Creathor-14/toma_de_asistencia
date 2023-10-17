@@ -27,8 +27,10 @@ export class ApiPage implements OnInit {
   }
   async cargarComuna(){
     try {
+      console.log(this.regionSel);
       const req = await this.apiService.getComuna(this.regionSel);
       this.comunas = req.data;
+
     } catch (error:any) {
       console.log("ERROR", error);
       
@@ -40,7 +42,7 @@ export class ApiPage implements OnInit {
     try {
       const req = await this.apiService.getRegion();
       this.regiones = req.data;
-      console.log("REGIONES",this.regiones);
+      
     } catch (error) {
       
     }

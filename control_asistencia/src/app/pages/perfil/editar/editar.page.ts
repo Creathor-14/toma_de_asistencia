@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { HelperService } from 'src/app/services/helper.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,36 +12,38 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./editar.page.scss'],
 })
 export class EditarPage implements OnInit {
-  email:string = this.userService.getActualEmail();
+  email:any;
+  user:User=this.userService.getActualUserData();
   nombre:string = "";
   apellido:string = "";
   contrasenia:string = "";
-  constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute,
-    private helperService:HelperService) { }
+  constructor(private router:Router, private userService: UserService,
+    private helperService:HelperService, private storageService:StorageService, private auth: AngularFireAuth) { }
   ngOnInit() {
-    this.nombre = this.userService.getNombre(this.email);
-    this.apellido = this.userService.getApellido(this.email);
-    this.contrasenia = this.userService.getContrasenia(this.email);
+    this.getUserEmail();
+    this.nombre = this.user.nombre;
+    this.apellido = this.user.apellido;
+    this.contrasenia = this.user.contrasenia;
   }
 
-  getNombre(): string {
-    return `${this.userService.getNombre(this.email)}`;
+  async getUserEmail(){
+    let user = await this.auth.currentUser;
+    if(user){
+      this.email =  user.email;
+      //this.getUserStorageData();
+    }
   }
-  getApellido(): string {
-    return `${this.userService.getApellido(this.email)}`;
+
+  async getUserStorageData(){
+    this.user= await this.storageService.getUserData(this.email);
   }
-  getEmail(): string {
-    return `${this.email}`;
-  }
-  getContrasenia(): string {
-    return `${this.userService.getContrasenia(this.email)}`;
-  }
+
 
 
   async actualizar(){
     var confirmar = await this.helperService.showConfirm("¿Desea modificar usuario?","Cancelar","Aceptar")
     if(confirmar){
-      this.userService.updateUser(this.email, this.nombre, this.apellido, this.contrasenia);
+      //this.userService.updateUser(this.email, this.nombre, this.apellido, this.contrasenia);
     }
   }
   volver(){

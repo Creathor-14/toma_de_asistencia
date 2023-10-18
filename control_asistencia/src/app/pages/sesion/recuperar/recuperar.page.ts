@@ -23,6 +23,7 @@ export class RecuperarPage {
     }
     
   }
+  /*
   async recuperarContrasenia() {
     if (this.email.trim() === '') {
       // Valida que se haya ingresado un email
@@ -35,7 +36,7 @@ export class RecuperarPage {
     } else {
       await this.helperService.showAlert('Email no registrado', 'Advertencia');
     }
-  }
+  }*/
   volver(){
     this.router.navigateByUrl("login/user");
   }

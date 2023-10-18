@@ -12,19 +12,16 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./tabs.page.scss'],
 })
 export class TabsPage implements OnInit {
-  email:string=this.userService.getActualEmail();
-  constructor(private userService: UserService,private router:Router,private activatedRoute:ActivatedRoute, 
+  constructor(private router:Router,private activatedRoute:ActivatedRoute, 
     private helperService:HelperService, private auth:AngularFireAuth) {
     
   }
 
   ngOnInit() {
-    this.email=this.userService.getActualEmail();
+
     
   }
-  getMensajeBienvenida(): string {
-    return `${this.userService.getNombre(this.email)} ${this.userService.getApellido(this.email)}`;
-  } 
+
   redirectToLogin() {
 
     this.router.navigate(['login/user']); 

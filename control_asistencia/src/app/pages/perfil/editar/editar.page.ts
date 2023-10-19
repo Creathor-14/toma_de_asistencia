@@ -20,10 +20,15 @@ export class EditarPage implements OnInit {
   constructor(private router:Router, private userService: UserService,
     private helperService:HelperService, private storageService:StorageService, private auth: AngularFireAuth) { }
   ngOnInit() {
+
     this.getUserEmail();
     this.nombre = this.user.nombre;
     this.apellido = this.user.apellido;
     this.contrasenia = this.user.contrasenia;
+
+  
+    
+
   }
 
   async getUserEmail(){

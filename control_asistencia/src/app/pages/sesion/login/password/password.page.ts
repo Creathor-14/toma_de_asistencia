@@ -34,23 +34,25 @@ export class PasswordPage implements OnInit {
     return this.email;
   }
 
-  async login(){
+  async login() {
     const loader = await this.helperService.showLoader("Cargando");
     try {
-      const request = await this.auth.signInWithEmailAndPassword(this.email,this.contrasenia);
-
-
-      
-      this.router.navigateByUrl("tabs/" + this.email);
-      await loader.dismiss();
-      await this.mostrarMensajeInicioSesionExitoso();
-
-    } catch (error:any) {
+      if (this.contrasenia.length >= 6 && this.contrasenia.length >= 20) {
+        this.helperService.showAlert("La contraseña debe tener entre 5 y 20 caracteres.", "Error de validación");
+        await loader.dismiss();
+      } else {
+        const request = await this.auth.signInWithEmailAndPassword(this.email, this.contrasenia);
+  
+        this.router.navigateByUrl("tabs/" + this.email);
+        await loader.dismiss();
+        await this.mostrarMensajeInicioSesionExitoso();
+      }
+    } catch (error: any) {
       if (error.code == "auth/missing-password") {
         this.helperService.showAlert("Ingrese una contraseña.", "Error de validación");
         await loader.dismiss();
       } else if (error.code == "auth/invalid-login-credentials") {
-        this.helperService.showAlert("Usuario inexistente o datos inválidos.","Error de validación");
+        this.helperService.showAlert("Usuario inexistente o datos inválidos.", "Error de validación");
         await loader.dismiss();
       } else {
         console.error(error);
@@ -58,6 +60,7 @@ export class PasswordPage implements OnInit {
       }
     }
   }
+  
 
   mostrarMensajeInicioSesionExitoso() {
     

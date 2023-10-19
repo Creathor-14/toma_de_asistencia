@@ -78,7 +78,7 @@ export class StorageService {
     const storageData = await this.getItem("user")
     
     if (storageData == null) {
-      return {email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
+      return {email:"",nombre:"",apellido:"",contrasenia:"", region: "", comuna: "", asistencias:[]};
     }else{
       data = JSON.parse(storageData);
       //console.log(data)
@@ -86,11 +86,11 @@ export class StorageService {
         for(const i of data){
           //console.log(i.email,"|    |",email)
           if(i.email == email){
-            return {email:i.email ,nombre:i.nombre, apellido:i.apellido, contrasenia:i.contrasenia, asistencias:i.asistencias};
+            return {email:i.email ,nombre:i.nombre, apellido:i.apellido, region:i.region, comuna:i.comuna, contrasenia:i.contrasenia, asistencias:i.asistencias};
           }
         }
       }
-      return {email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
+      return {email:"",nombre:"",apellido:"",contrasenia:"", region: "", comuna: "", asistencias:[]};
     }
   }
 
@@ -106,7 +106,6 @@ export class StorageService {
     for (const a of user.asistencias) {
       let actualAsist:string = a.asignatura+a.seccion+a.fecha+a.hora;
       let nuevaAsist:string = asistencia.asignatura+asistencia.seccion+asistencia.fecha+asistencia.hora;
-      //console.log(actualAsist,"|    |",nuevaAsist);
 
       if (actualAsist == nuevaAsist) {
         existeAsist=true;

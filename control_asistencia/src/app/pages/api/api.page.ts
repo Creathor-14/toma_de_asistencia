@@ -48,15 +48,17 @@ export class ApiPage implements OnInit {
     }
   }
 
-  user:User={email: "", nombre: "", apellido: "", contrasenia: "", asistencias: []};
+  user:User={email: "", nombre: "", apellido: "", region:"", comuna:"", contrasenia: "", asistencias: []};
   public userName:string="";
   public userEmail:string="";
   public userLastName:string="";
+  public userRegion:string="";
+  public userComuna:string="";
   public userPassword:string="";
   public userAsistencias:Asistencia[]=[];
   
   setStorage(){
-    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword,asistencias:this.userAsistencias};
+    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,region:this.userRegion,comuna:this.userComuna,contrasenia:this.userPassword,asistencias:this.userAsistencias};
     this.storageService.create("user",JSON.stringify(user))
 
   }
@@ -67,13 +69,13 @@ export class ApiPage implements OnInit {
         let u = JSON.parse(data.value);
         this.user=u;
       }else{
-        this.user={email:"none",nombre:"none",apellido:"none",contrasenia:"none",asistencias:[]};
+        this.user={email:"none",nombre:"none",apellido:"none",region:"none",comuna:"none",contrasenia:"none",asistencias:[]};
       }
     })
 
   }
   async updateStorage(){
-    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,contrasenia:this.userPassword,asistencias:this.userAsistencias};
+    let user:User = {email:this.userEmail,nombre:this.userName,apellido:this.userLastName,region:this.userRegion,comuna:this.userComuna,contrasenia:this.userPassword,asistencias:this.userAsistencias};
     await this.storageService.create("user",JSON.stringify(user))
   }
   async deleteFromStorage(){

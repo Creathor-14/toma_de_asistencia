@@ -23,7 +23,7 @@ export class VisualizarPage implements OnInit {
 
   loading = true;
   email:any;
-  user:User={email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
+  user:User={email:"",nombre:"",apellido:"", region:"", comuna:"" ,contrasenia:"", asistencias:[]};
 
   constructor(private router:Router, private userService:UserService,
     private storageService:StorageService, private auth: AngularFireAuth) { }

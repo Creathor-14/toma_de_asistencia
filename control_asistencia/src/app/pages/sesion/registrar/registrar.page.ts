@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -16,9 +15,11 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./registrar.page.scss'],
 })
 export class RegistrarPage implements OnInit {
-  email: string ="";
-  nombre: string ="";
-  apellido: string ="";
+  email: string = "";
+  nombre: string = "";
+  apellido: string = "";
+  region: string = "";
+  comuna: string = "";
   password: string ="";
 
   constructor(private userService: UserService,private router:Router, private auth: AngularFireAuth, private helperService:HelperService,
@@ -32,9 +33,20 @@ export class RegistrarPage implements OnInit {
   ngOnInit() {
     this.cargarRegion();
   }
-
+  getNombreUbicacion(id:number,ubicaciones:any[]){
+    for(const u of ubicaciones){
+      if(u.id == id){
+        return u.nombre
+      }
+    }
+    
+  }
   
   addUser(){
+
+    this.region = this.getNombreUbicacion(this.regionSel,this.regiones);
+    this.comuna = this.getNombreUbicacion(this.comunaSel,this.comunas);
+  
     if (this.nombre == null) {
       this.helperService.showAlert("Debe ingresar un nombre.", "Advertencia");
     } else if (this.apellido == null) {
@@ -49,7 +61,11 @@ export class RegistrarPage implements OnInit {
           this.auth.createUserWithEmailAndPassword(this.email, this.password)
             .then(response => {
               this.helperService.showAlert("Usuario registrado correctamente.", "Success");
-              let user:User = { email:this.email, nombre:this.nombre, apellido:this.apellido, contrasenia:this.password,asistencias:[] };
+              let user:User = { 
+                email:this.email, nombre:this.nombre, apellido:this.apellido, 
+                region: this.region, comuna: this.comuna,
+                contrasenia:this.password,asistencias:[] 
+              };
               this.storageService.guardarUser(user);
             })
             .catch(error => {
@@ -81,10 +97,10 @@ export class RegistrarPage implements OnInit {
   comunaSel:number = -1;
   async cargarComuna(){
     try {
-      console.log(this.regionSel);
       const req = await this.apisService.getComuna(this.regionSel);
       this.comunas = req.data;
-
+      this.region= this.comunas[this.regionSel].nombre;
+      
     } catch (error:any) {
       console.log("ERROR", error);
       
@@ -96,6 +112,7 @@ export class RegistrarPage implements OnInit {
     try {
       const req = await this.apisService.getRegion();
       this.regiones = req.data;
+      
       
     } catch (error) {
       

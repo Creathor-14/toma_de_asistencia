@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
 export class UserService {
   constructor() {}
 
-  userData:User={email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
+  userData:User={email:"",nombre:"",apellido:"", region:"", comuna:"", contrasenia:"", asistencias:[]};
   setActualUserData(user:User){
     this.userData=user;
   }

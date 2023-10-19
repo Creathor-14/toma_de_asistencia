@@ -54,11 +54,8 @@ export class StorageService {
     }
   }
 
-  async guardarUser(email:string, nombre:string, apellido:string, contrasenia:string){
-    let user:User = {
-      email: email, nombre: nombre, apellido: apellido, contrasenia: contrasenia,
-      asistencias: []
-    };
+  async guardarUser(user:User){
+    
     let users:User[]=[];
     users.push(user);
 

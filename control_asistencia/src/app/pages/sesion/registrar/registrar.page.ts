@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 
 import { ApisService } from 'src/app/services/apis.service';
 import { Region } from 'src/app/models/region';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-registrar',
@@ -38,13 +39,18 @@ export class RegistrarPage implements OnInit {
       this.helperService.showAlert("Debe ingresar un nombre.", "Advertencia");
     } else if (this.apellido == null) {
       this.helperService.showAlert("Debe ingresar un apellido.", "Advertencia");
+    } else if(this.regionSel == -1){
+      this.helperService.showAlert("Debe ingresar una region.", "Advertencia");
+    } else if(this.comunaSel == -1){
+      this.helperService.showAlert("Debe ingresar una comuna.", "Advertencia");
     } else {
       this.helperService.showLoader("Cargando").then(loader => {
         try {
           this.auth.createUserWithEmailAndPassword(this.email, this.password)
             .then(response => {
               this.helperService.showAlert("Usuario registrado correctamente.", "Success");
-              this.storageService.guardarUser(this.email,this.nombre,this.apellido,this.password);
+              let user:User = { email:this.email, nombre:this.nombre, apellido:this.apellido, contrasenia:this.password,asistencias:[] };
+              this.storageService.guardarUser(user);
             })
             .catch(error => {
               if (error.code == 'auth/invalid-email') {
@@ -71,8 +77,8 @@ export class RegistrarPage implements OnInit {
   }
   regiones:Region[]=[];
   comunas:any[]=[];
-  regionSel:number = 0;
-  comunaSel:number = 0;
+  regionSel:number = -1;
+  comunaSel:number = -1;
   async cargarComuna(){
     try {
       console.log(this.regionSel);

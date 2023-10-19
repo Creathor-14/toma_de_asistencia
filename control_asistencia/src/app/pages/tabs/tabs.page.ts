@@ -34,7 +34,7 @@ export class TabsPage implements OnInit {
     var corfirmar = await this.helperService.showConfirm("Desea cerrar la sesión actual?","Cancelar","Confirmar")
     if (corfirmar == true) {
       await this.auth.signOut();
-      this.helperService.showToast("¡Sesión cerrada con éxito!", 1000); 
+      this.helperService.showToast("¡Sesión cerrada con éxito!", 1000,"success"); 
       await this.router.navigate(['login/user']);
       
     }

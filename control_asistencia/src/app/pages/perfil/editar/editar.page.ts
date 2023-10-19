@@ -19,6 +19,7 @@ export class EditarPage implements OnInit {
     this.nombre = this.userService.getNombre(this.email);
     this.apellido = this.userService.getApellido(this.email);
     this.contrasenia = this.userService.getContrasenia(this.email);
+    
   }
 
   getNombre(): string {

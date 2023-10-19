@@ -27,6 +27,7 @@ export class LeerQrPage implements OnInit {
     var u = await this.angularFireAuth.currentUser;
     console.log(u?.email);
     this.resultQr  = (await BarcodeScanner.scan()).code;
+    console.log(this.resultQr)
     console.log("obj QR",JSON.parse(this.resultQr),"algo xd");
     await this.modalResultQr();
   }

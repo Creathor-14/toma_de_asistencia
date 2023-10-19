@@ -1,5 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { StorageService } from 'src/app/services/storage.service';
@@ -19,24 +20,35 @@ import { UserService } from 'src/app/services/user.service';
   ],
 })
 export class VisualizarPage implements OnInit {
+
   loading = true;
-  email:string=this.userService.getActualEmail();
+  email:any;
   user:User={email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
 
-  constructor(private router:Router, private userService: UserService, private activatedRoute:ActivatedRoute,
-    private storageService:StorageService) { }
+  constructor(private router:Router, private userService:UserService,
+    private storageService:StorageService, private auth: AngularFireAuth) { }
 
   ngOnInit() {
-    this.email=this.userService.getActualEmail();
-    this.ja()
+    this.getUserEmail();
     setTimeout(() => {
       this.loading = false;
     },2000);
+
     
   }
-  async ja(){
-    this.user= await this.storageService.getUserData(this.email);
+  async getUserEmail(){
+    let user = await this.auth.currentUser;
+    if(user){
+      this.email =  user.email;
+      this.getUserStorageData();
+    }
   }
+
+  async getUserStorageData(){
+    this.user= await this.storageService.getUserData(this.email);
+    this.userService.setActualUserData(this.user);
+  }
+
   getNombre(): string {
     return `${this.user.nombre}`;
   }
@@ -51,10 +63,11 @@ export class VisualizarPage implements OnInit {
   }
   async editar(){
     this.router.navigateByUrl(`tabs/${this.email}/perfil/editar`);
+    console.log(this.email);
   }
 
   eliminar(){
-    this.userService.deleteUser(this.email);
+    //this.userService.deleteUser(this.email);
     this.router.navigateByUrl("login/user");
   }
 

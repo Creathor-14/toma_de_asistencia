@@ -35,11 +35,6 @@ const routes: Routes = [
         ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
       },
       {
-        path: 'asistencia/registrar',
-        loadChildren: () => import('../asistencia/registrar/registrar.module').then((m) => m.RegistrarPageModule),
-        ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))
-      },
-      {
         path: 'api',
         loadChildren: () => import('../api/api.module').then( m => m.ApiPageModule),
         ...canActivate(()=> redirectUnauthorizedTo(["/login/user"]))

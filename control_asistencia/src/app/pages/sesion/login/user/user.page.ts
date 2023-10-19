@@ -20,7 +20,6 @@ export class UserPage implements OnInit {
   }
   recuperar(){
     this.router.navigateByUrl("recuperar/-1");
-    
   }
   registrarse(){
     this.router.navigateByUrl("registrar");
@@ -31,17 +30,10 @@ export class UserPage implements OnInit {
     }else if(!this.validateEmail(this.email)){
       this.helperService.showAlert("Formato de correo invalido.", "Error de validación");
     }else{
-      this.userService.setActualEmail(this.email);
+      //this.userService.setActualEmail(this.email);
       this.router.navigateByUrl("login/password/"+this.email);
       this.helperService.showToast("¡Ingrese su clave!", 1000, "succes"); 
     }
-    
-    /*
-    var respuesta = this.userSercive.existeUsuario(this.email);
-    if(respuesta!=-1){
-      this.router.navigateByUrl("login/password/"+respuesta);
-    }
-    */
   }
   validateEmail(email: string): boolean {
     const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;

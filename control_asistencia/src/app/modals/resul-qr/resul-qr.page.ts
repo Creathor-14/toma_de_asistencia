@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Asistencia } from 'src/app/models/asistencia';
@@ -12,19 +13,25 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./resul-qr.page.scss'],
 })
 export class ResulQrPage implements OnInit {
-  email:string=this.userService.getActualEmail();
+  email:any;
   @Input() dataQr:any;
   dataAsistencia:any;
 
   nombre:string = '';
   constructor(private modalController:ModalController, private router:Router, 
     private userService:UserService, private helperService:HelperService,
-    private storageService:StorageService) { }
+    private storageService:StorageService, private auth: AngularFireAuth) { }
 
   ngOnInit() {
+    this.getUserEmail();
     console.log("data-Modal",JSON.parse(this.dataQr));
     this.dataAsistencia = JSON.parse(this.dataQr);
-    this.email = this.userService.getActualEmail();
+  }
+  async getUserEmail(){
+    let user = await this.auth.currentUser;
+    if(user){
+      this.email =  user.email;
+    }
   }
 
 

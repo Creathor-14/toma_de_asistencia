@@ -76,13 +76,16 @@ export class StorageService {
   async getUserData(email:string):Promise<User>{
     let data:any[] = [];
     const storageData = await this.getItem("user")
+    
     if (storageData == null) {
       return {email:"",nombre:"",apellido:"",contrasenia:"", asistencias:[]};
     }else{
       data = JSON.parse(storageData);
+      //console.log(data)
       if(data){
         for(const i of data){
-          if(i.email = email){
+          //console.log(i.email,"|    |",email)
+          if(i.email == email){
             return {email:i.email ,nombre:i.nombre, apellido:i.apellido, contrasenia:i.contrasenia, asistencias:i.asistencias};
           }
         }

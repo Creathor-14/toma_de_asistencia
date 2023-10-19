@@ -13,12 +13,21 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./leer-qr.page.scss'],
 })
 export class LeerQrPage implements OnInit {
-  email:string=this.userService.getActualEmail();
+  email:any;
   constructor(private router:Router, private userService:UserService, 
-    private helperService:HelperService, private angularFireAuth:AngularFireAuth) {}
+    private helperService:HelperService, private angularFireAuth:AngularFireAuth,
+    private auth: AngularFireAuth) {}
   ngOnInit() {
-    this.email=this.userService.getActualEmail();
+    this.getUserEmail()
   }
+
+  async getUserEmail(){
+    let user = await this.auth.currentUser;
+    if(user){
+      this.email =  user.email;
+    }
+  }
+
   registrar_asistencia(){
     this.router.navigateByUrl(`tabs/${this.email}/asistencia/registrar`);
   }

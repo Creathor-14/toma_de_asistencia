@@ -13,7 +13,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./password.page.scss'],
 })
 export class PasswordPage implements OnInit {
-  email: string = this.userService.getActualEmail();
+  email: string = "";
   
   contrasenia: string = "";
 

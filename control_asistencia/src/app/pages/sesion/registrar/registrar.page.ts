@@ -33,19 +33,12 @@ export class RegistrarPage implements OnInit {
   ngOnInit() {
     this.cargarRegion();
   }
-  getNombreUbicacion(id:number,ubicaciones:any[]){
-    for(const u of ubicaciones){
-      if(u.id == id){
-        return u.nombre
-      }
-    }
-    
-  }
+  
   
   addUser(){
 
-    this.region = this.getNombreUbicacion(this.regionSel,this.regiones);
-    this.comuna = this.getNombreUbicacion(this.comunaSel,this.comunas);
+    this.region = this.apisService.getNombreUbicacion(this.regionSel,this.regiones);
+    this.comuna = this.apisService.getNombreUbicacion(this.comunaSel,this.comunas);
   
     if (this.nombre == null) {
       this.helperService.showAlert("Debe ingresar un nombre.", "Advertencia");
@@ -79,7 +72,11 @@ export class RegistrarPage implements OnInit {
                 this.helperService.showAlert("Ingrese un correo.", "Error de validación");
               } else if (error.code == 'auth/missing-password') {
                 this.helperService.showAlert("Ingrese una contraseña.", "Error de validación");
-              } else {
+              }else if(error.code == "auth/network-request-failed"){
+                this.helperService.showAlert("Problema de conectividad con los servidores un problema en la red", "Error de red");
+
+              }
+              else {
                 this.helperService.showAlert(error, "Error");
                 console.log(error);
               }

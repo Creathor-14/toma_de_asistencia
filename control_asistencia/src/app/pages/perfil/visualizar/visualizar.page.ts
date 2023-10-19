@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { StorageService } from 'src/app/services/storage.service';
 import { UserService } from 'src/app/services/user.service';
+import { ApisService } from 'src/app/services/apis.service';
+import { Region } from 'src/app/models/region';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-visualizar',
@@ -24,15 +27,18 @@ export class VisualizarPage implements OnInit {
   loading = true;
   email:any;
   user:User={email:"",nombre:"",apellido:"", region:"", comuna:"" ,contrasenia:"", asistencias:[]};
+  region: string = "";
+  comuna: string = "";
 
   constructor(private router:Router, private userService:UserService,
-    private storageService:StorageService, private auth: AngularFireAuth) { }
+    private storageService:StorageService, private auth: AngularFireAuth, private helperService:HelperService, private apisService:ApisService) { }
 
   ngOnInit() {
     this.getUserEmail();
     setTimeout(() => {
       this.loading = false;
     },2000);
+    
 
     
   }
@@ -61,6 +67,13 @@ export class VisualizarPage implements OnInit {
   getContrasenia(): string {
     return `${this.user.contrasenia}`;
   }
+  getRegion(): string {
+    return `${this.user.region}`;
+  }
+  getComuna(): string {
+    return `${this.user.comuna}`;
+  }
+
   async editar(){
     this.router.navigateByUrl(`tabs/${this.email}/perfil/editar`);
     console.log(this.email);
@@ -70,5 +83,6 @@ export class VisualizarPage implements OnInit {
     //this.userService.deleteUser(this.email);
     this.router.navigateByUrl("login/user");
   }
+ 
 
 }

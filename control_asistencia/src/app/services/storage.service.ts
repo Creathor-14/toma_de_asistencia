@@ -67,6 +67,25 @@ export class StorageService {
     }
     this.setItem("user",JSON.stringify(users));
   }
+  async editarUsuario(user:User){
+    
+    let users:User[]=[];
+
+    var usuarios = await this.obtenerUser();
+    for (const i of usuarios) {
+      if (i.email == user.email) {
+        i.nombre = user.nombre;
+        i.apellido = user.apellido;
+        i.comuna = user.comuna;
+        i.region = user.region;
+        
+      }
+  
+      users.push(i);
+      
+    }
+    this.setItem("user",JSON.stringify(users));
+  }
 
   async setItem(llave:string,valor:string){
     await Preferences.set({key:llave,value:valor});

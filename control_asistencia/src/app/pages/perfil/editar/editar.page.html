@@ -15,5 +15,27 @@
       <ion-label position="stacked">Apellido</ion-label>
       <ion-input [(ngModel)]="apellido" [clearInput]="true" placeholder="Ingrese el apellido"></ion-input>
     </ion-item>
+
+    <ion-list>
+      <ion-item color="light">
+        <ion-label position="stacked">Seleccione Region</ion-label>        
+        <ion-select (ionChange)="cargarComuna()" placeholder="Seleccione" [(ngModel)]="regionSel">
+          <ion-select-option [value]="r.id" *ngFor="let r of regiones">{{r.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  
+    <ion-list >
+      <ion-item color="light">
+        <ion-label position="stacked">Seleccione Comuna</ion-label>        
+        <ion-select  placeholder="Seleccione" [(ngModel)]="comunaSel">
+          <ion-select-option [value]="r.id" *ngFor="let r of comunas">{{r.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+
+
+
     <ion-button (click)="actualizar()" class="centro" fill="solid" color="success"><ion-icon name="trash-outline" size="large"></ion-icon> Actualizar usuario </ion-button>
 </ion-content>

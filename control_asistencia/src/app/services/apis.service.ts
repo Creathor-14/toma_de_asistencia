@@ -18,4 +18,13 @@ export class ApisService {
   async getComuna(regionId:number){
     return await lastValueFrom(this.http.get<ApiResponse<any>>(`${environment.apiUrl}comuna/` + regionId));
   }
+
+  getNombreUbicacion(id:number,ubicaciones:any[]){
+    for(const u of ubicaciones){
+      if(u.id == id){
+        return u.nombre
+      }
+    }
+    
+  }
 }

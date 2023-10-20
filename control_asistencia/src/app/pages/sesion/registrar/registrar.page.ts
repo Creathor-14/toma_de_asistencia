@@ -29,11 +29,27 @@ export class RegistrarPage implements OnInit {
     this.cargarRegion();
   }
   addUser() {
-    if (!this.email || !this.nombre || !this.apellido || this.regionSel === -1 || this.comunaSel === -1 || !this.password) {
-      this.helperService.showAlert("Por favor, complete todos los campos.", "Error de validación");
-    } else if (this.password.length >= 6 && this.password.length >= 20) {
-      this.helperService.showAlert("La contraseña debe tener entre 6 y 20 caracteres.", "Error de validación");
-    } else {
+    if (!this.email) {
+      this.helperService.showToast("Debe ingresar un correo.",1000, "danger"); 
+    } else if (!this.email) {
+      this.helperService.showToast("El formato del correo no es válido.",1000, "danger");
+    } else if (!this.nombre) {
+      this.helperService.showToast("Debe ingresar un nombre.",1000, "danger");
+    } else if (!/^[A-Za-z]+$/.test(this.nombre)) {
+      this.helperService.showToast("El nombre solo debe contener letras.",1000, "danger");
+    } else if (!this.apellido) {
+      this.helperService.showToast("Debe ingresar un apellido.",1000, "danger");
+    } else if (!/^[A-Za-z]+$/.test(this.apellido)) {
+      this.helperService.showToast("El apellido solo debe contener letras.",1000, "danger");
+    } else if (this.regionSel === -1) {
+      this.helperService.showToast("Debe ingresar una región.",1000, "danger");
+    } else if (this.comunaSel === -1) {
+      this.helperService.showToast("Debe ingresar una comuna.",1000, "danger");
+    } else if (!this.password) {
+      this.helperService.showToast("Debe ingresar una contraseña.",1000, "danger");
+    } else if (this.password.length < 6 || this.password.length > 20) {
+      this.helperService.showToast("La contraseña debe tener entre 6 y 20 caracteres.",1000, "danger");
+    }else {
       this.region = this.apisService.getNombreUbicacion(this.regionSel, this.regiones);
       this.comuna = this.apisService.getNombreUbicacion(this.comunaSel, this.comunas);
       this.helperService.showLoader("Cargando").then(loader => {

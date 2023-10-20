@@ -19,7 +19,7 @@
     <ion-list>
       <ion-item color="light">
         <ion-label position="stacked">Seleccione Region</ion-label>        
-        <ion-select (ionChange)="cargarComuna()" placeholder="Seleccione" [(ngModel)]="regionSel">
+        <ion-select (ionChange)="cargarComuna()" placeholder="{{region}}" [(ngModel)]="regionSel">
           <ion-select-option [value]="r.id" *ngFor="let r of regiones">{{r.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -28,7 +28,7 @@
     <ion-list >
       <ion-item color="light">
         <ion-label position="stacked">Seleccione Comuna</ion-label>        
-        <ion-select  placeholder="Seleccione" [(ngModel)]="comunaSel">
+        <ion-select  placeholder="{{comuna}}" [(ngModel)]="comunaSel">
           <ion-select-option [value]="r.id" *ngFor="let r of comunas">{{r.nombre}}</ion-select-option>
         </ion-select>
       </ion-item>

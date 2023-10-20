@@ -84,10 +84,14 @@ export class EditarPage implements OnInit {
 
 
   async actualizar(){
-    if(this.nombre == ""){
-      
-    }else if(this.apellido == ""){
-      
+    if (!this.nombre) {
+      this.helperService.showToast("Debe ingresar un nombre.",1000, "danger");
+    } else if (!/^[A-Za-z]+$/.test(this.nombre)) {
+      this.helperService.showToast("El nombre solo debe contener letras.",1000, "danger");
+    } else if (!this.apellido) {
+      this.helperService.showToast("Debe ingresar un apellido.",1000, "danger");
+    } else if (!/^[A-Za-z]+$/.test(this.apellido)) {
+      this.helperService.showToast("El apellido solo debe contener letras.",1000, "danger");      
     }else if(this.regionSel != -1 && this.comunaSel == -1){
       console.log("elija comuna valida")
     }else{

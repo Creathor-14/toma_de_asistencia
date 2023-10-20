@@ -93,7 +93,7 @@ export class EditarPage implements OnInit {
     } else if (!/^[A-Za-z]+$/.test(this.apellido)) {
       this.helperService.showToast("El apellido solo debe contener letras.",1000, "danger");      
     }else if(this.regionSel != -1 && this.comunaSel == -1){
-      console.log("elija comuna valida")
+      this.helperService.showToast("Elija comuna valida",1000, "danger");      
     }else{
       var confirmar = await this.helperService.showConfirm("¿Desea modificar usuario?","Cancelar","Aceptar")
       if(confirmar){

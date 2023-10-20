@@ -91,20 +91,35 @@ export class EditarPage implements OnInit {
 
 
 
-  async actualizar(){
-    this.region = this.apisService.getNombreUbicacion(this.regionSel,this.regiones);
-    this.comuna = this.apisService.getNombreUbicacion(this.comunaSel,this.comunas);
-    console.log(this.user)
-    var confirmar = await this.helperService.showConfirm("¿Desea modificar usuario?","Cancelar","Aceptar")
-    if(confirmar){
-      this.user.nombre = this.nombre;
-      this.user.apellido = this.apellido;
-      this.user.region = this.region;
-      this.user.comuna = this.comuna;
+  async actualizar() {
+    this.region = this.apisService.getNombreUbicacion(this.regionSel, this.regiones);
+    this.comuna = this.apisService.getNombreUbicacion(this.comunaSel, this.comunas);
 
-      this.storageService.actualizarUser(this.user);
+    if (!this.nombre) {
+      this.helperService.showToast("Debe ingresar un nombre.",1000, "danger");
+    } else if (!/^[A-Za-z]+$/.test(this.nombre)) {
+      this.helperService.showToast("El nombre solo debe contener letras.",1000, "danger");
+    } else if (!this.apellido) {
+      this.helperService.showToast("Debe ingresar un apellido.",1000, "danger");
+    } else if (!/^[A-Za-z]+$/.test(this.apellido)) {
+      this.helperService.showToast("El apellido solo debe contener letras.",1000, "danger");
+    } else if (!this.region || this.regionSel === -1) {
+      this.helperService.showToast("Debe ingresar una región.",1000, "danger");
+    } else if (!this.comuna || this.comunaSel === -1) {
+      this.helperService.showToast("Debe ingresar una comuna.",1000, "danger");
+    } else {
+        var confirmar = await this.helperService.showConfirm("¿Desea modificar usuario?", "Cancelar", "Aceptar");
+        if (confirmar) {
+            this.user.nombre = this.nombre;
+            this.user.apellido = this.apellido;
+            this.user.region = this.region;
+            this.user.comuna = this.comuna;
+            this.storageService.actualizarUser(this.user);
+            this.helperService.showAlert("Usuario registrado correctamente.", "Éxito");
+        }
     }
   }
+
   volver(){
     this.router.navigateByUrl(`tabs/${this.email}/perfil/visualizar`);
   }

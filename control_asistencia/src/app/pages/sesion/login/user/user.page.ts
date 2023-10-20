@@ -27,12 +27,12 @@ export class UserPage implements OnInit {
 
   siguiente() {
     if (this.email === "") {
-      this.helperService.showAlert("Ingrese un correo.", "Error de validación");
+      this.helperService.showToast("Debe ingresar un correo.",1000, "danger"); 
     } else if (this.email.length > 50) {
-      this.helperService.showAlert("El correo electrónico no debe superar los 50 caracteres.", "Error de validación");
+      this.helperService.showToast("El correo electrónico no debe superar los 50 caracteres.",1000, "danger"); 
     } 
     else if(!this.validateEmail(this.email)){
-      this.helperService.showAlert("Formato de correo invalido.", "Error de validación");
+      this.helperService.showToast("Formato de correo invalido.",1000, "danger"); 
     }else{
       //this.userService.setActualEmail(this.email);
       this.router.navigateByUrl("login/password/"+this.email);

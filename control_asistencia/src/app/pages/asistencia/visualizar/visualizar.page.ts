@@ -21,6 +21,7 @@ export class VisualizarPage implements OnInit {
     let user = await this.auth.currentUser;
     if(user){
       this.email =  user.email;
+      this.obtenerAsistencia();
     }
   }
 

@@ -1,14 +1,16 @@
-.registro{
-  margin-left: 14%;
-  margin-top: 7%;
+ion-toolbar {
+  --opacity: 0.5;
+}
+div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  height: 80vh;
 }
 .qr{
-  margin-left: 14%;
-}
-.prueba{
-  font-size: 15rem;
+  font-size: 250px;
 }
 .scan{
-  margin-left: 14%;
-  width: 70%;
+  width: 50%;
 }

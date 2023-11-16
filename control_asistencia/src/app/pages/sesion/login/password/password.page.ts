@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
-import { UserService } from 'src/app/services/user.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 
@@ -19,7 +18,6 @@ export class PasswordPage implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private auth: AngularFireAuth,
     private helperService: HelperService,
@@ -42,7 +40,6 @@ export class PasswordPage implements OnInit {
         await loader.dismiss();
       } else {
         const request = await this.auth.signInWithEmailAndPassword(this.email, this.contrasenia);
-  
         this.router.navigateByUrl("tabs/" + this.email);
         await loader.dismiss();
         await this.mostrarMensajeInicioSesionExitoso();

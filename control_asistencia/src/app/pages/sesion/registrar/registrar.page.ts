@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { UserService } from 'src/app/services/user.service';
 import { ApisService } from 'src/app/services/apis.service';
 import { Region } from 'src/app/models/region';
 import { User } from 'src/app/models/user.model';
@@ -19,7 +18,7 @@ export class RegistrarPage implements OnInit {
   region: string = "";
   comuna: string = "";
   password: string ="";
-  constructor(private userService: UserService,private router:Router, private auth: AngularFireAuth, private helperService:HelperService,
+  constructor(private router:Router, private auth: AngularFireAuth, private helperService:HelperService,
     private storageService:StorageService, private apisService:ApisService) {
   }
   volver(){
@@ -67,6 +66,7 @@ export class RegistrarPage implements OnInit {
                 asistencias: []
               };
               this.storageService.guardarUser(user);
+              this.router.navigateByUrl("login/user");
             })
             .catch(error => {
               if (error.code == 'auth/invalid-email') {

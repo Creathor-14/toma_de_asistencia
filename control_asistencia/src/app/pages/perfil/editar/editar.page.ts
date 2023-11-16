@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { UserService } from 'src/app/services/user.service';
 
 import { ApisService } from 'src/app/services/apis.service';
 import { Region } from 'src/app/models/region';
@@ -24,7 +23,7 @@ export class EditarPage implements OnInit {
   region: string = "";
   comuna: string = "";
 
-  constructor(private router:Router, private userService: UserService,
+  constructor(private router:Router,
     private helperService:HelperService, private storageService:StorageService, private auth: AngularFireAuth, private apisService:ApisService) { }
   ngOnInit() {
   }

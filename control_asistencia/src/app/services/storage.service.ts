@@ -179,4 +179,11 @@ export class StorageService {
     }
   }
 
+  userData:User={email:"",nombre:"",apellido:"", region:"", comuna:"", contrasenia:"", asistencias:[]};
+  setActualUserData(user:User){
+    this.userData=user;
+  }
+  getActualUserData():User{
+    return this.userData;
+  }
 }

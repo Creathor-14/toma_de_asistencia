@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
-import { UserService } from 'src/app/services/user.service';
+
 
 
 @Component({
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 
 export class UserPage implements OnInit {
-  constructor(private router:Router, private userService:UserService, private helperService:HelperService) { }
+  constructor(private router:Router, private helperService:HelperService) { }
   email:string = "";
   
   

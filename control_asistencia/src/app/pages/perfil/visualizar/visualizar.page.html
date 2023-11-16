@@ -1,0 +1,106 @@
+<ion-header >
+  <ion-toolbar color="light">
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="editar()" >Editar<ion-icon slot="end" name="pencil-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="false" color="light">
+  <ng-container *ngIf="loading; else content">
+    <div @fadeInOut class="loading-state">
+
+        
+        <div class="container">
+          <ion-icon class="prueba" name="person-circle-outline"></ion-icon>
+        </div>
+  
+        <ion-item color="light">
+          <ion-label>
+            <h1>Nombre</h1>
+            <ion-skeleton-text animated style="width: 50xw; padding: 3px;"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Apellido</h1>
+            <ion-skeleton-text animated style="width: 50xw; padding: 3px;"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Email</h1>
+            <ion-skeleton-text animated style="width: 50xw; padding: 3px;"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Region</h1>
+            <ion-skeleton-text animated style="width: 50xw; padding: 3px;"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Comuna</h1>
+            <ion-skeleton-text animated style="width: 50xw; padding: 3px;"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Contraseña</h1>
+            <ion-skeleton-text animated style="width: 50xw; padding: 3px;"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+
+    </div>
+  </ng-container>
+
+
+
+  <ng-template #content color="light">
+    <div @fadeInOut class="content">
+
+        <div class="container">
+          <ion-icon class="prueba" name="person-circle-outline"></ion-icon>
+        </div>
+  
+        <ion-item color="light">
+          <ion-label>
+            <h1>Nombre</h1>
+            <p>{{ getNombre() }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Apellido</h1>
+            <p>{{ getApellido() }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Email</h1>
+            <p>{{ getEmail() }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Region</h1>
+            <p>{{ getRegion() }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Comuna</h1>
+            <p>{{ getComuna() }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>
+            <h1>Contraseña</h1>
+            <p>{{ getContrasenia() }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-button (click)="eliminar()" class="centro" fill="solid" color="danger"><ion-icon name="trash-outline" size="large"></ion-icon> Eliminar usuario </ion-button>
+    </div>
+  </ng-template>
+</ion-content>

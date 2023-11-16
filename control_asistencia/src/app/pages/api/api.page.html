@@ -1,0 +1,67 @@
+<!--
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card> 
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-select (ionChange)="cargarComuna()" placeholder="Seleccione" [(ngModel)]="regionSel">
+            <ion-select-option [value]="r.id" *ngFor="let r of regiones">{{r.nombre}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item>
+          <ion-select  placeholder="Seleccione" [(ngModel)]="comunaSel">
+            <ion-select-option [value]="r.id" *ngFor="let r of comunas">{{r.nombre}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-content>
+<ion-item>
+  <ion-label position="floating">Enter email</ion-label>
+  <ion-input type="text" [(ngModel)]="userEmail" placeholder="Enter email" required></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Enter name</ion-label>
+  <ion-input type="text" [(ngModel)]="userName" placeholder="Enter name" required></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Enter last name</ion-label>
+  <ion-input type="text" [(ngModel)]="userLastName" placeholder="Enter last name" required></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating">Enter password</ion-label>
+  <ion-input type="text" [(ngModel)]="userPassword" placeholder="Enter password" required></ion-input>
+</ion-item>
+
+<ion-button size="small" color="tertiary" (click)="setStorage()">Set storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="getStorage()">Get storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="updateStorage()">Update storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="deleteFromStorage()">Delete storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="clearStorage()">Clear storage data</ion-button>
+<ion-button size="small" color="tertiary" (click)="prueba()">Prueba</ion-button>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{user.email}}</ion-card-title>
+    <ion-card-subtitle>{{user.nombre}} {{user.apellido}}</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{user.contrasenia}}
+  </ion-card-content>
+</ion-card>
+</ion-content>
+-->
+<ion-button (click)="location()">get location</ion-button>

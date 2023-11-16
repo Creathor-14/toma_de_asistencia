@@ -1,7 +1,0 @@
-{
-  "name": "control_asistencia",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

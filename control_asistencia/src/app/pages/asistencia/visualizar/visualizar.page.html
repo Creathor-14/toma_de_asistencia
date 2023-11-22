@@ -1,16 +1,45 @@
-<ion-content>
-  <div *ngFor="let asistencia of asistencias">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{asistencia.leccion}}</ion-card-title>
-        <ion-card-subtitle>{{asistencia.asignatura}}-{{asistencia.seccion}}</ion-card-subtitle>
-      </ion-card-header>
-    
-      <ion-card-content>
-        fecha:{{asistencia.fecha}}<br>
-        hora:{{asistencia.hora}}
-      </ion-card-content>
-    </ion-card>
-    
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <ng-container *ngIf="loading; else load">
+    <span *ngFor="let e of [0,1,2]">
+      <ion-card>
+        <ion-card-header>
+          <ion-skeleton-text [animated]="true" style="width: 80%; height: 18px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="false" style="width: 34%; height: 10px;"></ion-skeleton-text>
+        </ion-card-header>
+      
+        <ion-card-content>
+          <ion-skeleton-text [animated]="false" style="width: 50%; height: 14px;"></ion-skeleton-text>
+          <ion-skeleton-text [animated]="false" style="width: 42%; height: 14px;"></ion-skeleton-text>
+        </ion-card-content>
+      </ion-card>
+    </span>
+  </ng-container>
+  <ng-template #load>
+    <ng-container *ngIf="content; then some else none"></ng-container>
+    <ng-template #none>
+      <h1>No tiene ninguna asistencia registrada</h1>
+
+    </ng-template>
+    <ng-template  #some>
+      <div @fadeInOut *ngFor="let asistencia of asistencias">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{asistencia.leccion}}</ion-card-title>
+            <ion-card-subtitle>{{asistencia.asignatura}}-{{asistencia.seccion}}</ion-card-subtitle>
+          </ion-card-header>
+        
+          <ion-card-content>
+            fecha:{{asistencia.fecha}}<br>
+            hora:{{asistencia.hora}}
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ng-template>
+  </ng-template>
 </ion-content>

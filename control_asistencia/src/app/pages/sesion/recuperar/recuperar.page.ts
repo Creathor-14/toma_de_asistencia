@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -13,8 +12,8 @@ export class RecuperarPage {
   
   email: string = "";
 
-  constructor(private userService: UserService, private router: Router, private activatedRoute:ActivatedRoute, 
-    private helperService:HelperService, private angularFireAuth: AngularFireAuth) {}
+  constructor( private router: Router, private activatedRoute:ActivatedRoute, 
+    private angularFireAuth: AngularFireAuth, private helperService:HelperService) {}
 
   ngOnInit(){
     let e = this.activatedRoute.snapshot.params['email'];
@@ -23,35 +22,33 @@ export class RecuperarPage {
     }
     
   }
-  /*
-  async recuperarContrasenia() {
-    if (this.email.trim() === '') {
-      // Valida que se haya ingresado un email
-      await this.helperService.showAlert('Debe ingresar un email.', 'Advertencia');
-      return;
-    }
-    const contraseña = this.userService.recuperarContrasenia(this.email);
-    if (contraseña !== null) {
-      await this.helperService.showAlert(`La contraseña para el email ${this.email} es: ${contraseña}`, 'Correcto');
-    } else {
-      await this.helperService.showAlert('Email no registrado', 'Advertencia');
-    }
-  }*/
+
   volver(){
     this.router.navigateByUrl("login/user");
   }
-  resetPassword(): void {
-    
-    this.angularFireAuth.sendPasswordResetEmail(this.email)
+  resetPassword(): void { 
+    if (this.email === "") {
+      this.helperService.showAlert("Ingrese un correo.", "Error de validación");
+    } else if (this.email.length > 50) {
+      this.helperService.showAlert("El correo electrónico no debe superar los 50 caracteres.", "Error de validación");
+    } 
+    else if(!this.validateEmail(this.email)){
+      this.helperService.showAlert("Formato de correo invalido.", "Error de validación");
+    }else{
+      this.angularFireAuth.sendPasswordResetEmail(this.email)
       .then(() => {
-        console.log("exito")
-        // Éxito: se envió un correo electrónico para restablecer la contraseña
-        // Puedes mostrar un mensaje al usuario o redirigirlo a una página de confirmación.
+        this.helperService.showAlert("Revise su correo electronico.", "Success");
+        this.router.navigateByUrl("login/user");
       })
       .catch((error:any) => {
-        console.log("error")
-        // Error: muestra un mensaje de error al usuario o registra el error en el registro.
+        this.helperService.showAlert("Error.", "Error");
       });
+    }
+    
+  }
+  validateEmail(email: string): boolean {
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return pattern.test(email);
   }
   
 }

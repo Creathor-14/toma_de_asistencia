@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
-import { UserService } from 'src/app/services/user.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 
@@ -19,7 +18,6 @@ export class PasswordPage implements OnInit {
 
   constructor(
     private router: Router,
-    private userService: UserService,
     private activatedRoute: ActivatedRoute,
     private auth: AngularFireAuth,
     private helperService: HelperService,
@@ -38,21 +36,20 @@ export class PasswordPage implements OnInit {
     const loader = await this.helperService.showLoader("Cargando");
     try {
       if (this.contrasenia.length >= 6 && this.contrasenia.length >= 20) {
-        this.helperService.showToast("La contraseña debe tener entre 6 y 20 caracteres.",1000, "danger");
+        this.helperService.showAlert("La contraseña debe tener entre 5 y 20 caracteres.", "Error de validación");
         await loader.dismiss();
       } else {
         const request = await this.auth.signInWithEmailAndPassword(this.email, this.contrasenia);
-
         this.router.navigateByUrl("tabs/" + this.email);
         await loader.dismiss();
         await this.mostrarMensajeInicioSesionExitoso();
       }
     } catch (error: any) {
       if (error.code == "auth/missing-password") {
-        this.helperService.showToast("Debe ingresar una contraseña.",1000, "danger");
+        this.helperService.showAlert("Ingrese una contraseña.", "Error de validación");
         await loader.dismiss();
       } else if (error.code == "auth/invalid-login-credentials") {
-        this.helperService.showToast("Usuario inexistente o datos inválidos.",1000, "danger");
+        this.helperService.showAlert("Usuario inexistente o datos inválidos.", "Error de validación");
         await loader.dismiss();
       } else {
         console.error(error);

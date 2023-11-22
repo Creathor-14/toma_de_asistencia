@@ -68,9 +68,7 @@ export class StorageService {
     this.setItem("user",JSON.stringify(users));
   }
   async editarUsuario(user:User){
-    
     let users:User[]=[];
-
     var usuarios = await this.obtenerUser();
     for (const i of usuarios) {
       if (i.email == user.email) {
@@ -80,9 +78,17 @@ export class StorageService {
         i.region = user.region;
         
       }
-  
       users.push(i);
-      
+    }
+    this.setItem("user",JSON.stringify(users));
+  }
+  async eliminarUsuario(email:string){
+    let users:User[]=[];
+    var usuarios = await this.obtenerUser();
+    for (const i of usuarios) {
+      if (i.email != email) {
+        users.push(i);
+      }
     }
     this.setItem("user",JSON.stringify(users));
   }
@@ -100,10 +106,8 @@ export class StorageService {
       return {email:"",nombre:"",apellido:"",contrasenia:"", region: "", comuna: "", asistencias:[]};
     }else{
       data = JSON.parse(storageData);
-      //console.log(data)
       if(data){
         for(const i of data){
-          //console.log(i.email,"|    |",email)
           if(i.email == email){
             return {email:i.email ,nombre:i.nombre, apellido:i.apellido, region:i.region, comuna:i.comuna, contrasenia:i.contrasenia, asistencias:i.asistencias};
           }
@@ -175,4 +179,11 @@ export class StorageService {
     }
   }
 
+  userData:User={email:"",nombre:"",apellido:"", region:"", comuna:"", contrasenia:"", asistencias:[]};
+  setActualUserData(user:User){
+    this.userData=user;
+  }
+  getActualUserData():User{
+    return this.userData;
+  }
 }

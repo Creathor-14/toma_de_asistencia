@@ -15,21 +15,21 @@
     <ion-input [(ngModel)]="apellido" label="Apellido" labelPlacement="floating" placeholder="Ingrese apellido"></ion-input>
   </ion-item>
   <ion-list>
-    <ion-item>
-      <ion-select (ionChange)="cargarComuna()" placeholder="Seleccione" [(ngModel)]="regionSel">
+    <ion-item color="light">
+      <ion-select (ionChange)="cargarComuna()" placeholder="Región" [(ngModel)]="regionSel">
         <ion-select-option [value]="r.id" *ngFor="let r of regiones">{{r.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
   <ion-list>
-    <ion-item>
-      <ion-select  placeholder="Seleccione" [(ngModel)]="comunaSel">
+    <ion-item color="light">
+      <ion-select  placeholder="Comuna" [(ngModel)]="comunaSel">
         <ion-select-option [value]="r.id" *ngFor="let r of comunas">{{r.nombre}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
   <ion-item color="light">
-    <ion-input [(ngModel)]="password" label="Contraseña" labelPlacement="floating" placeholder="Ingrese contraseña"></ion-input>
+    <ion-input [(ngModel)]="password" type="password" label="Contraseña" labelPlacement="floating" placeholder="Ingrese contraseña"></ion-input>
   </ion-item>
   <ion-button fill="solid" expand="block" (click)="addUser()"> Agregar Usuario</ion-button>  
 

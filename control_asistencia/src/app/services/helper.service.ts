@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController, ToastController, ModalController } from '@ionic/angular';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
-  
+  userData:User={email:"",nombre:"",apellido:"", region:"", comuna:"", contrasenia:"", asistencias:[]};
+  setActualUserData(user:User){
+    this.userData=user;
+  }
+  getActualUserData():User{
+    return this.userData;
+  }
 
   constructor(private alertController:AlertController, private loadingController:LoadingController, private toastController:ToastController, private modalController: ModalController) { }
   async showConfirm(message:string,btn_cancelar:string,btn_confirmar:string){

@@ -5,7 +5,6 @@ import { ModalController } from '@ionic/angular';
 import { Asistencia } from 'src/app/models/asistencia';
 import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-resul-qr',
@@ -19,7 +18,7 @@ export class ResulQrPage implements OnInit {
 
   nombre:string = '';
   constructor(private modalController:ModalController, private router:Router, 
-    private userService:UserService, private helperService:HelperService,
+    private helperService:HelperService,
     private storageService:StorageService, private auth: AngularFireAuth) { }
 
   ngOnInit() {

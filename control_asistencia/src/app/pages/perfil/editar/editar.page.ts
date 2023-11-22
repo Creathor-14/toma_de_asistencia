@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { HelperService } from 'src/app/services/helper.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { UserService } from 'src/app/services/user.service';
 
 import { ApisService } from 'src/app/services/apis.service';
 import { Region } from 'src/app/models/region';
@@ -16,49 +15,44 @@ import { Region } from 'src/app/models/region';
   styleUrls: ['./editar.page.scss'],
 })
 export class EditarPage implements OnInit {
+  loading:boolean = true;
   email:any;
-  user:User=this.userService.getActualUserData();
+  user:User={email:"",nombre:"",apellido:"", region:"", comuna:"" ,contrasenia:"", asistencias:[]};
   nombre:string = "";
   apellido:string = "";
-  contrasenia:string = "";
   region: string = "";
   comuna: string = "";
 
-  constructor(private router:Router, private userService: UserService,
+  constructor(private router:Router,
     private helperService:HelperService, private storageService:StorageService, private auth: AngularFireAuth, private apisService:ApisService) { }
   ngOnInit() {
+  }
 
-    this.getUserEmail();
-    this.nombre = this.user.nombre;
-    this.apellido = this.user.apellido;
-    this.contrasenia = this.user.contrasenia;
-    this.cargarRegion();
-
-  
-    
-
+  ionViewWillEnter() {
+    this.helperService.showLoader("Cargando").then(loader => {
+      this.getUserEmail();
+      this.cargarRegion();
+      setTimeout(() => {
+        this.nombre = this.user.nombre;
+        this.apellido = this.user.apellido;
+        this.region = this.user.region;
+        this.comuna = this.user.comuna;
+        this.loading = false;
+        loader.dismiss();
+      },500);
+    });
   }
 
   async getUserEmail(){
     let user = await this.auth.currentUser;
     if(user){
       this.email =  user.email;
-      //this.getUserStorageData();
+      this.getUserStorageData();
     }
-  }
-  getNombreUbicacion(id:number,ubicaciones:any[]){
-    for(const u of ubicaciones){
-      if(u.id == id){
-        return u.nombre
-      }
-    }
-    
   }
 
   async getUserStorageData(){
     this.user= await this.storageService.getUserData(this.email);
-    this.region = this.getNombreUbicacion(this.regionSel,this.regiones);
-    this.comuna = this.getNombreUbicacion(this.comunaSel,this.comunas);
   }
   regiones:Region[]=[];
   comunas:any[]=[];
@@ -73,7 +67,6 @@ export class EditarPage implements OnInit {
       
     } catch (error:any) {
       console.log("ERROR", error);
-      
       this.helperService.showAlert(error.error.msg,"Error")
     }
   }
@@ -82,8 +75,6 @@ export class EditarPage implements OnInit {
     try {
       const req = await this.apisService.getRegion();
       this.regiones = req.data;
-      
-      
     } catch (error) {
       
     }
@@ -91,10 +82,7 @@ export class EditarPage implements OnInit {
 
 
 
-  async actualizar() {
-    this.region = this.apisService.getNombreUbicacion(this.regionSel, this.regiones);
-    this.comuna = this.apisService.getNombreUbicacion(this.comunaSel, this.comunas);
-
+  async actualizar(){
     if (!this.nombre) {
       this.helperService.showToast("Debe ingresar un nombre.",1000, "danger");
     } else if (!/^[A-Za-z]+$/.test(this.nombre)) {
@@ -102,24 +90,30 @@ export class EditarPage implements OnInit {
     } else if (!this.apellido) {
       this.helperService.showToast("Debe ingresar un apellido.",1000, "danger");
     } else if (!/^[A-Za-z]+$/.test(this.apellido)) {
-      this.helperService.showToast("El apellido solo debe contener letras.",1000, "danger");
-    } else if (!this.region || this.regionSel === -1) {
-      this.helperService.showToast("Debe ingresar una región.",1000, "danger");
-    } else if (!this.comuna || this.comunaSel === -1) {
-      this.helperService.showToast("Debe ingresar una comuna.",1000, "danger");
-    } else {
-        var confirmar = await this.helperService.showConfirm("¿Desea modificar usuario?", "Cancelar", "Aceptar");
-        if (confirmar) {
-            this.user.nombre = this.nombre;
-            this.user.apellido = this.apellido;
-            this.user.region = this.region;
-            this.user.comuna = this.comuna;
-            this.storageService.actualizarUser(this.user);
-            this.helperService.showAlert("Usuario registrado correctamente.", "Éxito");
+      this.helperService.showToast("El apellido solo debe contener letras.",1000, "danger");      
+    }else if(this.regionSel != -1 && this.comunaSel == -1){
+      this.helperService.showToast("Elija comuna valida",1000, "danger");      
+    }else{
+      var confirmar = await this.helperService.showConfirm("¿Desea modificar usuario?","Cancelar","Aceptar")
+      if(confirmar){
+        this.user.nombre = this.nombre;
+        this.user.apellido = this.apellido;
+        if(this.regionSel != -1){
+          this.region = this.apisService.getNombreUbicacion(this.regionSel,this.regiones);
+          this.user.region = this.region;
         }
-    }
-  }
+        if(this.comunaSel != -1){
+          this.comuna = this.apisService.getNombreUbicacion(this.comunaSel,this.comunas);
+          this.user.comuna = this.comuna;
+        }
 
+        this.storageService.actualizarUser(this.user);
+      }
+    }
+    
+        
+    
+  }
   volver(){
     this.router.navigateByUrl(`tabs/${this.email}/perfil/visualizar`);
   }

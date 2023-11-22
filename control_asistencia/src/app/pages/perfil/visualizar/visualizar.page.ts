@@ -4,10 +4,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { StorageService } from 'src/app/services/storage.service';
-import { UserService } from 'src/app/services/user.service';
 import { ApisService } from 'src/app/services/apis.service';
 import { Region } from 'src/app/models/region';
 import { HelperService } from 'src/app/services/helper.service';
+
 
 @Component({
   selector: 'app-visualizar',
@@ -30,18 +30,22 @@ export class VisualizarPage implements OnInit {
   region: string = "";
   comuna: string = "";
 
-  constructor(private router:Router, private userService:UserService,
-    private storageService:StorageService, private auth: AngularFireAuth, private helperService:HelperService, private apisService:ApisService) { }
+  constructor(private router:Router,
+    private storageService:StorageService, private auth: AngularFireAuth,
+    private helperService:HelperService) { }
 
   ngOnInit() {
+    
+
+  }
+
+  ionViewWillEnter() {
     this.getUserEmail();
     setTimeout(() => {
       this.loading = false;
     },2000);
-    
-
-    
   }
+  
   async getUserEmail(){
     let user = await this.auth.currentUser;
     if(user){
@@ -52,7 +56,7 @@ export class VisualizarPage implements OnInit {
 
   async getUserStorageData(){
     this.user= await this.storageService.getUserData(this.email);
-    this.userService.setActualUserData(this.user);
+    this.storageService.setActualUserData(this.user);
   }
 
   getNombre(): string {
@@ -79,10 +83,13 @@ export class VisualizarPage implements OnInit {
     console.log(this.email);
   }
 
-  eliminar(){
-    //this.userService.deleteUser(this.email);
-    this.router.navigateByUrl("login/user");
+   async eliminar(){
+    var corfirmar = await this.helperService.showConfirm("Desea eliminar este usuario del Storage?","Cancelar","Confirmar")
+    if (corfirmar == true) {
+      this.storageService.eliminarUsuario(this.email);
+      this.router.navigateByUrl("login/user");
+      console.log('Usuario eliminado de storage, no de firebase');
+    }
   }
- 
 
 }

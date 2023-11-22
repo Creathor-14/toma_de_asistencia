@@ -1,13 +1,16 @@
+<ion-header >
+  <ion-toolbar color="light">
+
+    <ion-buttons slot="primary">
+      <ion-button (click)="editar()" >Editar<ion-icon slot="end" name="pencil-outline"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="false" color="light">
   <ng-container *ngIf="loading; else content">
     <div @fadeInOut class="loading-state">
 
-        <ion-toolbar color="light">
-
-          <ion-buttons slot="primary">
-            <ion-button (click)="editar()" >Editar<ion-icon slot="end" name="pencil-outline"></ion-icon></ion-button>
-          </ion-buttons>
-        </ion-toolbar>
+        
         <div class="container">
           <ion-icon class="prueba" name="person-circle-outline"></ion-icon>
         </div>
@@ -57,12 +60,6 @@
   <ng-template #content color="light">
     <div @fadeInOut class="content">
 
-        <ion-toolbar color="light">
-
-          <ion-buttons slot="primary">
-            <ion-button (click)="editar()" >Editar<ion-icon slot="end" name="pencil-outline"></ion-icon></ion-button>
-          </ion-buttons>
-        </ion-toolbar>
         <div class="container">
           <ion-icon class="prueba" name="person-circle-outline"></ion-icon>
         </div>

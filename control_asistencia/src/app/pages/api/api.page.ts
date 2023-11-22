@@ -8,6 +8,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { BarcodeScanner } from 'capacitor-barcode-scanner';
 import { ResulQrPage } from 'src/app/modals/resul-qr/resul-qr.page';
 import { Asistencia } from 'src/app/models/asistencia';
+import { Geolocation } from '@capacitor/geolocation';
 @Component({
   selector: 'app-api',
   templateUrl: './api.page.html',
@@ -89,5 +90,9 @@ export class ApiPage implements OnInit {
   async prueba(){
     this.storageService.guardarUser(this.user);
   }
-
+  async location(){
+    const l = await Geolocation.getCurrentPosition();
+      console.log("Pegar en maps:",l.coords.latitude,l.coords.longitude);
+      this.helperService.showAlert(`${l.coords.latitude}, ${l.coords.longitude}`,"Latitud, Longitud");
+  }
 }

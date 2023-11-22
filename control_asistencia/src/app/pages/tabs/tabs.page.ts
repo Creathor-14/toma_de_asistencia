@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
+import { Geolocation } from '@capacitor/geolocation';
 
 
 @Component({
@@ -35,16 +34,12 @@ export class TabsPage implements OnInit {
       await this.router.navigate(['login/user']);
       
     }
-    
-    //this.router.navigate(['login/user']); 
   }
-
-
-
-  
-
-  
- 
+  async location(){
+    const l = await Geolocation.getCurrentPosition();
+      console.log("Pegar en maps:",l.coords.latitude,l.coords.longitude);
+      this.helperService.showAlert(`${l.coords.latitude}, ${l.coords.longitude}`,"Latitud, Longitud");
+  }
 
 
 }

@@ -1,18 +1,12 @@
-<div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Lee el Qr </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ng-container color="light" >
   <div>
-    <ion-button (click)="registrar_asistencia()" class="registro">
-      <ion-icon class="prueba" name="camera-outline"></ion-icon>
-    </ion-button>
+      <ion-icon name="qr-code-outline" class="qr"></ion-icon>
+      <ion-button (click)="scan()" class="scan">Scan</ion-button>
   </div>
-  <div>
-    <ion-icon style="font-size: 250px;" name="qr-code-outline"  class = "qr"></ion-icon>
-  </div>
-
-  <div> 
-    <ion-button (click)="scan()"  class = "scan">Scan</ion-button>
-  </div>
-
-  
-  
-</div>
+</ng-container>
 

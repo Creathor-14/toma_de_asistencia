@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 
 import { BarcodeScanner } from 'capacitor-barcode-scanner';
 import { ResulQrPage } from 'src/app/modals/resul-qr/resul-qr.page';
@@ -14,7 +13,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class LeerQrPage implements OnInit {
   email:any;
-  constructor(private router:Router, private userService:UserService, 
+  constructor(private router:Router, 
     private helperService:HelperService, private angularFireAuth:AngularFireAuth,
     private auth: AngularFireAuth) {}
   ngOnInit() {

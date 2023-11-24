@@ -20,7 +20,7 @@ describe('HelperService', () => {
     alertController = TestBed.inject(AlertController);
   });
 
-  it('should show an alert', fakeAsync(async () => {
+  it('show alert', fakeAsync(async () => {
     const alertTitle = 'Test Alert';
     const alertMessage = 'This is a test alert';
 

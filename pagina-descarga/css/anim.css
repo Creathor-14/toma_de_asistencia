@@ -1,0 +1,30 @@
+.aparece{
+    animation: fadeIn 2s forwards ;
+}
+.desaparece{
+    animation: fadeOut 2s forwards ;
+    animation-delay: 1s;
+}
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
+}
+@keyframes fadeOut {
+    from{
+        opacity: 1;
+    }to{
+        opacity: 0;
+    }
+}
+
+@keyframes desapareceBajando {
+    0% {
+      top: -100px;
+    }
+    100% {
+      top: calc(100vh + 100px);
+    }
+  }
